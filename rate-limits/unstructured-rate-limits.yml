@@ -1,0 +1,38 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Unstructured
+providerId: unstructured
+created: '2026-06-12'
+modified: '2026-06-12'
+notes: >-
+  Unstructured does not publish explicit rate limit values in public
+  documentation as of 2026-06-12. The SDK implements exponential backoff
+  retry logic with a default max elapsed time of 1 hour, suggesting rate
+  limiting may occur under heavy load. The split_pdf_concurrency_level
+  parameter is capped at 15 to avoid high resource usage. Enterprise and
+  dedicated instance customers may negotiate custom limits. Check
+  https://docs.unstructured.io or contact support@unstructured.io for
+  plan-specific limits.
+retryAfter: true
+throttled: 429
+retryStrategy:
+  type: exponential-backoff
+  initialInterval: 500
+  maxInterval: 60000
+  maxElapsedTime: 3600000
+limits:
+  - scope: document
+    metric: split_pdf_concurrency_level
+    limit: 15
+    timeFrame: per-request
+    notes: >-
+      Maximum concurrent PDF split operations per API request to prevent
+      excessive resource usage and cost overruns.
+  - scope: account
+    metric: pages
+    limit: 15000
+    timeFrame: lifetime
+    planTier: free
+    notes: >-
+      Free (Let's Go) tier includes 15,000 pages total with no expiration.
+      Once exhausted, upgrade to Pay-As-You-Go is required.

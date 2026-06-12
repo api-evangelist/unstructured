@@ -1,0 +1,91 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: Unstructured
+providerId: unstructured
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+type: freemium
+url: https://unstructured.io/pricing
+plans:
+  - name: Let's Go
+    description: >-
+      Free tier for individual users. Includes 15,000 pages with no expiration
+      date. Full access to all platform features including 40+ connectors,
+      50+ document types, and all transformation strategies. Single user,
+      single workspace, hosted on shared multi-tenant infrastructure.
+    type: free
+    price: 0
+    currency: USD
+    quotas:
+      - metric: pages
+        limit: 15000
+        timeFrame: lifetime
+        type: quota
+    features:
+      - All platform features
+      - 40+ source and destination connectors
+      - 50+ document types
+      - Multiple transformation strategies
+      - Vision transformer and OCR models
+      - By-page and by-similarity chunking
+      - Multi-tenant SaaS hosting
+  - name: Pay-As-You-Go
+    description: >-
+      Metered pricing for individual users with no minimum spend and no maximum
+      limits. Flat rate of $0.03 per page applies to all file types and
+      processing pipelines. Single user, single workspace on shared
+      infrastructure. No hidden fees or commitments.
+    type: paid
+    price: 0
+    currency: USD
+    billing: metered
+    quotas:
+      - metric: pages
+        limit: unlimited
+        timeFrame: monthly
+        type: metered
+    meters:
+      - name: Page Processing
+        metric: pages
+        unitPrice: 0.03
+        unit: page
+        currency: USD
+        notes: >-
+          Page calculation varies by file type: PDFs/PPTXs/TIFFs use standard
+          page count; DOCX uses page metadata; other formats use file size
+          divided by 100 KB; non-file data uses 100 KB per page unit.
+    features:
+      - All platform features
+      - 40+ source and destination connectors
+      - 50+ document types
+      - Multiple transformation strategies
+      - No minimum spend
+      - No maximum limits
+  - name: Business
+    description: >-
+      Enterprise plan for teams requiring enhanced privacy, security, and
+      dedicated resources. Supports multiple users and multiple workspaces.
+      Deployment options include dedicated instance, in-VPC deployment, or
+      multi-tenant SaaS. Includes full data isolation, dedicated technical
+      support, and access to custom plugins and custom model hosting.
+    type: enterprise
+    price: custom
+    currency: USD
+    billing: custom
+    features:
+      - Multiple users and workspaces
+      - Dedicated instance option
+      - In-VPC deployment option
+      - Bare metal option
+      - Full data isolation
+      - Dedicated technical support
+      - Custom plugins
+      - Custom model hosting
+      - All platform features
+      - SOC 2 Type 1 and Type 2 compliance
+      - HIPAA compliance
+      - GDPR compliance
+      - ISO 27001 compliance
+      - FedRAMP compliance
+      - CMMC 2.0 Level 2 compliance

@@ -1,0 +1,106 @@
+aid: unstructured
+name: Unstructured
+description: >-
+  Unstructured is a document parsing and pre-processing platform that provides
+  a REST API for ingesting PDFs, HTML, DOCX, images, and more than 50 other
+  file formats, transforming them into clean structured JSON chunks ready for
+  RAG pipelines and LLM applications. The platform offers partitioning,
+  enrichment, chunking, and embedding capabilities via both a SaaS serverless
+  API and self-hosted deployments. Billing is calculated on a per-page basis,
+  with a free tier of 15,000 pages, pay-as-you-go at $0.03 per page, and
+  custom enterprise pricing. Unstructured also ships Python and JavaScript SDKs,
+  an MCP server for AI agent workflows, and 40+ connectors for source and
+  destination data systems including S3, Databricks, and vector databases.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - document-processing
+  - ETL
+  - RAG
+  - LLM
+  - PDF
+  - OCR
+  - data-ingestion
+  - chunking
+  - embeddings
+  - AI
+url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+apis:
+  - aid: unstructured-platform-api
+    name: Unstructured Platform API
+    description: >-
+      The Unstructured Platform API provides programmatic access to workflow
+      operations including source connectors, destination connectors, workflows,
+      and jobs. It enables headless, push-style data transformation pipelines
+      that partition, enrich, chunk, and embed documents from 50+ file formats
+      into AI-ready JSON output suitable for RAG and LLM applications.
+    humanURL: https://docs.unstructured.io/api-reference/overview
+    baseURL: https://platform.unstructuredapp.io/api/v1
+    tags:
+      - document-processing
+      - workflows
+      - connectors
+      - RAG
+      - ETL
+    properties:
+      - type: Documentation
+        url: https://docs.unstructured.io/api-reference/overview
+      - type: OpenAPI
+        url: https://docs.unstructured.io/llms.txt
+  - aid: unstructured-partition-endpoint
+    name: Unstructured Partition Endpoint
+    description: >-
+      The Unstructured Partition Endpoint is the legacy serverless API for
+      processing individual files on demand. It supports PDFs, images, DOCX,
+      HTML, and dozens of other formats, returning structured element JSON with
+      configurable processing strategies including fast, hi_res, ocr_only, and
+      auto. Authentication uses API key headers.
+    humanURL: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+    baseURL: https://api.unstructured.io/general/v0/general
+    tags:
+      - document-partitioning
+      - OCR
+      - PDF
+      - serverless
+    properties:
+      - type: Documentation
+        url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+      - type: PythonSDK
+        url: https://github.com/Unstructured-IO/unstructured-python-client
+      - type: JavaScriptSDK
+        url: https://github.com/Unstructured-IO/unstructured-js-client
+common:
+  - type: Website
+    url: https://unstructured.io
+  - type: Documentation
+    url: https://docs.unstructured.io
+  - type: GitHubOrganization
+    url: https://github.com/Unstructured-IO
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/unstructuredio/
+  - type: X
+    url: https://twitter.com/UnstructuredIO
+  - type: Blog
+    url: https://unstructured.io/blog
+  - type: Pricing
+    url: https://unstructured.io/pricing
+  - type: StatusPage
+    url: https://unstructuredio.trust.pagerduty.com/posts/dashboard
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+  - type: MCPServer
+    url: https://github.com/Unstructured-IO/UNS-MCP
+  - type: Plans
+    url: plans/unstructured-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/unstructured-rate-limits.yml
+  - type: FinOps
+    url: finops/unstructured-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

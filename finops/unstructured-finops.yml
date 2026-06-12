@@ -1,0 +1,80 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+provider: Unstructured
+providerId: unstructured
+created: '2026-06-12'
+modified: '2026-06-12'
+billingModel: per-page
+description: >-
+  Unstructured uses a per-page billing model where each page processed through
+  the API incurs a metered charge. Page count calculation varies by file type:
+  PDFs, PPTXs, and TIFFs use actual page counts; DOCX files use embedded page
+  metadata; all other file formats use file size divided by 100 KB; non-file
+  data sources count 100 KB as one page unit. The free tier provides 15,000
+  pages lifetime at no cost. Pay-As-You-Go charges $0.03 per page with no
+  minimum or maximum.
+focusColumns:
+  - ChargeCategory: Usage
+  - ChargeDescription: Document page processing
+  - BilledCurrency: USD
+  - PricingUnit: page
+  - PricingQuantity: variable
+  - EffectiveCost: variable
+  - BillingAccountId: unstructured-account-id
+  - ServiceName: Unstructured Platform API
+  - ServiceCategory: AI and Machine Learning
+  - ResourceType: document-processor
+meters:
+  - name: Page Processing
+    unit: page
+    description: >-
+      One unit equals one document page. Calculation method varies by file
+      type as described in the billing model.
+    tiers:
+      - name: Free
+        from: 0
+        to: 15000
+        unitPrice: 0.00
+        currency: USD
+        plan: Let's Go
+      - name: Pay-As-You-Go
+        from: 0
+        to: unlimited
+        unitPrice: 0.03
+        currency: USD
+        plan: Pay-As-You-Go
+      - name: Enterprise
+        from: 0
+        to: unlimited
+        unitPrice: custom
+        currency: USD
+        plan: Business
+  - name: Dedicated Instance (Business)
+    unit: instance
+    description: >-
+      Dedicated or in-VPC compute resources provisioned for Business tier
+      customers. Pricing is custom and negotiated with the sales team.
+    tiers:
+      - name: Enterprise Custom
+        unitPrice: custom
+        currency: USD
+        plan: Business
+principles:
+  - principle: Visibility
+    description: >-
+      Usage is tracked and billed on a per-page basis providing granular
+      cost attribution per document processed. Account dashboards expose
+      current page consumption. Customers can subscribe to status and billing
+      updates via email or Slack.
+  - principle: Optimization
+    description: >-
+      Teams can optimize costs by choosing the appropriate processing strategy
+      (fast vs hi_res vs ocr_only) based on document complexity. Lower-fidelity
+      strategies process faster and may cost less in compute time on dedicated
+      instances. Free tier pages never expire, enabling controlled testing
+      before committing to metered usage.
+  - principle: Accountability
+    description: >-
+      The flat per-page rate on Pay-As-You-Go eliminates surprise charges from
+      file-type complexity variation. Enterprise customers can negotiate volume
+      discounts and dedicated resource pools for budget predictability.
