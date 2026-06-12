@@ -1,0 +1,91 @@
+unstructured_platform_api_examples:
+  title: Unstructured Platform API Examples
+  description: Request and response examples for the Unstructured Platform API
+  base_url: https://platform.unstructuredapp.io
+  authentication:
+    type: apiKey
+    header: unstructured-api-key
+    description: Include your Unstructured API key in the request header
+  examples:
+  - name: List available source connectors
+    method: GET
+    path: /api/v1/sources/
+    description: Retrieve a list of available source connectors.
+    tags:
+    - sources
+    operationId: list_sources
+  - name: Create source connector
+    method: POST
+    path: /api/v1/sources/
+    description: Create a new source connector using the provided configuration and
+      name.
+    tags:
+    - sources
+    operationId: create_source
+    request_schema_ref: CreateSourceConnector
+    response_schema_ref: SourceConnectorInformation
+  - name: List destination connectors
+    method: GET
+    path: /api/v1/destinations/
+    description: Retrieve a list of available destination connectors.
+    tags:
+    - destinations
+    operationId: list_destinations
+  - name: Create destination connector
+    method: POST
+    path: /api/v1/destinations/
+    description: Create a new destination connector using the provided configuration
+      and name.
+    tags:
+    - destinations
+    operationId: create_destination
+    request_schema_ref: CreateDestinationConnector
+    response_schema_ref: DestinationConnectorInformation
+  - name: List Workflows
+    method: GET
+    path: /api/v1/workflows/
+    description: Retrieve a list of workflows, optionally filtered by source, destination,
+      state, name, date range, and supports pagination and sorting.
+    tags:
+    - workflows
+    operationId: list_workflows
+  - name: Create Workflow
+    method: POST
+    path: /api/v1/workflows/
+    description: Create a new workflow, either custom or auto, and configure its settings.
+    tags:
+    - workflows
+    operationId: create_workflow
+    request_schema_ref: CreateWorkflow
+    response_schema_ref: WorkflowInformation
+  - name: Run Workflow
+    method: POST
+    path: /api/v1/workflows/{workflow_id}/run
+    description: Run a workflow by triggering a new job if none is currently active.
+    tags:
+    - workflows
+    operationId: run_workflow
+    request_schema_ref: Body_run_workflow
+  - name: List Jobs
+    method: GET
+    path: /api/v1/jobs/
+    description: Retrieve a list of jobs with optional filtering by workflow ID or
+      job status.
+    tags:
+    - jobs
+    operationId: list_jobs
+  - name: Get Job
+    method: GET
+    path: /api/v1/jobs/{job_id}
+    description: Retrieve detailed information for a specific job by its ID.
+    tags:
+    - jobs
+    operationId: get_job
+    response_schema_ref: JobInformation
+  - name: Cancel Job
+    method: POST
+    path: /api/v1/jobs/{job_id}/cancel
+    description: Cancel the specified job.
+    tags:
+    - jobs
+    operationId: cancel_job

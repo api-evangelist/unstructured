@@ -1,0 +1,147 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "uns": "https://unstructured.io/vocab#",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "version": "schema:version",
+    "dateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "dateModified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:date"
+    },
+    "Workflow": {
+      "@id": "uns:Workflow",
+      "@type": "rdfs:Class",
+      "@context": {
+        "workflow_id": "uns:workflowId",
+        "name": "schema:name",
+        "status": "uns:workflowStatus",
+        "source_id": "uns:sourceConnectorId",
+        "destination_id": "uns:destinationConnectorId",
+        "schedule": "uns:cronSchedule"
+      }
+    },
+    "Job": {
+      "@id": "uns:Job",
+      "@type": "rdfs:Class",
+      "@context": {
+        "job_id": "uns:jobId",
+        "workflow_id": "uns:workflowId",
+        "status": "uns:jobStatus",
+        "created_at": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        },
+        "runtime": "uns:runtimeSeconds"
+      }
+    },
+    "SourceConnector": {
+      "@id": "uns:SourceConnector",
+      "@type": "rdfs:Class",
+      "@context": {
+        "id": "uns:connectorId",
+        "name": "schema:name",
+        "type": "uns:connectorType",
+        "config": "uns:connectorConfig"
+      }
+    },
+    "DestinationConnector": {
+      "@id": "uns:DestinationConnector",
+      "@type": "rdfs:Class",
+      "@context": {
+        "id": "uns:connectorId",
+        "name": "schema:name",
+        "type": "uns:connectorType",
+        "config": "uns:connectorConfig"
+      }
+    },
+    "DocumentElement": {
+      "@id": "uns:DocumentElement",
+      "@type": "rdfs:Class",
+      "@context": {
+        "type": "uns:elementType",
+        "text": "schema:text",
+        "metadata": "uns:elementMetadata",
+        "element_id": "uns:elementId"
+      }
+    },
+    "PartitionRequest": {
+      "@id": "uns:PartitionRequest",
+      "@type": "rdfs:Class",
+      "@context": {
+        "files": "schema:MediaObject",
+        "strategy": "uns:processingStrategy",
+        "chunking_strategy": "uns:chunkingStrategy",
+        "languages": "uns:documentLanguages"
+      }
+    },
+    "workflowStatus": {
+      "@id": "uns:workflowStatus",
+      "@type": "@vocab",
+      "@context": {
+        "active": "uns:StatusActive",
+        "inactive": "uns:StatusInactive",
+        "scheduled": "uns:StatusScheduled"
+      }
+    },
+    "jobStatus": {
+      "@id": "uns:jobStatus",
+      "@type": "@vocab",
+      "@context": {
+        "pending": "uns:StatusPending",
+        "in_progress": "uns:StatusInProgress",
+        "completed": "uns:StatusCompleted",
+        "failed": "uns:StatusFailed",
+        "cancelled": "uns:StatusCancelled"
+      }
+    },
+    "processingStrategy": {
+      "@id": "uns:processingStrategy",
+      "@type": "@vocab",
+      "@context": {
+        "auto": "uns:StrategyAuto",
+        "fast": "uns:StrategyFast",
+        "hi_res": "uns:StrategyHiRes",
+        "ocr_only": "uns:StrategyOcrOnly"
+      }
+    },
+    "ApiService": {
+      "@id": "schema:WebAPI",
+      "@context": {
+        "documentation": "schema:documentation",
+        "termsOfService": "schema:termsOfService",
+        "provider": "schema:provider",
+        "baseURL": "schema:url",
+        "humanURL": "schema:url"
+      }
+    }
+  },
+  "@graph": [
+    {
+      "@type": "schema:WebAPI",
+      "@id": "https://platform.unstructuredapp.io/api/v1",
+      "name": "Unstructured Platform API",
+      "description": "REST API for managing document processing workflows including sources, destinations, workflows, jobs, and notifications.",
+      "url": "https://platform.unstructuredapp.io/api/v1",
+      "documentation": "https://docs.unstructured.io/api-reference/overview",
+      "schema:version": "3.1.0"
+    },
+    {
+      "@type": "schema:WebAPI",
+      "@id": "https://api.unstructuredapp.io/general/v0/general",
+      "name": "Unstructured Partition API",
+      "description": "Legacy serverless REST API for on-demand document partitioning, supporting PDFs, DOCX, HTML, images, and 50+ file formats.",
+      "url": "https://api.unstructuredapp.io/general/v0/general",
+      "documentation": "https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide",
+      "schema:version": "3.1.0"
+    }
+  ]
+}

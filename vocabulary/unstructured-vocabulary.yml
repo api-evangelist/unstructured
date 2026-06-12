@@ -1,0 +1,133 @@
+aid: unstructured-vocabulary
+name: Unstructured API Vocabulary
+description: Domain terms, concepts, and definitions used across the Unstructured
+  Platform API and Partition API.
+url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/vocabulary/unstructured-vocabulary.yml
+tags:
+- document-processing
+- RAG
+- LLM
+- ETL
+- chunking
+- embeddings
+- OCR
+- PDF
+terms:
+- term: source_connector
+  label: Source Connector
+  definition: A configured connection to an input data system (e.g. S3, SharePoint,
+    Dropbox, Confluence) from which documents are ingested for processing.
+  tags:
+  - connector
+  - ingestion
+  - ETL
+- term: destination_connector
+  label: Destination Connector
+  definition: A configured connection to an output data system (e.g. vector databases,
+    S3, Databricks) where processed document chunks are written.
+  tags:
+  - connector
+  - output
+  - ETL
+  - vector-database
+- term: workflow
+  label: Workflow
+  definition: A named pipeline configuration that links a source connector to a destination
+    connector with processing nodes (partitioning, chunking, embedding) and scheduling
+    options.
+  tags:
+  - pipeline
+  - orchestration
+- term: job
+  label: Job
+  definition: A single execution run of a workflow. Each job tracks status, progress,
+    and results including any failed files.
+  tags:
+  - execution
+  - run
+  - monitoring
+- term: partitioning
+  label: Partitioning
+  definition: The process of splitting a document into its constituent elements (titles,
+    narrative text, tables, images) with associated metadata.
+  tags:
+  - document-processing
+  - parsing
+- term: chunking
+  label: Chunking
+  definition: The process of grouping document elements into fixed-size or semantically
+    coherent text chunks suitable for LLM context windows and RAG pipelines.
+  tags:
+  - RAG
+  - LLM
+  - text-processing
+- term: embedding
+  label: Embedding
+  definition: The conversion of text chunks into vector representations using an embedding
+    model, enabling semantic search and retrieval.
+  tags:
+  - RAG
+  - vector
+  - semantic-search
+- term: hi_res_strategy
+  label: Hi-Res Processing Strategy
+  definition: A document processing mode that uses OCR and layout detection models
+    for higher accuracy on complex PDFs and scanned documents, at increased compute
+    cost.
+  tags:
+  - OCR
+  - PDF
+  - processing-strategy
+- term: fast_strategy
+  label: Fast Processing Strategy
+  definition: A document processing mode optimized for speed using text extraction
+    only, suitable for digitally-native PDFs and text-based files.
+  tags:
+  - PDF
+  - processing-strategy
+  - performance
+- term: element
+  label: Document Element
+  definition: A discrete unit extracted from a document, such as Title, NarrativeText,
+    Table, Image, or ListItem, along with metadata like page number and coordinates.
+  tags:
+  - document-processing
+  - output
+- term: template
+  label: Workflow Template
+  definition: A reusable workflow configuration blueprint that can be instantiated
+    to create multiple similar workflows.
+  tags:
+  - workflow
+  - configuration
+- term: notification_channel
+  label: Notification Channel
+  definition: A configured endpoint (email or webhook) for receiving job completion,
+    failure, and status notifications from workflows.
+  tags:
+  - monitoring
+  - alerting
+  - webhooks
+- term: unstructured_api_key
+  label: Unstructured API Key
+  definition: The authentication credential passed in the 'unstructured-api-key' HTTP
+    header to authenticate requests to both the Platform API and Partition API.
+  tags:
+  - authentication
+  - security
+- term: page_based_billing
+  label: Page-Based Billing
+  definition: Unstructured charges per page processed. The free tier includes 15,000
+    pages; pay-as-you-go is $0.03/page.
+  tags:
+  - pricing
+  - billing
+  - finops
+- term: rag_pipeline
+  label: RAG Pipeline
+  definition: A Retrieval-Augmented Generation pipeline that uses Unstructured to
+    convert raw documents into vector-indexed chunks for LLM question-answering systems.
+  tags:
+  - RAG
+  - LLM
+  - AI

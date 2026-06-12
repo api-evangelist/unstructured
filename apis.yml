@@ -49,7 +49,7 @@ apis:
       - type: Documentation
         url: https://docs.unstructured.io/api-reference/overview
       - type: OpenAPI
-        url: https://docs.unstructured.io/llms.txt
+        url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/openapi/unstructured-platform-api-openapi.yml
   - aid: unstructured-partition-endpoint
     name: Unstructured Partition Endpoint
     description: >-
@@ -72,6 +72,8 @@ apis:
         url: https://github.com/Unstructured-IO/unstructured-python-client
       - type: JavaScriptSDK
         url: https://github.com/Unstructured-IO/unstructured-js-client
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/openapi/unstructured-partition-endpoint-openapi.yml
 common:
   - type: Website
     url: https://unstructured.io
@@ -101,6 +103,12 @@ common:
     url: rate-limits/unstructured-rate-limits.yml
   - type: FinOps
     url: finops/unstructured-finops.yml
+  - type: Vocabulary
+    url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/vocabulary/unstructured-vocabulary.yml
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/json-schema/unstructured-schemas.json
+  - type: JSONLDContext
+    url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/json-ld/unstructured-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
