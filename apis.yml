@@ -75,6 +75,12 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/openapi/unstructured-partition-endpoint-openapi.yml
 common:
+  - type: TrustCenter
+    url: security/unstructured-trust-center.yml
+  - type: DomainSecurity
+    url: security/unstructured-domain-security.yml
+  - type: Authentication
+    url: authentication/unstructured-authentication.yml
   - type: Website
     url: https://unstructured.io
   - type: Documentation
