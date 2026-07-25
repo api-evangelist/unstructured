@@ -1,0 +1,1463 @@
+openapi: 3.1.0
+info:
+  title: Unstructured Partition channels workflows API
+  version: 1.5.58
+servers:
+- url: https://api.unstructuredapp.io
+  description: Serverless SaaS API
+  x-speakeasy-server-id: saas-api
+- url: http://localhost:8000
+  description: Development server
+  x-speakeasy-server-id: development
+security:
+- ApiKeyAuth: []
+- {}
+tags:
+- name: workflows
+paths:
+  /api/v1/workflows/:
+    post:
+      tags:
+      - workflows
+      summary: Create Workflow
+      description: Create a new workflow, either custom or auto, and configure its settings.
+      operationId: create_workflow
+      parameters:
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflow'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowInformation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - workflows
+      summary: List Workflows
+      description: Retrieve a list of workflows, optionally filtered by source, destination, state, name, date range, and supports pagination and sorting.
+      operationId: list_workflows
+      parameters:
+      - name: dag_node_configuration_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dag Node Configuration Id
+      - name: source_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Source Id
+      - name: destination_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Destination Id
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowState'
+          - type: 'null'
+          title: Status
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 1
+          title: Page
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 20
+          title: Page Size
+      - name: created_since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created Since
+      - name: created_before
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created Before
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+          default: id
+          title: Sort By
+      - name: sort_direction
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortDirection'
+          default: asc
+      - name: show_only_soft_deleted
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Show Only Soft Deleted
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowInformation'
+                title: Response List Workflows
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workflows/{workflow_id}:
+    get:
+      tags:
+      - workflows
+      summary: Get Workflow
+      description: Retrieve detailed information for a specific workflow by its ID.
+      operationId: get_workflow
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowInformation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - workflows
+      summary: Update Workflow
+      description: Update an existing workflow's name, connectors, schedule, or workflow type.
+      operationId: update_workflow
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkflow'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowInformation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - workflows
+      summary: Delete Workflow
+      description: Delete a workflow by its ID.
+      operationId: delete_workflow
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workflows/{workflow_id}/run:
+    post:
+      tags:
+      - workflows
+      summary: Run Workflow
+      description: Run a workflow by triggering a new job if none is currently active.
+      operationId: run_workflow
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_run_workflow'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInformation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workflows/{workflow_id}/notifications/channels:
+    get:
+      tags:
+      - workflows
+      summary: List Workflow Channels
+      description: 'List workflow-scoped notification channels.
+
+
+        Returns all channel configurations for the specified workflow.
+
+        channel_type is required - no cross-type aggregation.'
+      operationId: list_workflow_channels_api_v1_workflows__workflow_id__notifications_channels_get
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: channel_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChannelType'
+      - name: enabled
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - workflows
+      summary: Create Workflow Channel
+      description: 'Create workflow-scoped notification channel.
+
+
+        Creates a new delivery channel for receiving platform event notifications
+
+        scoped to the specified workflow.'
+      operationId: create_workflow_channel_api_v1_workflows__workflow_id__notifications_channels_post
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/CreateWebhookChannelRequest'
+              - $ref: '#/components/schemas/CreateEmailChannelRequest'
+              discriminator:
+                propertyName: channel_type
+                mapping:
+                  webhook: '#/components/schemas/CreateWebhookChannelRequest'
+                  email: '#/components/schemas/CreateEmailChannelRequest'
+              title: Data
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Create Workflow Channel Api V1 Workflows  Workflow Id  Notifications Channels Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workflows/{workflow_id}/notifications/channels/{channel_id}:
+    get:
+      tags:
+      - workflows
+      summary: Get Workflow Channel
+      description: Get workflow-scoped notification channel by ID.
+      operationId: get_workflow_channel_api_v1_workflows__workflow_id__notifications_channels__channel_id__get
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Get Workflow Channel Api V1 Workflows  Workflow Id  Notifications Channels  Channel Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - workflows
+      summary: Update Workflow Channel
+      description: 'Update workflow-scoped notification channel.
+
+
+        Updates an existing channel. Only provided fields are updated.'
+      operationId: update_workflow_channel_api_v1_workflows__workflow_id__notifications_channels__channel_id__patch
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Update Workflow Channel Api V1 Workflows  Workflow Id  Notifications Channels  Channel Id  Patch
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - workflows
+      summary: Delete Workflow Channel
+      description: Delete workflow-scoped notification channel.
+      operationId: delete_workflow_channel_api_v1_workflows__workflow_id__notifications_channels__channel_id__delete
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workflows/{workflow_id}/notifications/channels/{channel_id}/verify:
+    post:
+      tags:
+      - workflows
+      summary: Verify Workflow Channel
+      description: 'Verify a workflow-scoped notification channel using a verification code.
+
+
+        Email channels require verification by providing the 6-digit code
+
+        sent to the recipient email address during channel creation.'
+      operationId: verify_workflow_channel_api_v1_workflows__workflow_id__notifications_channels__channel_id__verify_post
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Workflow Id
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyChannelRequest'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CronTabEntry:
+      properties:
+        cron_expression:
+          type: string
+          title: Cron Expression
+      type: object
+      required:
+      - cron_expression
+      title: CronTabEntry
+    EmailChannelConfigResponse:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+        provider:
+          type: string
+          title: Provider
+          description: Email provider (read-only, from platform config)
+      type: object
+      required:
+      - recipient_email
+      - provider
+      title: EmailChannelConfigResponse
+      description: Email config in response (no sensitive data).
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WorkflowState:
+      type: string
+      enum:
+      - active
+      - inactive
+      title: WorkflowState
+    VerifyChannelRequest:
+      properties:
+        code:
+          type: string
+          maxLength: 6
+          minLength: 6
+          pattern: ^\d{6}$
+          title: Code
+          description: 6-digit verification code sent to the channel's email address
+      type: object
+      required:
+      - code
+      title: VerifyChannelRequest
+      description: Request to verify an email channel with a verification code.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WorkflowJobType:
+      type: string
+      enum:
+      - ephemeral
+      - persistent
+      - scheduled
+      - template
+      title: WorkflowJobType
+    WorkflowSchedule:
+      properties:
+        crontab_entries:
+          items:
+            $ref: '#/components/schemas/CronTabEntry'
+          type: array
+          title: Crontab Entries
+      type: object
+      required:
+      - crontab_entries
+      title: WorkflowSchedule
+      examples:
+      - crontab_entries:
+        - cron_expression: 0 0 * * *
+    NotificationEventType:
+      type: string
+      enum:
+      - job.scheduled
+      - job.in_progress
+      - job.progress
+      - job.completed
+      - job.stopped
+      - job.failed
+      title: NotificationEventType
+      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
+    EmailChannelConfig:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      required:
+      - recipient_email
+      title: EmailChannelConfig
+      description: User-configurable email settings.
+    CreateWebhookChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes)
+      type: object
+      required:
+      - event_types
+      - url
+      title: CreateWebhookChannelRequest
+      description: Request to create a webhook notification channel.
+    CreateEmailChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: email
+          title: Channel Type
+          default: email
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfig'
+          description: Email channel configuration
+      type: object
+      required:
+      - event_types
+      - email_config
+      title: CreateEmailChannelRequest
+      description: Request to create an email notification channel.
+    ChannelType:
+      type: string
+      enum:
+      - webhook
+      - email
+      title: ChannelType
+      description: Notification delivery channel types.
+    Body_run_workflow:
+      properties:
+        input_files:
+          anyOf:
+          - items:
+              type: string
+              contentMediaType: application/octet-stream
+            type: array
+          - type: 'null'
+          title: Input Files
+      type: object
+      title: Body_run_workflow
+    CreateWorkflow:
+      properties:
+        name:
+          type: string
+          title: Name
+        source_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Source Id
+        destination_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Destination Id
+        workflow_type:
+          $ref: '#/components/schemas/WorkflowType'
+        workflow_nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/WorkflowNode'
+            type: array
+          - type: 'null'
+          title: Workflow Nodes
+        template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template Id
+        schedule:
+          anyOf:
+          - type: string
+            enum:
+            - every 15 minutes
+            - every hour
+            - every 2 hours
+            - every 4 hours
+            - every 6 hours
+            - every 8 hours
+            - every 10 hours
+            - every 12 hours
+            - daily
+            - weekly
+            - monthly
+          - type: 'null'
+          title: Schedule
+        reprocess_all:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Reprocess All
+          default: false
+        key:
+          anyOf:
+          - type: string
+            maxLength: 63
+            minLength: 1
+            pattern: ^[a-z0-9](-?[a-z0-9])*$
+          - type: 'null'
+          title: Key
+          description: Stable workspace level identifier for the workflow. If omitted, derived from `name`. Immutable once set. 1-63 characters, lowercase alphanumeric and hyphens, no consecutive/leading/trailing hyphens.
+          examples:
+          - invoice-processing-v2
+      type: object
+      required:
+      - name
+      - workflow_type
+      title: CreateWorkflow
+    UpdateChannelRequest:
+      properties:
+        channel_type:
+          anyOf:
+          - $ref: '#/components/schemas/ChannelType'
+          - type: 'null'
+          description: Channel type (immutable)
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/NotificationEventType'
+            type: array
+            minItems: 1
+          - type: 'null'
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+          description: Enable/disable channel
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes). Pass empty string to remove custom secret.
+        email_config:
+          anyOf:
+          - $ref: '#/components/schemas/EmailChannelConfigUpdate'
+          - type: 'null'
+          description: Email channel configuration
+      type: object
+      title: UpdateChannelRequest
+      description: Common fields for all channel update requests.
+    UpdateWorkflow:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        source_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Source Id
+        destination_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Destination Id
+        workflow_type:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowType'
+          - type: 'null'
+        workflow_nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/WorkflowNode'
+            type: array
+          - type: 'null'
+          title: Workflow Nodes
+        template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template Id
+        schedule:
+          anyOf:
+          - type: string
+            enum:
+            - every 15 minutes
+            - every hour
+            - every 2 hours
+            - every 4 hours
+            - every 6 hours
+            - every 8 hours
+            - every 10 hours
+            - every 12 hours
+            - daily
+            - weekly
+            - monthly
+          - type: 'null'
+          title: Schedule
+        reprocess_all:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Reprocess All
+        state:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowState'
+          - type: 'null'
+      type: object
+      title: UpdateWorkflow
+    WorkflowInformation:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        sources:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Sources
+        destinations:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Destinations
+        workflow_type:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowType'
+          - type: 'null'
+        workflow_nodes:
+          items:
+            $ref: '#/components/schemas/WorkflowNode'
+          type: array
+          title: Workflow Nodes
+        schedule:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowSchedule'
+          - type: 'null'
+        status:
+          $ref: '#/components/schemas/WorkflowState'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        reprocess_all:
+          type: boolean
+          title: Reprocess All
+          default: false
+      type: object
+      required:
+      - id
+      - name
+      - sources
+      - destinations
+      - workflow_nodes
+      - status
+      - created_at
+      title: WorkflowInformation
+    WorkflowType:
+      type: string
+      enum:
+      - basic
+      - advanced
+      - platinum
+      - custom
+      title: WorkflowType
+    NodeFileMetadata:
+      properties:
+        node_id:
+          type: string
+          format: uuid
+          title: Node Id
+        file_id:
+          type: string
+          title: File Id
+        node_type:
+          type: string
+          title: Node Type
+        node_subtype:
+          type: string
+          title: Node Subtype
+      type: object
+      required:
+      - node_id
+      - file_id
+      - node_type
+      - node_subtype
+      title: NodeFileMetadata
+    SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: SortDirection
+    JobStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+      - STOPPED
+      - FAILED
+      title: JobStatus
+    EmailChannelConfigUpdate:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      title: EmailChannelConfigUpdate
+      description: User-configurable email settings.
+    ChannelListResponse:
+      properties:
+        items:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/WebhookChannelResponse'
+            - $ref: '#/components/schemas/EmailChannelResponse'
+            discriminator:
+              propertyName: channel_type
+              mapping:
+                email: '#/components/schemas/EmailChannelResponse'
+                webhook: '#/components/schemas/WebhookChannelResponse'
+          type: array
+          title: Items
+          description: List of channels
+      type: object
+      required:
+      - items
+      title: ChannelListResponse
+      description: List response for notification channels (no pagination, max 50 per scope).
+    WorkflowNode:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+        subtype:
+          type: string
+          title: Subtype
+        settings:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Settings
+      type: object
+      required:
+      - name
+      - type
+      - subtype
+      title: WorkflowNode
+    EmailChannelResponse:
+      properties:
+        channel_type:
+          type: string
+          const: email
+          title: Channel Type
+          default: email
+        id:
+          type: string
+          title: Id
+          description: Channel ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            type: string
+          type: array
+          title: Event Types
+          description: Subscribed event types
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Channel enabled status
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Last update timestamp
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfigResponse'
+          description: Email channel configuration
+      type: object
+      required:
+      - id
+      - event_types
+      - enabled
+      - created_at
+      - updated_at
+      - email_config
+      title: EmailChannelResponse
+      description: Response for email notification channel.
+    JobInformation:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        workflow_id:
+          type: string
+          format: uuid
+          title: Workflow Id
+        workflow_name:
+          type: string
+          title: Workflow Name
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        runtime:
+          anyOf:
+          - type: string
+            format: duration
+          - type: 'null'
+          title: Runtime
+        input_file_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Input File Ids
+        output_node_files:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/NodeFileMetadata'
+            type: array
+          - type: 'null'
+          title: Output Node Files
+        job_type:
+          $ref: '#/components/schemas/WorkflowJobType'
+          default: ephemeral
+      type: object
+      required:
+      - id
+      - workflow_id
+      - workflow_name
+      - status
+      - created_at
+      title: JobInformation
+    WebhookChannelResponse:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        id:
+          type: string
+          title: Id
+          description: Channel ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            type: string
+          type: array
+          title: Event Types
+          description: Subscribed event types
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Channel enabled status
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Last update timestamp
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL
+      type: object
+      required:
+      - id
+      - event_types
+      - enabled
+      - created_at
+      - updated_at
+      - url
+      title: WebhookChannelResponse
+      description: Response for webhook notification channel.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: unstructured-api-key
+      in: header
+      x-speakeasy-example: YOUR_API_KEY
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 3000
+    maxInterval: 720000
+    maxElapsedTime: 1800000
+    exponent: 1.88
+  statusCodes:
+  - 5xx
+  retryConnectionErrors: true

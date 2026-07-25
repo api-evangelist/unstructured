@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Unstructured Partition channels templates API
+  version: 1.5.58
+servers:
+- url: https://api.unstructuredapp.io
+  description: Serverless SaaS API
+  x-speakeasy-server-id: saas-api
+- url: http://localhost:8000
+  description: Development server
+  x-speakeasy-server-id: development
+security:
+- ApiKeyAuth: []
+- {}
+tags:
+- name: templates
+paths:
+  /api/v1/templates/:
+    get:
+      tags:
+      - templates
+      summary: List Templates
+      description: Retrieve a list of available templates with their metadata.
+      operationId: list_templates
+      parameters:
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateListItem'
+                title: Response List Templates
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/templates/{template_id}:
+    get:
+      tags:
+      - templates
+      summary: Get Template
+      description: Retrieve detailed information and DAG for a specific template.
+      operationId: get_template
+      parameters:
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Template Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateDetail'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    TemplateListItem:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+        last_updated:
+          type: string
+          title: Last Updated
+        description:
+          type: string
+          title: Description
+      type: object
+      required:
+      - id
+      - name
+      - version
+      - last_updated
+      - description
+      title: TemplateListItem
+      description: Template metadata for list responses.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TemplateNode:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+        subtype:
+          type: string
+          title: Subtype
+        settings:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Settings
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - subtype
+      title: TemplateNode
+      description: A node in a template DAG.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TemplateDetail:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+        last_updated:
+          type: string
+          title: Last Updated
+        description:
+          type: string
+          title: Description
+        nodes:
+          items:
+            $ref: '#/components/schemas/TemplateNode'
+          type: array
+          title: Nodes
+      type: object
+      required:
+      - id
+      - name
+      - version
+      - last_updated
+      - description
+      - nodes
+      title: TemplateDetail
+      description: Full template details including nodes.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: unstructured-api-key
+      in: header
+      x-speakeasy-example: YOUR_API_KEY
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 3000
+    maxInterval: 720000
+    maxElapsedTime: 1800000
+    exponent: 1.88
+  statusCodes:
+  - 5xx
+  retryConnectionErrors: true

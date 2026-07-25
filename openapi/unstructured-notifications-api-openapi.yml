@@ -1,0 +1,387 @@
+openapi: 3.1.0
+info:
+  title: Unstructured Partition channels notifications API
+  version: 1.5.58
+servers:
+- url: https://api.unstructuredapp.io
+  description: Serverless SaaS API
+  x-speakeasy-server-id: saas-api
+- url: http://localhost:8000
+  description: Development server
+  x-speakeasy-server-id: development
+security:
+- ApiKeyAuth: []
+- {}
+tags:
+- name: notifications
+paths:
+  /api/v1/notifications:
+    get:
+      tags:
+      - notifications
+      summary: List Notifications
+      description: "List notification events for the authenticated user.\n\nReturns persisted notification events enriched with per-user read status.\nEach notification represents a platform event (e.g., job.completed) with\nan `is_read` flag indicating whether the current user has marked it as read.\n\nOrdered by created_at DESC with cursor-based pagination.\n\nArgs:\n    workflow_id: Filter by workflow ID\n    event_types: Comma-separated event types (e.g., \"job.completed,job.failed\")\n    since: Filter events created after this ISO 8601 timestamp\n    limit: Max events to return (1-100, default 50)\n    cursor: Pagination cursor from previous response\n    unread_only: Filter to unread events only for current user"
+      operationId: list_notifications_api_v1_notifications_get
+      parameters:
+      - name: workflow_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+      - name: event_types
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Event Types
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Since
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cursor
+      - name: unread_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Unread Only
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/notifications/unread-count:
+    get:
+      tags:
+      - notifications
+      summary: Get Unread Count
+      description: "Get count of unread notification events for current user.\n\nTarget performance: <50ms p95 (SC-014).\n\nArgs:\n    workflow_id: Optional workflow filter"
+      operationId: get_unread_count_api_v1_notifications_unread_count_get
+      parameters:
+      - name: workflow_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadCountResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/notifications/mark-read:
+    post:
+      tags:
+      - notifications
+      summary: Mark Read
+      description: 'Mark notification events as read for current user.
+
+
+        Provide EITHER notification_ids (list of up to 100 UUIDs) OR before (timestamp).
+
+        workflow_id filter is only valid with ''before'' mode.
+
+
+        Target performance: batch of 100 < 100ms (SC-015).'
+      operationId: mark_read_api_v1_notifications_mark_read_post
+      parameters:
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkReadRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarkReadResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/notifications/{notification_id}:
+    get:
+      tags:
+      - notifications
+      summary: Get Notification
+      description: Get a single notification event by ID.
+      operationId: get_notification_api_v1_notifications__notification_id__get
+      parameters:
+      - name: notification_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Notification Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UnreadCountResponse:
+      properties:
+        unread_count:
+          type: integer
+          title: Unread Count
+          description: Number of unread events
+      type: object
+      required:
+      - unread_count
+      title: UnreadCountResponse
+      description: Response for unread count query.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MarkReadResponse:
+      properties:
+        marked_count:
+          type: integer
+          title: Marked Count
+          description: Number of events newly marked as read
+      type: object
+      required:
+      - marked_count
+      title: MarkReadResponse
+      description: Response for mark-as-read operation.
+    MarkReadRequest:
+      properties:
+        notification_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+            maxItems: 100
+          - type: 'null'
+          title: Notification Ids
+          description: Specific notification IDs to mark as read (max 100)
+        before:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Before
+          description: Mark all notifications created before this ISO 8601 timestamp as read
+        mark_all:
+          type: boolean
+          title: Mark All
+          description: Mark all unread notifications as read (can combine with workflow_id)
+          default: false
+        workflow_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+          description: Filter by workflow (only valid with 'before' or 'mark_all')
+      type: object
+      title: MarkReadRequest
+      description: 'Request to mark notifications as read.
+
+
+        Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
+
+        workflow_id is valid with ''before'' or ''mark_all''.'
+    NotificationResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Notification event UUID
+        event_type:
+          type: string
+          title: Event Type
+          description: Event type (e.g., job.completed)
+        workflow_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+          description: Workflow scope (null = account-level)
+        payload:
+          additionalProperties: true
+          type: object
+          title: Payload
+          description: Event payload data
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Event creation timestamp
+        is_read:
+          type: boolean
+          title: Is Read
+          description: Read status for current user
+          default: false
+      type: object
+      required:
+      - id
+      - event_type
+      - payload
+      - created_at
+      title: NotificationResponse
+      description: Single notification event.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    NotificationListResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/NotificationResponse'
+          type: array
+          title: Events
+          description: List of notification events
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: Cursor for next page (null if no more)
+      type: object
+      required:
+      - events
+      title: NotificationListResponse
+      description: Paginated notification list response.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: unstructured-api-key
+      in: header
+      x-speakeasy-example: YOUR_API_KEY
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 3000
+    maxInterval: 720000
+    maxElapsedTime: 1800000
+    exponent: 1.88
+  statusCodes:
+  - 5xx
+  retryConnectionErrors: true

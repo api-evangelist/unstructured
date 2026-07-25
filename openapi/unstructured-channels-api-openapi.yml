@@ -1,0 +1,706 @@
+openapi: 3.1.0
+info:
+  title: Unstructured Partition channels API
+  version: 1.5.58
+servers:
+- url: https://api.unstructuredapp.io
+  description: Serverless SaaS API
+  x-speakeasy-server-id: saas-api
+- url: http://localhost:8000
+  description: Development server
+  x-speakeasy-server-id: development
+security:
+- ApiKeyAuth: []
+- {}
+tags:
+- name: channels
+paths:
+  /api/v1/notifications/channels:
+    post:
+      tags:
+      - channels
+      summary: Create Channel
+      description: 'Create notification channel.
+
+
+        Creates a new delivery channel for receiving platform event notifications.
+
+        URL must use HTTPS for webhook type. At least one event type must be specified.'
+      operationId: create_channel_api_v1_notifications_channels_post
+      parameters:
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/CreateWebhookChannelRequest'
+              - $ref: '#/components/schemas/CreateEmailChannelRequest'
+              discriminator:
+                propertyName: channel_type
+                mapping:
+                  webhook: '#/components/schemas/CreateWebhookChannelRequest'
+                  email: '#/components/schemas/CreateEmailChannelRequest'
+              title: Data
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Create Channel Api V1 Notifications Channels Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - channels
+      summary: List Channels
+      description: 'List account-level notification channels.
+
+
+        Returns all channel configurations for the account (workflow_id=None scope).
+
+        channel_type is required - no cross-type aggregation.'
+      operationId: list_channels_api_v1_notifications_channels_get
+      parameters:
+      - name: channel_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChannelType'
+      - name: enabled
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/notifications/channels/{channel_id}:
+    get:
+      tags:
+      - channels
+      summary: Get Channel
+      description: Get account-level notification channel by ID.
+      operationId: get_channel_api_v1_notifications_channels__channel_id__get
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Get Channel Api V1 Notifications Channels  Channel Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - channels
+      summary: Update Channel
+      description: 'Update account-level notification channel.
+
+
+        Updates an existing channel. Only provided fields are updated.'
+      operationId: update_channel_api_v1_notifications_channels__channel_id__patch
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/WebhookChannelResponse'
+                - $ref: '#/components/schemas/EmailChannelResponse'
+                discriminator:
+                  propertyName: channel_type
+                  mapping:
+                    webhook: '#/components/schemas/WebhookChannelResponse'
+                    email: '#/components/schemas/EmailChannelResponse'
+                title: Response Update Channel Api V1 Notifications Channels  Channel Id  Patch
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - channels
+      summary: Delete Channel
+      description: Delete account-level notification channel.
+      operationId: delete_channel_api_v1_notifications_channels__channel_id__delete
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/notifications/channels/{channel_id}/verify:
+    post:
+      tags:
+      - channels
+      summary: Verify Channel
+      description: 'Verify a notification channel using a verification code.
+
+
+        Email channels require verification by providing the 6-digit code
+
+        sent to the recipient email address during channel creation.'
+      operationId: verify_channel_api_v1_notifications_channels__channel_id__verify_post
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Channel Id
+      - name: unstructured-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unstructured-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyChannelRequest'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UpdateChannelRequest:
+      properties:
+        channel_type:
+          anyOf:
+          - $ref: '#/components/schemas/ChannelType'
+          - type: 'null'
+          description: Channel type (immutable)
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/NotificationEventType'
+            type: array
+            minItems: 1
+          - type: 'null'
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+          description: Enable/disable channel
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes). Pass empty string to remove custom secret.
+        email_config:
+          anyOf:
+          - $ref: '#/components/schemas/EmailChannelConfigUpdate'
+          - type: 'null'
+          description: Email channel configuration
+      type: object
+      title: UpdateChannelRequest
+      description: Common fields for all channel update requests.
+    ChannelType:
+      type: string
+      enum:
+      - webhook
+      - email
+      title: ChannelType
+      description: Notification delivery channel types.
+    CreateEmailChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: email
+          title: Channel Type
+          default: email
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfig'
+          description: Email channel configuration
+      type: object
+      required:
+      - event_types
+      - email_config
+      title: CreateEmailChannelRequest
+      description: Request to create an email notification channel.
+    EmailChannelConfigUpdate:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      title: EmailChannelConfigUpdate
+      description: User-configurable email settings.
+    EmailChannelConfigResponse:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+        provider:
+          type: string
+          title: Provider
+          description: Email provider (read-only, from platform config)
+      type: object
+      required:
+      - recipient_email
+      - provider
+      title: EmailChannelConfigResponse
+      description: Email config in response (no sensitive data).
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ChannelListResponse:
+      properties:
+        items:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/WebhookChannelResponse'
+            - $ref: '#/components/schemas/EmailChannelResponse'
+            discriminator:
+              propertyName: channel_type
+              mapping:
+                email: '#/components/schemas/EmailChannelResponse'
+                webhook: '#/components/schemas/WebhookChannelResponse'
+          type: array
+          title: Items
+          description: List of channels
+      type: object
+      required:
+      - items
+      title: ChannelListResponse
+      description: List response for notification channels (no pagination, max 50 per scope).
+    EmailChannelResponse:
+      properties:
+        channel_type:
+          type: string
+          const: email
+          title: Channel Type
+          default: email
+        id:
+          type: string
+          title: Id
+          description: Channel ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            type: string
+          type: array
+          title: Event Types
+          description: Subscribed event types
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Channel enabled status
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Last update timestamp
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfigResponse'
+          description: Email channel configuration
+      type: object
+      required:
+      - id
+      - event_types
+      - enabled
+      - created_at
+      - updated_at
+      - email_config
+      title: EmailChannelResponse
+      description: Response for email notification channel.
+    EmailChannelConfig:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      required:
+      - recipient_email
+      title: EmailChannelConfig
+      description: User-configurable email settings.
+    VerifyChannelRequest:
+      properties:
+        code:
+          type: string
+          maxLength: 6
+          minLength: 6
+          pattern: ^\d{6}$
+          title: Code
+          description: 6-digit verification code sent to the channel's email address
+      type: object
+      required:
+      - code
+      title: VerifyChannelRequest
+      description: Request to verify an email channel with a verification code.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    NotificationEventType:
+      type: string
+      enum:
+      - job.scheduled
+      - job.in_progress
+      - job.progress
+      - job.completed
+      - job.stopped
+      - job.failed
+      title: NotificationEventType
+      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
+    WebhookChannelResponse:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        id:
+          type: string
+          title: Id
+          description: Channel ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            type: string
+          type: array
+          title: Event Types
+          description: Subscribed event types
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Channel enabled status
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Last update timestamp
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL
+      type: object
+      required:
+      - id
+      - event_types
+      - enabled
+      - created_at
+      - updated_at
+      - url
+      title: WebhookChannelResponse
+      description: Response for webhook notification channel.
+    CreateWebhookChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes)
+      type: object
+      required:
+      - event_types
+      - url
+      title: CreateWebhookChannelRequest
+      description: Request to create a webhook notification channel.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: unstructured-api-key
+      in: header
+      x-speakeasy-example: YOUR_API_KEY
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 3000
+    maxInterval: 720000
+    maxElapsedTime: 1800000
+    exponent: 1.88
+  statusCodes:
+  - 5xx
+  retryConnectionErrors: true
