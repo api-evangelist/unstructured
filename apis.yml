@@ -12,7 +12,20 @@ description: >-
   an MCP server for AI agent workflows, and 40+ connectors for source and
   destination data systems including S3, Databricks, and vector databases.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/unstructured.png
 tags:
   - document-processing
   - ETL
@@ -29,51 +42,168 @@ created: '2026-06-12'
 modified: '2026-06-12'
 specificationVersion: '0.19'
 apis:
-  - aid: unstructured-platform-api
-    name: Unstructured Platform API
-    description: >-
-      The Unstructured Platform API provides programmatic access to workflow
-      operations including source connectors, destination connectors, workflows,
-      and jobs. It enables headless, push-style data transformation pipelines
-      that partition, enrich, chunk, and embed documents from 50+ file formats
-      into AI-ready JSON output suitable for RAG and LLM applications.
-    humanURL: https://docs.unstructured.io/api-reference/overview
-    baseURL: https://platform.unstructuredapp.io/api/v1
-    tags:
-      - document-processing
-      - workflows
-      - connectors
-      - RAG
-      - ETL
-    properties:
-      - type: Documentation
-        url: https://docs.unstructured.io/api-reference/overview
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/openapi/unstructured-platform-api-openapi.yml
-  - aid: unstructured-partition-endpoint
-    name: Unstructured Partition Endpoint
-    description: >-
-      The Unstructured Partition Endpoint is the legacy serverless API for
-      processing individual files on demand. It supports PDFs, images, DOCX,
-      HTML, and dozens of other formats, returning structured element JSON with
-      configurable processing strategies including fast, hi_res, ocr_only, and
-      auto. Authentication uses API key headers.
-    humanURL: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
-    baseURL: https://api.unstructured.io/general/v0/general
-    tags:
-      - document-partitioning
-      - OCR
-      - PDF
-      - serverless
-    properties:
-      - type: Documentation
-        url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
-      - type: PythonSDK
-        url: https://github.com/Unstructured-IO/unstructured-python-client
-      - type: JavaScriptSDK
-        url: https://github.com/Unstructured-IO/unstructured-js-client
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/openapi/unstructured-partition-endpoint-openapi.yml
+- aid: unstructured:unstructured-channels-api
+  name: Unstructured channels API
+  description: The channels API from Unstructured — 3 operation(s) for channels.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - channels
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-channels-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-destinations-api
+  name: Unstructured destinations API
+  description: The destinations API from Unstructured — 3 operation(s) for destinations.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - destinations
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-destinations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-general-api
+  name: Unstructured general API
+  description: The general API from Unstructured — 1 operation(s) for general.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - general
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-general-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-jobs-api
+  name: Unstructured jobs API
+  description: The jobs API from Unstructured — 6 operation(s) for jobs.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-notifications-api
+  name: Unstructured notifications API
+  description: The notifications API from Unstructured — 4 operation(s) for notifications.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-sources-api
+  name: Unstructured sources API
+  description: The sources API from Unstructured — 3 operation(s) for sources.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - sources
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-templates-api
+  name: Unstructured templates API
+  description: The templates API from Unstructured — 2 operation(s) for templates.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - templates
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-workflow-channels-api
+  name: Unstructured workflow-channels API
+  description: The workflow-channels API from Unstructured — 3 operation(s) for workflow-channels.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - workflow-channels
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-workflow-channels-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
+- aid: unstructured:unstructured-workflows-api
+  name: Unstructured workflows API
+  description: The workflows API from Unstructured — 6 operation(s) for workflows.
+  humanURL: https://docs.unstructured.io/api-reference/overview
+  baseURL: https://platform.unstructuredapp.io/api/v1
+  tags:
+  - workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/unstructured-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/overview
+  - type: Documentation
+    url: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
+  - type: PythonSDK
+    url: https://github.com/Unstructured-IO/unstructured-python-client
+  - type: JavaScriptSDK
+    url: https://github.com/Unstructured-IO/unstructured-js-client
 common:
   - type: AgenticAccess
     url: agentic-access/unstructured-agentic-access.yml
