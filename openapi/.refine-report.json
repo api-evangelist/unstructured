@@ -1,0 +1,30 @@
+{
+  "provider": "unstructured",
+  "sources": [
+    "unstructured-channels-api-openapi.yml",
+    "unstructured-destinations-api-openapi.yml",
+    "unstructured-general-api-openapi.yml",
+    "unstructured-jobs-api-openapi.yml",
+    "unstructured-notifications-api-openapi.yml",
+    "unstructured-sources-api-openapi.yml",
+    "unstructured-templates-api-openapi.yml",
+    "unstructured-workflow-channels-api-openapi.yml",
+    "unstructured-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "unstructured-channels-api-openapi.yml",
+    "unstructured-destinations-api-openapi.yml",
+    "unstructured-general-api-openapi.yml",
+    "unstructured-jobs-api-openapi.yml",
+    "unstructured-notifications-api-openapi.yml",
+    "unstructured-sources-api-openapi.yml",
+    "unstructured-templates-api-openapi.yml",
+    "unstructured-workflow-channels-api-openapi.yml",
+    "unstructured-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
