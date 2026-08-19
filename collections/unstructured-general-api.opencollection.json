@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unstructured Partition channels general API",
+    "version": "1.5.58"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "unstructured-api-key",
+      "value": "{{unstructured-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "general",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/general/v0/general",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Description"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unstructured Partition channels notifications API",
+    "version": "1.5.58"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "unstructured-api-key",
+      "value": "{{unstructured-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/notifications",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unread_only",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List notification events for the authenticated user.\n\nReturns persisted notification events enriched with per-user read status.\nEach notification represents a platform event (e.g., job.completed) with\nan `is_read` flag indicating whether the current user has marked it as read.\n\nOrdered by created_at DESC with cursor-based pagination.\n\nArgs:\n    workflow_id: Filter by workflow ID\n    event_types: Comma-separated event types (e.g., \"job.completed,job.failed\")\n    since: Filter events created after"
+        },
+        {
+          "info": {
+            "name": "Get Unread Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/notifications/unread-count",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get count of unread notification events for current user.\n\nTarget performance: <50ms p95 (SC-014).\n\nArgs:\n    workflow_id: Optional workflow filter"
+        },
+        {
+          "info": {
+            "name": "Mark Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/api/v1/notifications/mark-read",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark notification events as read for current user.\n\nProvide EITHER notification_ids (list of up to 100 UUIDs) OR before (timestamp).\nworkflow_id filter is only valid with 'before' mode.\n\nTarget performance: batch of 100 < 100ms (SC-015)."
+        },
+        {
+          "info": {
+            "name": "Get Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/notifications/:notification_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "notification_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single notification event by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

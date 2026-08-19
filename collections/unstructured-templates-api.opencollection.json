@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unstructured Partition channels templates API",
+    "version": "1.5.58"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "unstructured-api-key",
+      "value": "{{unstructured-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/templates/",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of available templates with their metadata."
+        },
+        {
+          "info": {
+            "name": "Get Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/templates/:template_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information and DAG for a specific template."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

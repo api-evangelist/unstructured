@@ -1,0 +1,416 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unstructured Partition channels workflows API",
+    "version": "1.5.58"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "unstructured-api-key",
+      "value": "{{unstructured-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dag_node_configuration_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "destination_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "show_only_soft_deleted",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of workflows, optionally filtered by source, destination, state, name, date range, and supports pagination and sorting."
+        },
+        {
+          "info": {
+            "name": "Create Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new workflow, either custom or auto, and configure its settings."
+        },
+        {
+          "info": {
+            "name": "Get Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for a specific workflow by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing workflow's name, connectors, schedule, or workflow type."
+        },
+        {
+          "info": {
+            "name": "Delete Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a workflow by its ID."
+        },
+        {
+          "info": {
+            "name": "Run Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/run",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Run a workflow by triggering a new job if none is currently active."
+        },
+        {
+          "info": {
+            "name": "List Workflow Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List workflow-scoped notification channels.\n\nReturns all channel configurations for the specified workflow.\nchannel_type is required - no cross-type aggregation."
+        },
+        {
+          "info": {
+            "name": "Create Workflow Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create workflow-scoped notification channel.\n\nCreates a new delivery channel for receiving platform event notifications\nscoped to the specified workflow."
+        },
+        {
+          "info": {
+            "name": "Get Workflow Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels/:channel_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get workflow-scoped notification channel by ID."
+        },
+        {
+          "info": {
+            "name": "Update Workflow Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels/:channel_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update workflow-scoped notification channel.\n\nUpdates an existing channel. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Delete Workflow Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels/:channel_id",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete workflow-scoped notification channel."
+        },
+        {
+          "info": {
+            "name": "Verify Workflow Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unstructuredapp.io/api/v1/workflows/:workflow_id/notifications/channels/:channel_id/verify",
+            "headers": [
+              {
+                "name": "unstructured-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify a workflow-scoped notification channel using a verification code.\n\nEmail channels require verification by providing the 6-digit code\nsent to the recipient email address during channel creation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

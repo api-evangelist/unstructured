@@ -1,0 +1,2570 @@
+{
+  "item": [
+    {
+      "id": "ad150961-521d-44e9-a70e-e02996e5d297",
+      "name": "workflows",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ea38358-7844-4899-a615-8022240b1414",
+          "name": "Create Workflow",
+          "request": {
+            "name": "Create Workflow",
+            "description": {
+              "content": "Create a new workflow, either custom or auto, and configure its settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"workflow_type\": \"<string>\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"settings\": {\n        \"key_0\": 8550,\n        \"key_1\": 2091.2367988484702\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"settings\": {\n        \"key_0\": false\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d985adb-a022-4449-83d5-c823fb01577c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workflow_type\": \"basic\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"57d6abd3-80ce-72d6-2c52-8b838a20499d\",\n      \"settings\": {\n        \"key_0\": 9430,\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"d2426128-cb03-d8e8-4127-ce12a4764411\",\n      \"settings\": {\n        \"key_0\": 3358.9924132029314\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3a680853-b4c9-0c63-8e8a-774590828f8a\",\n  \"name\": \"string\",\n  \"sources\": [\n    \"ea8c7416-7a28-4c13-6aff-6fd161800327\",\n    \"9aecc83f-64f8-7ce9-172b-097fd387a12a\"\n  ],\n  \"destinations\": [\n    \"d17a8296-b5ca-471d-8f07-a48a0a339a64\",\n    \"2c6e0e2d-2052-4429-30b4-30f09004bc9f\"\n  ],\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"87ace401-12fa-6d3b-d792-7f612953e9b1\",\n      \"settings\": {\n        \"key_0\": false,\n        \"key_1\": 7123\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"1cf19931-1623-aa3d-1658-953ed91b5288\",\n      \"settings\": {\n        \"key_0\": 883.3016831270224,\n        \"key_1\": false\n      }\n    }\n  ],\n  \"status\": \"inactive\",\n  \"created_at\": \"1957-05-29T03:22:46.954Z\",\n  \"key\": \"string\",\n  \"workflow_type\": \"custom\",\n  \"schedule\": {\n    \"crontab_entries\": [\n      {\n        \"cron_expression\": \"0 0 * * *\"\n      }\n    ]\n  },\n  \"updated_at\": \"1988-12-07T10:29:17.379Z\",\n  \"reprocess_all\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a81a7b8a-4d1a-411e-ab1b-8cc982dc020e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workflow_type\": \"basic\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"57d6abd3-80ce-72d6-2c52-8b838a20499d\",\n      \"settings\": {\n        \"key_0\": 9430,\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"d2426128-cb03-d8e8-4127-ce12a4764411\",\n      \"settings\": {\n        \"key_0\": 3358.9924132029314\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28142d0f-a021-4eee-b8b5-26327f2569da",
+          "name": "List Workflows",
+          "request": {
+            "name": "List Workflows",
+            "description": {
+              "content": "Retrieve a list of workflows, optionally filtered by source, destination, state, name, date range, and supports pagination and sorting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dag_node_configuration_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "asc"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_only_soft_deleted",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f39d308-3819-4548-b029-5601f231b4de",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dag_node_configuration_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "destination_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "show_only_soft_deleted",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"4e1e2359-1bb2-50e2-9f17-ef393e55a4f5\",\n    \"name\": \"string\",\n    \"sources\": [\n      \"222fa413-48e1-d15a-cea2-97323c3fc13c\",\n      \"6062a4b1-2153-84b8-8342-4e486aa3ef1e\"\n    ],\n    \"destinations\": [\n      \"ca372658-2b51-93f8-8e1a-536d62e915b2\",\n      \"b320ff47-44ca-76d4-07bd-305f5a938845\"\n    ],\n    \"workflow_nodes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"subtype\": \"string\",\n        \"id\": \"3dce5bab-0cf3-be8f-5010-a19d25a04497\",\n        \"settings\": {\n          \"key_0\": 4920.204028823579,\n          \"key_1\": 777.2726637853244,\n          \"key_2\": true,\n          \"key_3\": 53\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"subtype\": \"string\",\n        \"id\": \"8e925312-631a-ac8c-6070-4b4b1d95600d\",\n        \"settings\": {\n          \"key_0\": 5342,\n          \"key_1\": \"string\"\n        }\n      }\n    ],\n    \"status\": \"active\",\n    \"created_at\": \"1966-03-23T08:00:46.188Z\",\n    \"key\": \"string\",\n    \"workflow_type\": \"advanced\",\n    \"schedule\": {\n      \"crontab_entries\": [\n        {\n          \"cron_expression\": \"0 0 * * *\"\n        }\n      ]\n    },\n    \"updated_at\": \"2016-10-17T20:17:52.743Z\",\n    \"reprocess_all\": false\n  },\n  {\n    \"id\": \"7fb38210-9717-30ed-568a-bf0f90bdfbcb\",\n    \"name\": \"string\",\n    \"sources\": [\n      \"62194686-4be8-2d5d-2016-96a3e3301524\",\n      \"e2400bbc-4441-63db-751f-c7e898cca937\"\n    ],\n    \"destinations\": [\n      \"6b65f679-8546-f609-79ab-9ee152b982ae\",\n      \"dd731092-0980-8d34-bd3a-3e84c1a19755\"\n    ],\n    \"workflow_nodes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"subtype\": \"string\",\n        \"id\": \"e556c11a-76a4-a213-794e-5848d8ca8fd2\",\n        \"settings\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": 7419.113492130234,\n          \"key_3\": false,\n          \"key_4\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"subtype\": \"string\",\n        \"id\": \"ecd66d96-455f-53d8-8aba-54198339b00c\",\n        \"settings\": {\n          \"key_0\": \"string\",\n          \"key_1\": 1357.5962228097549\n        }\n      }\n    ],\n    \"status\": \"active\",\n    \"created_at\": \"1968-06-09T14:20:11.110Z\",\n    \"key\": \"string\",\n    \"workflow_type\": \"basic\",\n    \"schedule\": {\n      \"crontab_entries\": [\n        {\n          \"cron_expression\": \"0 0 * * *\"\n        }\n      ]\n    },\n    \"updated_at\": \"1948-11-10T16:48:31.080Z\",\n    \"reprocess_all\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e0a5654-e33d-4fe9-a507-7d7717ce519c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dag_node_configuration_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "destination_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "show_only_soft_deleted",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57142b09-c7c2-4aef-832f-a2cfd14d6507",
+          "name": "Get Workflow",
+          "request": {
+            "name": "Get Workflow",
+            "description": {
+              "content": "Retrieve detailed information for a specific workflow by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97e4a028-71be-4f42-8f60-f5e07e262044",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3a680853-b4c9-0c63-8e8a-774590828f8a\",\n  \"name\": \"string\",\n  \"sources\": [\n    \"ea8c7416-7a28-4c13-6aff-6fd161800327\",\n    \"9aecc83f-64f8-7ce9-172b-097fd387a12a\"\n  ],\n  \"destinations\": [\n    \"d17a8296-b5ca-471d-8f07-a48a0a339a64\",\n    \"2c6e0e2d-2052-4429-30b4-30f09004bc9f\"\n  ],\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"87ace401-12fa-6d3b-d792-7f612953e9b1\",\n      \"settings\": {\n        \"key_0\": false,\n        \"key_1\": 7123\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"1cf19931-1623-aa3d-1658-953ed91b5288\",\n      \"settings\": {\n        \"key_0\": 883.3016831270224,\n        \"key_1\": false\n      }\n    }\n  ],\n  \"status\": \"inactive\",\n  \"created_at\": \"1957-05-29T03:22:46.954Z\",\n  \"key\": \"string\",\n  \"workflow_type\": \"custom\",\n  \"schedule\": {\n    \"crontab_entries\": [\n      {\n        \"cron_expression\": \"0 0 * * *\"\n      }\n    ]\n  },\n  \"updated_at\": \"1988-12-07T10:29:17.379Z\",\n  \"reprocess_all\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a24351b5-4cac-4ba4-bf95-c3d229ae4c53",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6a4eec9-b977-4f25-87bb-7721889ea6c9",
+          "name": "Update Workflow",
+          "request": {
+            "name": "Update Workflow",
+            "description": {
+              "content": "Update an existing workflow's name, connectors, schedule, or workflow type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_type\": \"<string>\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"settings\": {\n        \"key_0\": 698.2849677325764\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"settings\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7779,\n        \"key_2\": 9810.227034690139\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acc4975d-2bac-4c4e-ad3b-9fb0d1442485",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_type\": \"custom\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"d52fb4c9-8a4b-2443-85b0-ed586e5032e6\",\n      \"settings\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5810\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"35bc1e05-7f9e-ebdf-4721-3d555368d6d2\",\n      \"settings\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"state\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3a680853-b4c9-0c63-8e8a-774590828f8a\",\n  \"name\": \"string\",\n  \"sources\": [\n    \"ea8c7416-7a28-4c13-6aff-6fd161800327\",\n    \"9aecc83f-64f8-7ce9-172b-097fd387a12a\"\n  ],\n  \"destinations\": [\n    \"d17a8296-b5ca-471d-8f07-a48a0a339a64\",\n    \"2c6e0e2d-2052-4429-30b4-30f09004bc9f\"\n  ],\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"87ace401-12fa-6d3b-d792-7f612953e9b1\",\n      \"settings\": {\n        \"key_0\": false,\n        \"key_1\": 7123\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"1cf19931-1623-aa3d-1658-953ed91b5288\",\n      \"settings\": {\n        \"key_0\": 883.3016831270224,\n        \"key_1\": false\n      }\n    }\n  ],\n  \"status\": \"inactive\",\n  \"created_at\": \"1957-05-29T03:22:46.954Z\",\n  \"key\": \"string\",\n  \"workflow_type\": \"custom\",\n  \"schedule\": {\n    \"crontab_entries\": [\n      {\n        \"cron_expression\": \"0 0 * * *\"\n      }\n    ]\n  },\n  \"updated_at\": \"1988-12-07T10:29:17.379Z\",\n  \"reprocess_all\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea8d235-0d05-4832-b18e-edaa6c9febb4",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source_id\": \"<uuid>\",\n  \"destination_id\": \"<uuid>\",\n  \"workflow_type\": \"custom\",\n  \"workflow_nodes\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"d52fb4c9-8a4b-2443-85b0-ed586e5032e6\",\n      \"settings\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5810\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"id\": \"35bc1e05-7f9e-ebdf-4721-3d555368d6d2\",\n      \"settings\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"template_id\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"reprocess_all\": \"<boolean>\",\n  \"state\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86c2246-a05d-4b16-9b86-acea82cdc50e",
+          "name": "Delete Workflow",
+          "request": {
+            "name": "Delete Workflow",
+            "description": {
+              "content": "Delete a workflow by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "455363a3-0cfb-4357-8cd0-b1139da58e0c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "911a0b37-ca39-4fc5-b8bd-6008b707c007",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b5b9acb-8d90-461a-853a-c089545f92cb",
+          "name": "Run Workflow",
+          "request": {
+            "name": "Run Workflow",
+            "description": {
+              "content": "Run a workflow by triggering a new job if none is currently active.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "input_files",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "832a6367-d6e0-4c36-b234-532439cfac4b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "input_files",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3e762b42-e6ed-8832-fd73-285e30b8efb9\",\n  \"workflow_id\": \"2e08cf84-34f6-a0e8-8f75-da6c0136bdae\",\n  \"workflow_name\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"created_at\": \"1975-10-17T04:42:03.428Z\",\n  \"runtime\": \"string\",\n  \"input_file_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"output_node_files\": [\n    {\n      \"node_id\": \"5260d434-7150-1cc8-14c1-827e4ba7e88f\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    },\n    {\n      \"node_id\": \"bf5be101-a264-a341-9bf7-3915c9e7e96f\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    }\n  ],\n  \"job_type\": \"ephemeral\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9926b613-4582-4a55-9ed7-1af32d864597",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "input_files",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18974992-9891-4a73-bb7c-4aed6ead71f6",
+          "name": "List Workflow Channels",
+          "request": {
+            "name": "List Workflow Channels",
+            "description": {
+              "content": "List workflow-scoped notification channels.\n\nReturns all channel configurations for the specified workflow.\nchannel_type is required - no cross-type aggregation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "channel_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe0227fa-6af6-42d2-b1cf-20b79468a0ca",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel_type",
+                      "value": "webhook"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"event_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"created_at\": \"1999-09-03T04:40:46.841Z\",\n      \"updated_at\": \"1999-02-02T17:33:19.098Z\",\n      \"url\": \"string\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"event_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"created_at\": \"1947-03-31T18:39:26.206Z\",\n      \"updated_at\": \"1961-01-15T00:31:34.364Z\",\n      \"url\": \"string\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "701c6199-3553-431c-830c-1db9bcae855b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "channel_type",
+                      "value": "webhook"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03389147-d241-458d-834f-3eb1cf9bfad1",
+          "name": "Create Workflow Channel",
+          "request": {
+            "name": "Create Workflow Channel",
+            "description": {
+              "content": "Create workflow-scoped notification channel.\n\nCreates a new delivery channel for receiving platform event notifications\nscoped to the specified workflow.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_types\": [\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef008258-5b6a-40b3-9909-c7f704215bd6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"secret\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": false,\n  \"created_at\": \"2012-08-05T14:39:30.570Z\",\n  \"updated_at\": \"1974-11-08T15:53:42.030Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f97322c-e40e-425d-9d0d-74c2c08b314c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"secret\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "189cdf00-cf1f-4f01-9273-195859de4e6d",
+          "name": "Get Workflow Channel",
+          "request": {
+            "name": "Get Workflow Channel",
+            "description": {
+              "content": "Get workflow-scoped notification channel by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acb756c7-88ac-4a77-a6fd-98ac68a0be2c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": false,\n  \"created_at\": \"2012-08-05T14:39:30.570Z\",\n  \"updated_at\": \"1974-11-08T15:53:42.030Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35f6c515-3730-4443-9da9-80663986be06",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "900fb743-85fc-4eaf-82bc-eb6e946c7b1d",
+          "name": "Update Workflow Channel",
+          "request": {
+            "name": "Update Workflow Channel",
+            "description": {
+              "content": "Update workflow-scoped notification channel.\n\nUpdates an existing channel. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"<email>\",\n      \"<email>\"\n    ],\n    \"reply_to\": \"<email>\",\n    \"recipient_email\": \"<email>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2dc18d59-46c0-4b80-81db-ba85c46b3fcb",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"EW4CLPQEK@ojJOhyCDbemdlNRGWtWofrVH.uohs\",\n      \"kq14@CVyyyx.gtiz\"\n    ],\n    \"reply_to\": \"3xBpur8v8-MD@ZPlLpbGnHOZsVZcyCffGsrxmclbHXNYr.qbpx\",\n    \"recipient_email\": \"2uB@aFuJuTKNeRXRMmbuyOtIGhOKd.dn\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": false,\n  \"created_at\": \"2012-08-05T14:39:30.570Z\",\n  \"updated_at\": \"1974-11-08T15:53:42.030Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a6f008f-9cd9-4a24-aac5-f61cee46a0cf",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"EW4CLPQEK@ojJOhyCDbemdlNRGWtWofrVH.uohs\",\n      \"kq14@CVyyyx.gtiz\"\n    ],\n    \"reply_to\": \"3xBpur8v8-MD@ZPlLpbGnHOZsVZcyCffGsrxmclbHXNYr.qbpx\",\n    \"recipient_email\": \"2uB@aFuJuTKNeRXRMmbuyOtIGhOKd.dn\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61518a76-be91-4066-8d48-528c61d9d5be",
+          "name": "Delete Workflow Channel",
+          "request": {
+            "name": "Delete Workflow Channel",
+            "description": {
+              "content": "Delete workflow-scoped notification channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7ad6654-99b7-4107-bf22-d4df416af8fa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f854df60-f712-46c3-856d-733a18555872",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1a4ab09-dc8e-455d-8713-f6b76002c672",
+          "name": "Verify Workflow Channel",
+          "request": {
+            "name": "Verify Workflow Channel",
+            "description": {
+              "content": "Verify a workflow-scoped notification channel using a verification code.\n\nEmail channels require verification by providing the 6-digit code\nsent to the recipient email address during channel creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                ":workflow_id",
+                "notifications",
+                "channels",
+                ":channel_id",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "workflow_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "unstructured-api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08f98e06-d7c8-410e-9a69-34424bccd819",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbe8d79f-13b2-4bee-a5d2-7c603904d3f7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workflows",
+                    ":workflow_id",
+                    "notifications",
+                    "channels",
+                    ":channel_id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "workflow_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "unstructured-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "unstructured-api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unstructuredapp.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "unstructured-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "23002be0-c7c3-4fa2-b3cf-e8b9fbcce42d",
+    "name": "Unstructured Partition channels workflows API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
