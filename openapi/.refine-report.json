@@ -1,20 +1,13 @@
 {
   "provider": "unstructured",
   "sources": [
-    "unstructured-channels-api-openapi.yml",
-    "unstructured-destinations-api-openapi.yml",
-    "unstructured-general-api-openapi.yml",
-    "unstructured-jobs-api-openapi.yml",
-    "unstructured-notifications-api-openapi.yml",
-    "unstructured-sources-api-openapi.yml",
-    "unstructured-templates-api-openapi.yml",
-    "unstructured-workflow-channels-api-openapi.yml",
-    "unstructured-workflows-api-openapi.yml"
+    "_original/unstructured-partition-endpoint-openapi.yml",
+    "_original/unstructured-platform-api-openapi.yml"
   ],
   "outputs": [
+    "unstructured-general-api-openapi.yml",
     "unstructured-channels-api-openapi.yml",
     "unstructured-destinations-api-openapi.yml",
-    "unstructured-general-api-openapi.yml",
     "unstructured-jobs-api-openapi.yml",
     "unstructured-notifications-api-openapi.yml",
     "unstructured-sources-api-openapi.yml",
@@ -25,6 +18,28 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "unstructured-partition-endpoint-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "unstructured-platform-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "unstructured-platform-api-openapi.yml: declared missing tag: channels",
+    "unstructured-platform-api-openapi.yml: declared missing tag: destinations",
+    "unstructured-platform-api-openapi.yml: declared missing tag: jobs",
+    "unstructured-platform-api-openapi.yml: declared missing tag: notifications",
+    "unstructured-platform-api-openapi.yml: declared missing tag: sources",
+    "unstructured-platform-api-openapi.yml: declared missing tag: templates",
+    "unstructured-platform-api-openapi.yml: declared missing tag: workflow-channels",
+    "unstructured-platform-api-openapi.yml: declared missing tag: workflows"
+  ],
+  "skipped": [
+    "unstructured-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-destinations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-general-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-workflow-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unstructured-workflows-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

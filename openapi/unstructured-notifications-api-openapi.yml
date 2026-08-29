@@ -1,17 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Unstructured Partition channels notifications API
-  version: 1.5.58
+  title: Platform Notifications API
+  version: 3.1.0
 servers:
-- url: https://api.unstructuredapp.io
-  description: Serverless SaaS API
-  x-speakeasy-server-id: saas-api
-- url: http://localhost:8000
-  description: Development server
-  x-speakeasy-server-id: development
-security:
-- ApiKeyAuth: []
-- {}
+- url: https://platform.unstructuredapp.io/
+  description: Unstructured Platform API
+  x-speakeasy-server-id: platform-api
 tags:
 - name: notifications
 paths:
@@ -213,43 +207,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UnreadCountResponse:
+    HTTPValidationError:
       properties:
-        unread_count:
-          type: integer
-          title: Unread Count
-          description: Number of unread events
-      type: object
-      required:
-      - unread_count
-      title: UnreadCountResponse
-      description: Response for unread count query.
-    ValidationError:
-      properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     MarkReadResponse:
       properties:
         marked_count:
@@ -261,45 +227,6 @@ components:
       - marked_count
       title: MarkReadResponse
       description: Response for mark-as-read operation.
-    MarkReadRequest:
-      properties:
-        notification_ids:
-          anyOf:
-          - items:
-              type: string
-              format: uuid
-            type: array
-            maxItems: 100
-          - type: 'null'
-          title: Notification Ids
-          description: Specific notification IDs to mark as read (max 100)
-        before:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Before
-          description: Mark all notifications created before this ISO 8601 timestamp as read
-        mark_all:
-          type: boolean
-          title: Mark All
-          description: Mark all unread notifications as read (can combine with workflow_id)
-          default: false
-        workflow_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Workflow Id
-          description: Filter by workflow (only valid with 'before' or 'mark_all')
-      type: object
-      title: MarkReadRequest
-      description: 'Request to mark notifications as read.
-
-
-        Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
-
-        workflow_id is valid with ''before'' or ''mark_all''.'
     NotificationResponse:
       properties:
         id:
@@ -341,15 +268,32 @@ components:
       - created_at
       title: NotificationResponse
       description: Single notification event.
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     NotificationListResponse:
       properties:
         events:
@@ -369,19 +313,53 @@ components:
       - events
       title: NotificationListResponse
       description: Paginated notification list response.
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: unstructured-api-key
-      in: header
-      x-speakeasy-example: YOUR_API_KEY
-x-speakeasy-retries:
-  strategy: backoff
-  backoff:
-    initialInterval: 3000
-    maxInterval: 720000
-    maxElapsedTime: 1800000
-    exponent: 1.88
-  statusCodes:
-  - 5xx
-  retryConnectionErrors: true
+    MarkReadRequest:
+      properties:
+        notification_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+            maxItems: 100
+          - type: 'null'
+          title: Notification Ids
+          description: Specific notification IDs to mark as read (max 100)
+        before:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Before
+          description: Mark all notifications created before this ISO 8601 timestamp as read
+        mark_all:
+          type: boolean
+          title: Mark All
+          description: Mark all unread notifications as read (can combine with workflow_id)
+          default: false
+        workflow_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+          description: Filter by workflow (only valid with 'before' or 'mark_all')
+      type: object
+      title: MarkReadRequest
+      description: 'Request to mark notifications as read.
+
+
+        Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
+
+        workflow_id is valid with ''before'' or ''mark_all''.'
+    UnreadCountResponse:
+      properties:
+        unread_count:
+          type: integer
+          title: Unread Count
+          description: Number of unread events
+      type: object
+      required:
+      - unread_count
+      title: UnreadCountResponse
+      description: Response for unread count query.

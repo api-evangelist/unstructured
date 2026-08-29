@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Unstructured Partition channels general API
+  title: Unstructured Partition General API
   version: 1.5.58
 servers:
 - url: https://api.unstructuredapp.io
@@ -79,6 +79,23 @@ components:
           type: string
       example:
         detail: An error occurred
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ValidationError'
+          - type: string
+      example:
+        detail:
+        - type: int_parsing
+          loc:
+          - body
+          - combine_under_n_chars
+          msg: Input should be a valid integer, unable to parse string as an integer
+          input: forty
     CSV-Element:
       title: CSV-Element
       type: string
@@ -382,23 +399,6 @@ components:
       required:
       - files
       title: Partition Parameters
-    HTTPValidationError:
-      type: object
-      properties:
-        detail:
-          oneOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ValidationError'
-          - type: string
-      example:
-        detail:
-        - type: int_parsing
-          loc:
-          - body
-          - combine_under_n_chars
-          msg: Input should be a valid integer, unable to parse string as an integer
-          input: forty
     Element:
       title: Element
       type: object

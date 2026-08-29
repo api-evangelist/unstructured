@@ -1,17 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Unstructured Partition channels sources API
-  version: 1.5.58
+  title: Platform Sources API
+  version: 3.1.0
 servers:
-- url: https://api.unstructuredapp.io
-  description: Serverless SaaS API
-  x-speakeasy-server-id: saas-api
-- url: http://localhost:8000
-  description: Development server
-  x-speakeasy-server-id: development
-security:
-- ApiKeyAuth: []
-- {}
+- url: https://platform.unstructuredapp.io/
+  description: Unstructured Platform API
+  x-speakeasy-server-id: platform-api
 tags:
 - name: sources
 paths:
@@ -285,1970 +279,6 @@ paths:
       x-speakeasy-name-override: get_connection_check_sources
 components:
   schemas:
-    ConnectionCheckStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - SUCCESS
-      - FAILURE
-      title: ConnectionCheckStatus
-    CreateSourceConnector:
-      properties:
-        name:
-          type: string
-          title: Name
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceConnectorType'
-          - type: string
-          title: Type
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/BoxSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
-          - $ref: '#/components/schemas/DropboxSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
-          - $ref: '#/components/schemas/GCSSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
-          - $ref: '#/components/schemas/OneDriveSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/OutlookSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/PostgresSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SalesforceSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SharePointSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SlackSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/TeradataSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/JiraSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ZendeskSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/S3SourceConnectorConfigInput'
-          - $ref: '#/components/schemas/AzureSourceConnectorConfigInput'
-          - additionalProperties: true
-            type: object
-          title: Config
-        key:
-          anyOf:
-          - type: string
-            maxLength: 63
-            minLength: 1
-            pattern: ^[a-z0-9](-?[a-z0-9])*$
-          - type: 'null'
-          title: Key
-          description: Stable identifier for the source connector, used for cross-environment export. If omitted, derived from `name` with a 6-hex-digit suffix. Immutable once set. 1-63 characters, lowercase alphanumeric and hyphens, no consecutive/leading/trailing hyphens.
-          examples:
-          - s3-invoices-source
-      type: object
-      required:
-      - name
-      - type
-      - config
-      title: CreateSourceConnector
-    AzureSourceConnectorConfigInput:
-      properties:
-        remote_url:
-          type: string
-          pattern: ^(az:\/\/|abfs:\/\/)
-          title: Remote Url
-        account_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Name
-        account_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Key
-        connection_string:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Connection String
-        sas_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sas Token
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      title: AzureSourceConnectorConfigInput
-    GCSSourceConnectorConfigInput:
-      properties:
-        remote_url:
-          type: string
-          pattern: ^(gs|gcs):\/\/
-          title: Remote Url
-        service_account_key:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Service Account Key
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        oauth_client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Client Id
-        oauth_client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Client Secret
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      title: GCSSourceConnectorConfigInput
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    SecretReference:
-      properties:
-        id:
-          type: string
-          title: Id
-        type:
-          $ref: '#/components/schemas/EncryptionType'
-          default: rsa
-      type: object
-      required:
-      - id
-      title: SecretReference
-    ElasticsearchConnectorConfigInput:
-      properties:
-        hosts:
-          items:
-            type: string
-          type: array
-          title: Hosts
-        index_name:
-          type: string
-          title: Index Name
-        es_api_key:
-          type: string
-          title: Es Api Key
-      additionalProperties: true
-      type: object
-      required:
-      - hosts
-      - index_name
-      - es_api_key
-      title: ElasticsearchConnectorConfigInput
-    BoxSourceConnectorConfigInput:
-      properties:
-        box_app_config:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Box App Config
-        access_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Access Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        remote_url:
-          type: string
-          pattern: ^box:\/\/
-          title: Remote Url
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      title: BoxSourceConnectorConfigInput
-    SharePointSourceConnectorConfig:
-      properties:
-        site:
-          type: string
-          title: Site
-        tenant:
-          type: string
-          title: Tenant
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        user_pname:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User Pname
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        recursive:
-          type: boolean
-          title: Recursive
-        path:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Path
-      additionalProperties: true
-      type: object
-      required:
-      - site
-      - tenant
-      - recursive
-      title: SharePointSourceConnectorConfig
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EncryptionType:
-      type: string
-      enum:
-      - rsa
-      - rsa_aes
-      - runtime_config
-      title: EncryptionType
-    PostgresSourceConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        database:
-          type: string
-          title: Database
-        port:
-          type: integer
-          title: Port
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          title: Batch Size
-        id_column:
-          type: string
-          title: Id Column
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - database
-      - port
-      - username
-      - password
-      - table_name
-      - batch_size
-      - id_column
-      title: PostgresSourceConnectorConfig
-    OneDriveSourceConnectorConfig:
-      properties:
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        user_pname:
-          type: string
-          title: User Pname
-        tenant:
-          type: string
-          title: Tenant
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        recursive:
-          type: boolean
-          title: Recursive
-        path:
-          type: string
-          title: Path
-      additionalProperties: true
-      type: object
-      required:
-      - user_pname
-      - tenant
-      - recursive
-      - path
-      title: OneDriveSourceConnectorConfig
-    JiraSourceConnectorConfigInput:
-      properties:
-        url:
-          type: string
-          title: Url
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        cloud_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloud Id
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        cloud:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Cloud
-          default: false
-        projects:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Projects
-        boards:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Boards
-        issues:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Issues
-        status_filters:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Status Filters
-        download_attachments:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Download Attachments
-          default: false
-      additionalProperties: true
-      type: object
-      required:
-      - url
-      title: JiraSourceConnectorConfigInput
-    S3SourceConnectorConfigInput:
-      properties:
-        remote_url:
-          type: string
-          pattern: ^s3:\/\/
-          title: Remote Url
-        anonymous:
-          type: boolean
-          title: Anonymous
-          default: false
-        ambient_credentials:
-          type: boolean
-          title: Ambient Credentials
-          default: false
-        key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Key
-        secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Secret
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        endpoint_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Endpoint Url
-        role_arn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Role Arn
-        external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Id
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      title: S3SourceConnectorConfigInput
-    SourceConnectorInformation:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        name:
-          type: string
-          title: Name
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceConnectorType'
-          - type: string
-          title: Type
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/BoxSourceConnectorConfig'
-          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfig'
-          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfig'
-          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfig'
-          - $ref: '#/components/schemas/DropboxSourceConnectorConfig'
-          - $ref: '#/components/schemas/ElasticsearchConnectorConfig'
-          - $ref: '#/components/schemas/GCSSourceConnectorConfig'
-          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfig'
-          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfig'
-          - $ref: '#/components/schemas/MongoDBConnectorConfig'
-          - $ref: '#/components/schemas/OneDriveSourceConnectorConfig'
-          - $ref: '#/components/schemas/OutlookSourceConnectorConfig'
-          - $ref: '#/components/schemas/PostgresSourceConnectorConfig'
-          - $ref: '#/components/schemas/SalesforceSourceConnectorConfig'
-          - $ref: '#/components/schemas/SharePointSourceConnectorConfig'
-          - $ref: '#/components/schemas/SlackSourceConnectorConfig'
-          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfig'
-          - $ref: '#/components/schemas/TeradataSourceConnectorConfig'
-          - $ref: '#/components/schemas/JiraSourceConnectorConfig'
-          - $ref: '#/components/schemas/ZendeskSourceConnectorConfig'
-          - $ref: '#/components/schemas/S3SourceConnectorConfig'
-          - $ref: '#/components/schemas/AzureSourceConnectorConfig'
-          - additionalProperties: true
-            type: object
-          title: Config
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Key
-      type: object
-      required:
-      - id
-      - name
-      - type
-      - config
-      - created_at
-      title: SourceConnectorInformation
-    BoxSourceConnectorConfig:
-      properties:
-        box_app_config:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Box App Config
-        access_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Access Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        recursive:
-          type: boolean
-          title: Recursive
-      additionalProperties: true
-      type: object
-      required:
-      - recursive
-      title: BoxSourceConnectorConfig
-    ConfluenceSourceConnectorConfigInput:
-      properties:
-        url:
-          type: string
-          title: Url
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        cloud_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloud Id
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        api_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Token
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        cloud:
-          type: boolean
-          title: Cloud
-          default: false
-        extract_images:
-          type: boolean
-          title: Extract Images
-          default: false
-        extract_files:
-          type: boolean
-          title: Extract Files
-          default: false
-        max_num_of_spaces:
-          type: integer
-          minimum: 1.0
-          title: Max Num Of Spaces
-          default: 500
-        max_num_of_docs_from_each_space:
-          type: integer
-          minimum: 1.0
-          title: Max Num Of Docs From Each Space
-          default: 150
-        spaces:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Spaces
-      additionalProperties: true
-      type: object
-      required:
-      - url
-      title: ConfluenceSourceConnectorConfigInput
-    SnowflakeSourceConnectorConfigInput:
-      properties:
-        account:
-          type: string
-          title: Account
-        role:
-          type: string
-          title: Role
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 443
-        database:
-          type: string
-          title: Database
-        schema:
-          type: string
-          title: Schema
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-        id_column:
-          type: string
-          title: Id Column
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - account
-      - role
-      - user
-      - password
-      - host
-      - database
-      - schema
-      - table_name
-      - id_column
-      title: SnowflakeSourceConnectorConfigInput
-    UpdateSourceConnector:
-      properties:
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/BoxSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
-          - $ref: '#/components/schemas/DropboxSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
-          - $ref: '#/components/schemas/GCSSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
-          - $ref: '#/components/schemas/OneDriveSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/OutlookSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/PostgresSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SalesforceSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SharePointSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SlackSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/TeradataSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/JiraSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/ZendeskSourceConnectorConfigInput'
-          - $ref: '#/components/schemas/S3SourceConnectorConfigInput'
-          - $ref: '#/components/schemas/AzureSourceConnectorConfigInput'
-          - additionalProperties: true
-            type: object
-          title: Config
-      type: object
-      required:
-      - config
-      title: UpdateSourceConnector
-    TeradataSourceConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        database:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Database
-        dbs_port:
-          type: integer
-          minimum: 1.0
-          title: Dbs Port
-          default: 1025
-        id_column:
-          type: string
-          title: Id Column
-          default: id
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - user
-      - password
-      - table_name
-      title: TeradataSourceConnectorConfig
-    CouchbaseSourceConnectorConfig:
-      properties:
-        bucket:
-          type: string
-          title: Bucket
-        connection_string:
-          type: string
-          title: Connection String
-        scope:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Scope
-        collection:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Collection
-        batch_size:
-          type: integer
-          title: Batch Size
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        collection_id:
-          type: string
-          title: Collection Id
-      additionalProperties: true
-      type: object
-      required:
-      - bucket
-      - connection_string
-      - batch_size
-      - username
-      - password
-      - collection_id
-      title: CouchbaseSourceConnectorConfig
-    SourceConnectorType:
-      type: string
-      enum:
-      - box
-      - confluence
-      - couchbase
-      - databricks_volumes
-      - dropbox
-      - elasticsearch
-      - gcs
-      - google_drive
-      - kafka-cloud
-      - mongodb
-      - onedrive
-      - outlook
-      - postgres
-      - salesforce
-      - sharepoint
-      - slack
-      - snowflake
-      - teradata
-      - jira
-      - zendesk
-      - s3
-      - azure
-      title: SourceConnectorType
-    DatabricksVolumesConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        catalog:
-          type: string
-          title: Catalog
-        schema:
-          type: string
-          title: Schema
-          default: default
-        volume:
-          type: string
-          title: Volume
-        volume_path:
-          type: string
-          title: Volume Path
-        client_secret:
-          type: string
-          title: Client Secret
-        client_id:
-          type: string
-          title: Client Id
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - catalog
-      - volume
-      - volume_path
-      - client_secret
-      - client_id
-      title: DatabricksVolumesConnectorConfig
-    DagNodeConnectionCheck:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        status:
-          $ref: '#/components/schemas/ConnectionCheckStatus'
-        reason:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reason
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        reported_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Reported At
-      type: object
-      required:
-      - id
-      - status
-      - created_at
-      title: DagNodeConnectionCheck
-    ElasticsearchConnectorConfig:
-      properties:
-        hosts:
-          items:
-            type: string
-          type: array
-          title: Hosts
-        index_name:
-          type: string
-          title: Index Name
-        es_api_key:
-          type: string
-          title: Es Api Key
-      additionalProperties: true
-      type: object
-      required:
-      - hosts
-      - index_name
-      - es_api_key
-      title: ElasticsearchConnectorConfig
-    SalesforceSourceConnectorConfig:
-      properties:
-        username:
-          type: string
-          title: Username
-        consumer_key:
-          type: string
-          title: Consumer Key
-        private_key:
-          type: string
-          title: Private Key
-        categories:
-          items:
-            type: string
-          type: array
-          title: Categories
-      additionalProperties: true
-      type: object
-      required:
-      - username
-      - consumer_key
-      - private_key
-      - categories
-      title: SalesforceSourceConnectorConfig
-    ConfluenceSourceConnectorConfig:
-      properties:
-        url:
-          type: string
-          title: Url
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        cloud_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cloud Id
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        api_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Token
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        cloud:
-          type: boolean
-          title: Cloud
-        extract_images:
-          type: boolean
-          title: Extract Images
-          default: false
-        extract_files:
-          type: boolean
-          title: Extract Files
-          default: false
-        max_num_of_spaces:
-          type: integer
-          title: Max Num Of Spaces
-        max_num_of_docs_from_each_space:
-          type: integer
-          title: Max Num Of Docs From Each Space
-        spaces:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Spaces
-      additionalProperties: true
-      type: object
-      required:
-      - url
-      - cloud
-      - max_num_of_spaces
-      - max_num_of_docs_from_each_space
-      - spaces
-      title: ConfluenceSourceConnectorConfig
-    SharePointSourceConnectorConfigInput:
-      properties:
-        site:
-          type: string
-          pattern: ^https:\/\/[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\/(sites|teams)\/[a-zA-Z0-9-_]+)?$
-          title: Site
-        tenant:
-          type: string
-          title: Tenant
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        user_pname:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User Pname
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        recursive:
-          type: boolean
-          title: Recursive
-          default: false
-        path:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Path
-      additionalProperties: true
-      type: object
-      required:
-      - site
-      - tenant
-      title: SharePointSourceConnectorConfigInput
-    DatabricksVolumesConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        catalog:
-          type: string
-          title: Catalog
-        schema:
-          type: string
-          title: Schema
-          default: default
-        volume:
-          type: string
-          title: Volume
-        volume_path:
-          type: string
-          title: Volume Path
-        client_secret:
-          type: string
-          title: Client Secret
-        client_id:
-          type: string
-          title: Client Id
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - catalog
-      - volume
-      - volume_path
-      - client_secret
-      - client_id
-      title: DatabricksVolumesConnectorConfigInput
-    OutlookSourceConnectorConfigInput:
-      properties:
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        tenant:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Tenant
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        outlook_folders:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Outlook Folders
-        recursive:
-          type: boolean
-          title: Recursive
-          default: false
-        user_email:
-          type: string
-          title: User Email
-      additionalProperties: true
-      type: object
-      required:
-      - user_email
-      title: OutlookSourceConnectorConfigInput
-    OneDriveSourceConnectorConfigInput:
-      properties:
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        user_pname:
-          type: string
-          title: User Pname
-        tenant:
-          type: string
-          title: Tenant
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        recursive:
-          type: boolean
-          title: Recursive
-          default: false
-        path:
-          type: string
-          title: Path
-      additionalProperties: true
-      type: object
-      required:
-      - user_pname
-      - tenant
-      - path
-      title: OneDriveSourceConnectorConfigInput
-    ZendeskSourceConnectorConfigInput:
-      properties:
-        subdomain:
-          type: string
-          title: Subdomain
-        email:
-          type: string
-          title: Email
-        api_token:
-          type: string
-          title: Api Token
-        item_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Item Type
-          default: tickets
-        batch_size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Batch Size
-          default: 2
-      additionalProperties: true
-      type: object
-      required:
-      - subdomain
-      - email
-      - api_token
-      title: ZendeskSourceConnectorConfigInput
-    ZendeskSourceConnectorConfig:
-      properties:
-        subdomain:
-          type: string
-          title: Subdomain
-        email:
-          type: string
-          title: Email
-        api_token:
-          type: string
-          title: Api Token
-        item_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Item Type
-          default: tickets
-        batch_size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Batch Size
-          default: 2
-      additionalProperties: true
-      type: object
-      required:
-      - subdomain
-      - email
-      - api_token
-      title: ZendeskSourceConnectorConfig
-    GoogleDriveSourceConnectorConfig:
-      properties:
-        drive_id:
-          type: string
-          title: Drive Id
-        service_account_key:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Service Account Key
-        oauth_token:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        extensions:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Extensions
-        recursive:
-          type: boolean
-          title: Recursive
-      additionalProperties: true
-      type: object
-      required:
-      - drive_id
-      - recursive
-      title: GoogleDriveSourceConnectorConfig
-    DropboxSourceConnectorConfigInput:
-      properties:
-        token:
-          type: string
-          title: Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        remote_url:
-          type: string
-          pattern: ^dropbox:\/\/
-          title: Remote Url
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-      additionalProperties: true
-      type: object
-      required:
-      - token
-      - remote_url
-      title: DropboxSourceConnectorConfigInput
-    DropboxSourceConnectorConfig:
-      properties:
-        token:
-          type: string
-          title: Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        remote_url:
-          type: string
-          title: Remote Url
-        recursive:
-          type: boolean
-          title: Recursive
-      additionalProperties: true
-      type: object
-      required:
-      - token
-      - remote_url
-      - recursive
-      title: DropboxSourceConnectorConfig
-    SnowflakeSourceConnectorConfig:
-      properties:
-        account:
-          type: string
-          title: Account
-        role:
-          type: string
-          title: Role
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 443
-        database:
-          type: string
-          title: Database
-        schema:
-          type: string
-          title: Schema
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-        id_column:
-          type: string
-          title: Id Column
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - account
-      - role
-      - user
-      - password
-      - host
-      - database
-      - schema
-      - table_name
-      - id_column
-      title: SnowflakeSourceConnectorConfig
-    SalesforceSourceConnectorConfigInput:
-      properties:
-        username:
-          type: string
-          title: Username
-        consumer_key:
-          type: string
-          title: Consumer Key
-        private_key:
-          type: string
-          title: Private Key
-        categories:
-          items:
-            type: string
-          type: array
-          title: Categories
-      additionalProperties: true
-      type: object
-      required:
-      - username
-      - consumer_key
-      - private_key
-      - categories
-      title: SalesforceSourceConnectorConfigInput
-    KafkaCloudSourceConnectorConfig:
-      properties:
-        bootstrap_servers:
-          type: string
-          title: Bootstrap Servers
-        port:
-          type: integer
-          title: Port
-        group_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Id
-        topic:
-          type: string
-          title: Topic
-        kafka_api_key:
-          type: string
-          title: Kafka Api Key
-        secret:
-          type: string
-          title: Secret
-        num_messages_to_consume:
-          type: integer
-          title: Num Messages To Consume
-      additionalProperties: true
-      type: object
-      required:
-      - bootstrap_servers
-      - port
-      - topic
-      - kafka_api_key
-      - secret
-      - num_messages_to_consume
-      title: KafkaCloudSourceConnectorConfig
-    SlackSourceConnectorConfig:
-      properties:
-        token:
-          type: string
-          title: Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        channels:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Channels
-        start_date:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Start Date
-        end_date:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: End Date
-      additionalProperties: true
-      type: object
-      required:
-      - token
-      - channels
-      title: SlackSourceConnectorConfig
-    TeradataSourceConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        database:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Database
-        dbs_port:
-          type: integer
-          minimum: 1.0
-          title: Dbs Port
-          default: 1025
-        id_column:
-          type: string
-          title: Id Column
-          default: id
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - user
-      - password
-      - table_name
-      title: TeradataSourceConnectorConfigInput
-    SlackSourceConnectorConfigInput:
-      properties:
-        token:
-          type: string
-          title: Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        channels:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Channels
-        start_date:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Start Date
-        end_date:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: End Date
-      additionalProperties: true
-      type: object
-      required:
-      - token
-      - channels
-      title: SlackSourceConnectorConfigInput
-    PostgresSourceConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        database:
-          type: string
-          title: Database
-        port:
-          type: integer
-          title: Port
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          title: Batch Size
-        id_column:
-          type: string
-          title: Id Column
-          default: id
-        fields:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - database
-      - port
-      - username
-      - password
-      - table_name
-      - batch_size
-      title: PostgresSourceConnectorConfigInput
-    MongoDBConnectorConfig:
-      properties:
-        database:
-          type: string
-          title: Database
-        collection:
-          type: string
-          title: Collection
-        uri:
-          type: string
-          title: Uri
-      additionalProperties: true
-      type: object
-      required:
-      - database
-      - collection
-      - uri
-      title: MongoDBConnectorConfig
-    CouchbaseSourceConnectorConfigInput:
-      properties:
-        bucket:
-          type: string
-          title: Bucket
-        connection_string:
-          type: string
-          title: Connection String
-        scope:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Scope
-        collection:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Collection
-        batch_size:
-          type: integer
-          title: Batch Size
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        collection_id:
-          type: string
-          title: Collection Id
-      additionalProperties: true
-      type: object
-      required:
-      - bucket
-      - connection_string
-      - batch_size
-      - username
-      - password
-      - collection_id
-      title: CouchbaseSourceConnectorConfigInput
-    MongoDBConnectorConfigInput:
-      properties:
-        database:
-          type: string
-          title: Database
-        collection:
-          type: string
-          title: Collection
-        uri:
-          type: string
-          pattern: ^mongodb(?:\+srv)?:\/\/(?:([^:@/\s]+)(?::([^@/\s]*))?@)?([^/\s:,]+)(?::(\d+))?(?:,([^/\s:,]+)(?::(\d+))?)*(?:\/([^/\s?]*))?(?:\?([^/\s]*))?$
-          title: Uri
-      additionalProperties: true
-      type: object
-      required:
-      - database
-      - collection
-      - uri
-      title: MongoDBConnectorConfigInput
-    GCSSourceConnectorConfig:
-      properties:
-        remote_url:
-          type: string
-          title: Remote Url
-        service_account_key:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Service Account Key
-        recursive:
-          type: boolean
-          title: Recursive
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        oauth_client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Client Id
-        oauth_client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Client Secret
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      - recursive
-      title: GCSSourceConnectorConfig
-    KafkaCloudSourceConnectorConfigInput:
-      properties:
-        bootstrap_servers:
-          type: string
-          title: Bootstrap Servers
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 9092
-        group_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Id
-        topic:
-          type: string
-          title: Topic
-        kafka_api_key:
-          type: string
-          title: Kafka Api Key
-        secret:
-          type: string
-          title: Secret
-        num_messages_to_consume:
-          type: integer
-          minimum: 1.0
-          title: Num Messages To Consume
-          default: 100
-      additionalProperties: true
-      type: object
-      required:
-      - bootstrap_servers
-      - topic
-      - kafka_api_key
-      - secret
-      title: KafkaCloudSourceConnectorConfigInput
-    OutlookSourceConnectorConfig:
-      properties:
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        tenant:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Tenant
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        outlook_folders:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Outlook Folders
-        recursive:
-          type: boolean
-          title: Recursive
-        user_email:
-          type: string
-          title: User Email
-      additionalProperties: true
-      type: object
-      required:
-      - recursive
-      - user_email
-      title: OutlookSourceConnectorConfig
-    GoogleDriveSourceConnectorConfigInput:
-      properties:
-        drive_id:
-          type: string
-          title: Drive Id
-        service_account_key:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Service Account Key
-        oauth_token:
-          anyOf:
-          - $ref: '#/components/schemas/SecretReference'
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        extensions:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Extensions
-        recursive:
-          type: boolean
-          title: Recursive
-          default: true
-      additionalProperties: true
-      type: object
-      required:
-      - drive_id
-      title: GoogleDriveSourceConnectorConfigInput
-    S3SourceConnectorConfig:
-      properties:
-        remote_url:
-          type: string
-          title: Remote Url
-        anonymous:
-          type: boolean
-          title: Anonymous
-        ambient_credentials:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Ambient Credentials
-        key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Key
-        secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Secret
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        endpoint_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Endpoint Url
-        role_arn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Role Arn
-        external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Id
-        recursive:
-          type: boolean
-          title: Recursive
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      - anonymous
-      - recursive
-      title: S3SourceConnectorConfig
     JiraSourceConnectorConfig:
       properties:
         url:
@@ -2329,6 +359,284 @@ components:
       required:
       - url
       title: JiraSourceConnectorConfig
+    SnowflakeSourceConnectorConfig:
+      properties:
+        account:
+          type: string
+          title: Account
+        role:
+          type: string
+          title: Role
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 443
+        database:
+          type: string
+          title: Database
+        schema:
+          type: string
+          title: Schema
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+        id_column:
+          type: string
+          title: Id Column
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - account
+      - role
+      - user
+      - password
+      - host
+      - database
+      - schema
+      - table_name
+      - id_column
+      title: SnowflakeSourceConnectorConfig
+    CouchbaseSourceConnectorConfig:
+      properties:
+        bucket:
+          type: string
+          title: Bucket
+        connection_string:
+          type: string
+          title: Connection String
+        scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scope
+        collection:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Collection
+        batch_size:
+          type: integer
+          title: Batch Size
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        collection_id:
+          type: string
+          title: Collection Id
+      additionalProperties: true
+      type: object
+      required:
+      - bucket
+      - connection_string
+      - batch_size
+      - username
+      - password
+      - collection_id
+      title: CouchbaseSourceConnectorConfig
+    OneDriveSourceConnectorConfigInput:
+      properties:
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        user_pname:
+          type: string
+          title: User Pname
+        tenant:
+          type: string
+          title: Tenant
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        path:
+          type: string
+          title: Path
+      additionalProperties: true
+      type: object
+      required:
+      - user_pname
+      - tenant
+      - path
+      title: OneDriveSourceConnectorConfigInput
+    ConfluenceSourceConnectorConfigInput:
+      properties:
+        url:
+          type: string
+          title: Url
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        cloud_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloud Id
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        api_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Token
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        cloud:
+          type: boolean
+          title: Cloud
+          default: false
+        extract_images:
+          type: boolean
+          title: Extract Images
+          default: false
+        extract_files:
+          type: boolean
+          title: Extract Files
+          default: false
+        max_num_of_spaces:
+          type: integer
+          minimum: 1.0
+          title: Max Num Of Spaces
+          default: 500
+        max_num_of_docs_from_each_space:
+          type: integer
+          minimum: 1.0
+          title: Max Num Of Docs From Each Space
+          default: 150
+        spaces:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Spaces
+      additionalProperties: true
+      type: object
+      required:
+      - url
+      title: ConfluenceSourceConnectorConfigInput
+    KafkaCloudSourceConnectorConfig:
+      properties:
+        bootstrap_servers:
+          type: string
+          title: Bootstrap Servers
+        port:
+          type: integer
+          title: Port
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        topic:
+          type: string
+          title: Topic
+        kafka_api_key:
+          type: string
+          title: Kafka Api Key
+        secret:
+          type: string
+          title: Secret
+        num_messages_to_consume:
+          type: integer
+          title: Num Messages To Consume
+      additionalProperties: true
+      type: object
+      required:
+      - bootstrap_servers
+      - port
+      - topic
+      - kafka_api_key
+      - secret
+      - num_messages_to_consume
+      title: KafkaCloudSourceConnectorConfig
+    DropboxSourceConnectorConfigInput:
+      properties:
+        token:
+          type: string
+          title: Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        remote_url:
+          type: string
+          pattern: ^dropbox:\/\/
+          title: Remote Url
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+      additionalProperties: true
+      type: object
+      required:
+      - token
+      - remote_url
+      title: DropboxSourceConnectorConfigInput
     AzureSourceConnectorConfig:
       properties:
         remote_url:
@@ -2363,19 +671,1689 @@ components:
       - remote_url
       - recursive
       title: AzureSourceConnectorConfig
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: unstructured-api-key
-      in: header
-      x-speakeasy-example: YOUR_API_KEY
-x-speakeasy-retries:
-  strategy: backoff
-  backoff:
-    initialInterval: 3000
-    maxInterval: 720000
-    maxElapsedTime: 1800000
-    exponent: 1.88
-  statusCodes:
-  - 5xx
-  retryConnectionErrors: true
+    AzureSourceConnectorConfigInput:
+      properties:
+        remote_url:
+          type: string
+          pattern: ^(az:\/\/|abfs:\/\/)
+          title: Remote Url
+        account_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Name
+        account_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Key
+        connection_string:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Connection String
+        sas_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sas Token
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      title: AzureSourceConnectorConfigInput
+    BoxSourceConnectorConfigInput:
+      properties:
+        box_app_config:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Box App Config
+        access_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        remote_url:
+          type: string
+          pattern: ^box:\/\/
+          title: Remote Url
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      title: BoxSourceConnectorConfigInput
+    SlackSourceConnectorConfig:
+      properties:
+        token:
+          type: string
+          title: Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        channels:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Channels
+        start_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Start Date
+        end_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: End Date
+      additionalProperties: true
+      type: object
+      required:
+      - token
+      - channels
+      title: SlackSourceConnectorConfig
+    OutlookSourceConnectorConfigInput:
+      properties:
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        tenant:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tenant
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        outlook_folders:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Outlook Folders
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        user_email:
+          type: string
+          title: User Email
+      additionalProperties: true
+      type: object
+      required:
+      - user_email
+      title: OutlookSourceConnectorConfigInput
+    S3SourceConnectorConfigInput:
+      properties:
+        remote_url:
+          type: string
+          pattern: ^s3:\/\/
+          title: Remote Url
+        anonymous:
+          type: boolean
+          title: Anonymous
+          default: false
+        ambient_credentials:
+          type: boolean
+          title: Ambient Credentials
+          default: false
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        endpoint_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Endpoint Url
+        role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role Arn
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      title: S3SourceConnectorConfigInput
+    TeradataSourceConnectorConfig:
+      properties:
+        host:
+          type: string
+          title: Host
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        database:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Database
+        dbs_port:
+          type: integer
+          minimum: 1.0
+          title: Dbs Port
+          default: 1025
+        id_column:
+          type: string
+          title: Id Column
+          default: id
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - user
+      - password
+      - table_name
+      title: TeradataSourceConnectorConfig
+    PostgresSourceConnectorConfig:
+      properties:
+        host:
+          type: string
+          title: Host
+        database:
+          type: string
+          title: Database
+        port:
+          type: integer
+          title: Port
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          title: Batch Size
+        id_column:
+          type: string
+          title: Id Column
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - database
+      - port
+      - username
+      - password
+      - table_name
+      - batch_size
+      - id_column
+      title: PostgresSourceConnectorConfig
+    CouchbaseSourceConnectorConfigInput:
+      properties:
+        bucket:
+          type: string
+          title: Bucket
+        connection_string:
+          type: string
+          title: Connection String
+        scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scope
+        collection:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Collection
+        batch_size:
+          type: integer
+          title: Batch Size
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        collection_id:
+          type: string
+          title: Collection Id
+      additionalProperties: true
+      type: object
+      required:
+      - bucket
+      - connection_string
+      - batch_size
+      - username
+      - password
+      - collection_id
+      title: CouchbaseSourceConnectorConfigInput
+    MongoDBConnectorConfigInput:
+      properties:
+        database:
+          type: string
+          title: Database
+        collection:
+          type: string
+          title: Collection
+        uri:
+          type: string
+          pattern: ^mongodb(?:\+srv)?:\/\/(?:([^:@/\s]+)(?::([^@/\s]*))?@)?([^/\s:,]+)(?::(\d+))?(?:,([^/\s:,]+)(?::(\d+))?)*(?:\/([^/\s?]*))?(?:\?([^/\s]*))?$
+          title: Uri
+      additionalProperties: true
+      type: object
+      required:
+      - database
+      - collection
+      - uri
+      title: MongoDBConnectorConfigInput
+    S3SourceConnectorConfig:
+      properties:
+        remote_url:
+          type: string
+          title: Remote Url
+        anonymous:
+          type: boolean
+          title: Anonymous
+        ambient_credentials:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ambient Credentials
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        endpoint_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Endpoint Url
+        role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role Arn
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+        recursive:
+          type: boolean
+          title: Recursive
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      - anonymous
+      - recursive
+      title: S3SourceConnectorConfig
+    GoogleDriveSourceConnectorConfig:
+      properties:
+        drive_id:
+          type: string
+          title: Drive Id
+        service_account_key:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Service Account Key
+        oauth_token:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        extensions:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Extensions
+        recursive:
+          type: boolean
+          title: Recursive
+      additionalProperties: true
+      type: object
+      required:
+      - drive_id
+      - recursive
+      title: GoogleDriveSourceConnectorConfig
+    ElasticsearchConnectorConfigInput:
+      properties:
+        hosts:
+          items:
+            type: string
+          type: array
+          title: Hosts
+        index_name:
+          type: string
+          title: Index Name
+        es_api_key:
+          type: string
+          title: Es Api Key
+      additionalProperties: true
+      type: object
+      required:
+      - hosts
+      - index_name
+      - es_api_key
+      title: ElasticsearchConnectorConfigInput
+    SalesforceSourceConnectorConfigInput:
+      properties:
+        username:
+          type: string
+          title: Username
+        consumer_key:
+          type: string
+          title: Consumer Key
+        private_key:
+          type: string
+          title: Private Key
+        categories:
+          items:
+            type: string
+          type: array
+          title: Categories
+      additionalProperties: true
+      type: object
+      required:
+      - username
+      - consumer_key
+      - private_key
+      - categories
+      title: SalesforceSourceConnectorConfigInput
+    ConnectionCheckStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - SUCCESS
+      - FAILURE
+      title: ConnectionCheckStatus
+    JiraSourceConnectorConfigInput:
+      properties:
+        url:
+          type: string
+          title: Url
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        cloud_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloud Id
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        cloud:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Cloud
+          default: false
+        projects:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Projects
+        boards:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Boards
+        issues:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Issues
+        status_filters:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Status Filters
+        download_attachments:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Download Attachments
+          default: false
+      additionalProperties: true
+      type: object
+      required:
+      - url
+      title: JiraSourceConnectorConfigInput
+    GCSSourceConnectorConfigInput:
+      properties:
+        remote_url:
+          type: string
+          pattern: ^(gs|gcs):\/\/
+          title: Remote Url
+        service_account_key:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Service Account Key
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        oauth_client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Client Id
+        oauth_client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Client Secret
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      title: GCSSourceConnectorConfigInput
+    ZendeskSourceConnectorConfigInput:
+      properties:
+        subdomain:
+          type: string
+          title: Subdomain
+        email:
+          type: string
+          title: Email
+        api_token:
+          type: string
+          title: Api Token
+        item_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Item Type
+          default: tickets
+        batch_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Batch Size
+          default: 2
+      additionalProperties: true
+      type: object
+      required:
+      - subdomain
+      - email
+      - api_token
+      title: ZendeskSourceConnectorConfigInput
+    SharePointSourceConnectorConfig:
+      properties:
+        site:
+          type: string
+          title: Site
+        tenant:
+          type: string
+          title: Tenant
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        user_pname:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Pname
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        recursive:
+          type: boolean
+          title: Recursive
+        path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Path
+      additionalProperties: true
+      type: object
+      required:
+      - site
+      - tenant
+      - recursive
+      title: SharePointSourceConnectorConfig
+    UpdateSourceConnector:
+      properties:
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/BoxSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
+          - $ref: '#/components/schemas/DropboxSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
+          - $ref: '#/components/schemas/GCSSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
+          - $ref: '#/components/schemas/OneDriveSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/OutlookSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/PostgresSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SalesforceSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SharePointSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SlackSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/TeradataSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/JiraSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ZendeskSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/S3SourceConnectorConfigInput'
+          - $ref: '#/components/schemas/AzureSourceConnectorConfigInput'
+          - additionalProperties: true
+            type: object
+          title: Config
+      type: object
+      required:
+      - config
+      title: UpdateSourceConnector
+    SalesforceSourceConnectorConfig:
+      properties:
+        username:
+          type: string
+          title: Username
+        consumer_key:
+          type: string
+          title: Consumer Key
+        private_key:
+          type: string
+          title: Private Key
+        categories:
+          items:
+            type: string
+          type: array
+          title: Categories
+      additionalProperties: true
+      type: object
+      required:
+      - username
+      - consumer_key
+      - private_key
+      - categories
+      title: SalesforceSourceConnectorConfig
+    KafkaCloudSourceConnectorConfigInput:
+      properties:
+        bootstrap_servers:
+          type: string
+          title: Bootstrap Servers
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 9092
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        topic:
+          type: string
+          title: Topic
+        kafka_api_key:
+          type: string
+          title: Kafka Api Key
+        secret:
+          type: string
+          title: Secret
+        num_messages_to_consume:
+          type: integer
+          minimum: 1.0
+          title: Num Messages To Consume
+          default: 100
+      additionalProperties: true
+      type: object
+      required:
+      - bootstrap_servers
+      - topic
+      - kafka_api_key
+      - secret
+      title: KafkaCloudSourceConnectorConfigInput
+    GCSSourceConnectorConfig:
+      properties:
+        remote_url:
+          type: string
+          title: Remote Url
+        service_account_key:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Service Account Key
+        recursive:
+          type: boolean
+          title: Recursive
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        oauth_client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Client Id
+        oauth_client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Client Secret
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      - recursive
+      title: GCSSourceConnectorConfig
+    BoxSourceConnectorConfig:
+      properties:
+        box_app_config:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Box App Config
+        access_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        recursive:
+          type: boolean
+          title: Recursive
+      additionalProperties: true
+      type: object
+      required:
+      - recursive
+      title: BoxSourceConnectorConfig
+    DatabricksVolumesConnectorConfig:
+      properties:
+        host:
+          type: string
+          title: Host
+        catalog:
+          type: string
+          title: Catalog
+        schema:
+          type: string
+          title: Schema
+          default: default
+        volume:
+          type: string
+          title: Volume
+        volume_path:
+          type: string
+          title: Volume Path
+        client_secret:
+          type: string
+          title: Client Secret
+        client_id:
+          type: string
+          title: Client Id
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - catalog
+      - volume
+      - volume_path
+      - client_secret
+      - client_id
+      title: DatabricksVolumesConnectorConfig
+    DagNodeConnectionCheck:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/ConnectionCheckStatus'
+        reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        reported_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Reported At
+      type: object
+      required:
+      - id
+      - status
+      - created_at
+      title: DagNodeConnectionCheck
+    MongoDBConnectorConfig:
+      properties:
+        database:
+          type: string
+          title: Database
+        collection:
+          type: string
+          title: Collection
+        uri:
+          type: string
+          title: Uri
+      additionalProperties: true
+      type: object
+      required:
+      - database
+      - collection
+      - uri
+      title: MongoDBConnectorConfig
+    EncryptionType:
+      type: string
+      enum:
+      - rsa
+      - rsa_aes
+      - runtime_config
+      title: EncryptionType
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TeradataSourceConnectorConfigInput:
+      properties:
+        host:
+          type: string
+          title: Host
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        database:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Database
+        dbs_port:
+          type: integer
+          minimum: 1.0
+          title: Dbs Port
+          default: 1025
+        id_column:
+          type: string
+          title: Id Column
+          default: id
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - user
+      - password
+      - table_name
+      title: TeradataSourceConnectorConfigInput
+    GoogleDriveSourceConnectorConfigInput:
+      properties:
+        drive_id:
+          type: string
+          title: Drive Id
+        service_account_key:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Service Account Key
+        oauth_token:
+          anyOf:
+          - $ref: '#/components/schemas/SecretReference'
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        extensions:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Extensions
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+      additionalProperties: true
+      type: object
+      required:
+      - drive_id
+      title: GoogleDriveSourceConnectorConfigInput
+    DatabricksVolumesConnectorConfigInput:
+      properties:
+        host:
+          type: string
+          title: Host
+        catalog:
+          type: string
+          title: Catalog
+        schema:
+          type: string
+          title: Schema
+          default: default
+        volume:
+          type: string
+          title: Volume
+        volume_path:
+          type: string
+          title: Volume Path
+        client_secret:
+          type: string
+          title: Client Secret
+        client_id:
+          type: string
+          title: Client Id
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - catalog
+      - volume
+      - volume_path
+      - client_secret
+      - client_id
+      title: DatabricksVolumesConnectorConfigInput
+    SourceConnectorType:
+      type: string
+      enum:
+      - box
+      - confluence
+      - couchbase
+      - databricks_volumes
+      - dropbox
+      - elasticsearch
+      - gcs
+      - google_drive
+      - kafka-cloud
+      - mongodb
+      - onedrive
+      - outlook
+      - postgres
+      - salesforce
+      - sharepoint
+      - slack
+      - snowflake
+      - teradata
+      - jira
+      - zendesk
+      - s3
+      - azure
+      title: SourceConnectorType
+    ElasticsearchConnectorConfig:
+      properties:
+        hosts:
+          items:
+            type: string
+          type: array
+          title: Hosts
+        index_name:
+          type: string
+          title: Index Name
+        es_api_key:
+          type: string
+          title: Es Api Key
+      additionalProperties: true
+      type: object
+      required:
+      - hosts
+      - index_name
+      - es_api_key
+      title: ElasticsearchConnectorConfig
+    SharePointSourceConnectorConfigInput:
+      properties:
+        site:
+          type: string
+          pattern: ^https:\/\/[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\/(sites|teams)\/[a-zA-Z0-9-_]+)?$
+          title: Site
+        tenant:
+          type: string
+          title: Tenant
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        user_pname:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Pname
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Path
+      additionalProperties: true
+      type: object
+      required:
+      - site
+      - tenant
+      title: SharePointSourceConnectorConfigInput
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    OutlookSourceConnectorConfig:
+      properties:
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        tenant:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tenant
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        outlook_folders:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Outlook Folders
+        recursive:
+          type: boolean
+          title: Recursive
+        user_email:
+          type: string
+          title: User Email
+      additionalProperties: true
+      type: object
+      required:
+      - recursive
+      - user_email
+      title: OutlookSourceConnectorConfig
+    PostgresSourceConnectorConfigInput:
+      properties:
+        host:
+          type: string
+          title: Host
+        database:
+          type: string
+          title: Database
+        port:
+          type: integer
+          title: Port
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          title: Batch Size
+        id_column:
+          type: string
+          title: Id Column
+          default: id
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - database
+      - port
+      - username
+      - password
+      - table_name
+      - batch_size
+      title: PostgresSourceConnectorConfigInput
+    ConfluenceSourceConnectorConfig:
+      properties:
+        url:
+          type: string
+          title: Url
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        cloud_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloud Id
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        api_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Token
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        cloud:
+          type: boolean
+          title: Cloud
+        extract_images:
+          type: boolean
+          title: Extract Images
+          default: false
+        extract_files:
+          type: boolean
+          title: Extract Files
+          default: false
+        max_num_of_spaces:
+          type: integer
+          title: Max Num Of Spaces
+        max_num_of_docs_from_each_space:
+          type: integer
+          title: Max Num Of Docs From Each Space
+        spaces:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Spaces
+      additionalProperties: true
+      type: object
+      required:
+      - url
+      - cloud
+      - max_num_of_spaces
+      - max_num_of_docs_from_each_space
+      - spaces
+      title: ConfluenceSourceConnectorConfig
+    SourceConnectorInformation:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceConnectorType'
+          - type: string
+          title: Type
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/BoxSourceConnectorConfig'
+          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfig'
+          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfig'
+          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfig'
+          - $ref: '#/components/schemas/DropboxSourceConnectorConfig'
+          - $ref: '#/components/schemas/ElasticsearchConnectorConfig'
+          - $ref: '#/components/schemas/GCSSourceConnectorConfig'
+          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfig'
+          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfig'
+          - $ref: '#/components/schemas/MongoDBConnectorConfig'
+          - $ref: '#/components/schemas/OneDriveSourceConnectorConfig'
+          - $ref: '#/components/schemas/OutlookSourceConnectorConfig'
+          - $ref: '#/components/schemas/PostgresSourceConnectorConfig'
+          - $ref: '#/components/schemas/SalesforceSourceConnectorConfig'
+          - $ref: '#/components/schemas/SharePointSourceConnectorConfig'
+          - $ref: '#/components/schemas/SlackSourceConnectorConfig'
+          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfig'
+          - $ref: '#/components/schemas/TeradataSourceConnectorConfig'
+          - $ref: '#/components/schemas/JiraSourceConnectorConfig'
+          - $ref: '#/components/schemas/ZendeskSourceConnectorConfig'
+          - $ref: '#/components/schemas/S3SourceConnectorConfig'
+          - $ref: '#/components/schemas/AzureSourceConnectorConfig'
+          - additionalProperties: true
+            type: object
+          title: Config
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - config
+      - created_at
+      title: SourceConnectorInformation
+    CreateSourceConnector:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceConnectorType'
+          - type: string
+          title: Type
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/BoxSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ConfluenceSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/CouchbaseSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
+          - $ref: '#/components/schemas/DropboxSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
+          - $ref: '#/components/schemas/GCSSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/GoogleDriveSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/KafkaCloudSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
+          - $ref: '#/components/schemas/OneDriveSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/OutlookSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/PostgresSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SalesforceSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SharePointSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SlackSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/SnowflakeSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/TeradataSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/JiraSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/ZendeskSourceConnectorConfigInput'
+          - $ref: '#/components/schemas/S3SourceConnectorConfigInput'
+          - $ref: '#/components/schemas/AzureSourceConnectorConfigInput'
+          - additionalProperties: true
+            type: object
+          title: Config
+        key:
+          anyOf:
+          - type: string
+            maxLength: 63
+            minLength: 1
+            pattern: ^[a-z0-9](-?[a-z0-9])*$
+          - type: 'null'
+          title: Key
+          description: Stable identifier for the source connector, used for cross-environment export. If omitted, derived from `name` with a 6-hex-digit suffix. Immutable once set. 1-63 characters, lowercase alphanumeric and hyphens, no consecutive/leading/trailing hyphens.
+          examples:
+          - s3-invoices-source
+      type: object
+      required:
+      - name
+      - type
+      - config
+      title: CreateSourceConnector
+    ZendeskSourceConnectorConfig:
+      properties:
+        subdomain:
+          type: string
+          title: Subdomain
+        email:
+          type: string
+          title: Email
+        api_token:
+          type: string
+          title: Api Token
+        item_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Item Type
+          default: tickets
+        batch_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Batch Size
+          default: 2
+      additionalProperties: true
+      type: object
+      required:
+      - subdomain
+      - email
+      - api_token
+      title: ZendeskSourceConnectorConfig
+    DropboxSourceConnectorConfig:
+      properties:
+        token:
+          type: string
+          title: Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        remote_url:
+          type: string
+          title: Remote Url
+        recursive:
+          type: boolean
+          title: Recursive
+      additionalProperties: true
+      type: object
+      required:
+      - token
+      - remote_url
+      - recursive
+      title: DropboxSourceConnectorConfig
+    SecretReference:
+      properties:
+        id:
+          type: string
+          title: Id
+        type:
+          $ref: '#/components/schemas/EncryptionType'
+          default: rsa
+      type: object
+      required:
+      - id
+      title: SecretReference
+    OneDriveSourceConnectorConfig:
+      properties:
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        user_pname:
+          type: string
+          title: User Pname
+        tenant:
+          type: string
+          title: Tenant
+        authority_url:
+          type: string
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        recursive:
+          type: boolean
+          title: Recursive
+        path:
+          type: string
+          title: Path
+      additionalProperties: true
+      type: object
+      required:
+      - user_pname
+      - tenant
+      - recursive
+      - path
+      title: OneDriveSourceConnectorConfig
+    SnowflakeSourceConnectorConfigInput:
+      properties:
+        account:
+          type: string
+          title: Account
+        role:
+          type: string
+          title: Role
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 443
+        database:
+          type: string
+          title: Database
+        schema:
+          type: string
+          title: Schema
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+        id_column:
+          type: string
+          title: Id Column
+        fields:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields
+      additionalProperties: true
+      type: object
+      required:
+      - account
+      - role
+      - user
+      - password
+      - host
+      - database
+      - schema
+      - table_name
+      - id_column
+      title: SnowflakeSourceConnectorConfigInput
+    SlackSourceConnectorConfigInput:
+      properties:
+        token:
+          type: string
+          title: Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        channels:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Channels
+        start_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Start Date
+        end_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: End Date
+      additionalProperties: true
+      type: object
+      required:
+      - token
+      - channels
+      title: SlackSourceConnectorConfigInput
