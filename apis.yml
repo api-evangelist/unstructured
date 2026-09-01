@@ -39,14 +39,14 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/unstructured.png
 tags:
-  - document-processing
+  - Document Processing
   - ETL
   - RAG
   - LLM
   - PDF
   - OCR
-  - data-ingestion
-  - chunking
+  - Data Ingestion
+  - Chunking
   - Embeddings
   - Artificial Intelligence
 tags_raw:
@@ -91,7 +91,7 @@ apis:
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
   tags:
-  - destinations
+  - Destinations
   tags_raw:
   - destinations
   properties:
