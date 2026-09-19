@@ -92,7 +92,7 @@ apis:
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
   tags:
-  - Destinations
+  - Destination
   tags_raw:
   - destinations
   properties:
