@@ -7,14 +7,39 @@ servers:
   description: Unstructured Platform API
   x-speakeasy-server-id: platform-api
 tags:
-- name: notifications
+- name: Notifications
 paths:
   /api/v1/notifications:
     get:
       tags:
-      - notifications
+      - Notifications
       summary: List Notifications
-      description: "List notification events for the authenticated user.\n\nReturns persisted notification events enriched with per-user read status.\nEach notification represents a platform event (e.g., job.completed) with\nan `is_read` flag indicating whether the current user has marked it as read.\n\nOrdered by created_at DESC with cursor-based pagination.\n\nArgs:\n    workflow_id: Filter by workflow ID\n    event_types: Comma-separated event types (e.g., \"job.completed,job.failed\")\n    since: Filter events created after this ISO 8601 timestamp\n    limit: Max events to return (1-100, default 50)\n    cursor: Pagination cursor from previous response\n    unread_only: Filter to unread events only for current user"
+      description: 'List notification events for the authenticated user.
+
+
+        Returns persisted notification events enriched with per-user read status.
+
+        Each notification represents a platform event (e.g., job.completed) with
+
+        an `is_read` flag indicating whether the current user has marked it as read.
+
+
+        Ordered by created_at DESC with cursor-based pagination.
+
+
+        Args:
+
+        workflow_id: Filter by workflow ID
+
+        event_types: Comma-separated event types (e.g., "job.completed,job.failed")
+
+        since: Filter events created after this ISO 8601 timestamp
+
+        limit: Max events to return (1-100, default 50)
+
+        cursor: Pagination cursor from previous response
+
+        unread_only: Filter to unread events only for current user'
       operationId: list_notifications_api_v1_notifications_get
       parameters:
       - name: workflow_id
@@ -91,9 +116,17 @@ paths:
   /api/v1/notifications/unread-count:
     get:
       tags:
-      - notifications
+      - Notifications
       summary: Get Unread Count
-      description: "Get count of unread notification events for current user.\n\nTarget performance: <50ms p95 (SC-014).\n\nArgs:\n    workflow_id: Optional workflow filter"
+      description: 'Get count of unread notification events for current user.
+
+
+        Target performance: <50ms p95 (SC-014).
+
+
+        Args:
+
+        workflow_id: Optional workflow filter'
       operationId: get_unread_count_api_v1_notifications_unread_count_get
       parameters:
       - name: workflow_id
@@ -129,7 +162,7 @@ paths:
   /api/v1/notifications/mark-read:
     post:
       tags:
-      - notifications
+      - Notifications
       summary: Mark Read
       description: 'Mark notification events as read for current user.
 
@@ -172,7 +205,7 @@ paths:
   /api/v1/notifications/{notification_id}:
     get:
       tags:
-      - notifications
+      - Notifications
       summary: Get Notification
       description: Get a single notification event by ID.
       operationId: get_notification_api_v1_notifications__notification_id__get
@@ -207,15 +240,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     MarkReadResponse:
       properties:
         marked_count:
@@ -227,6 +251,45 @@ components:
       - marked_count
       title: MarkReadResponse
       description: Response for mark-as-read operation.
+    MarkReadRequest:
+      properties:
+        notification_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+            maxItems: 100
+          - type: 'null'
+          title: Notification Ids
+          description: Specific notification IDs to mark as read (max 100)
+        before:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Before
+          description: Mark all notifications created before this ISO 8601 timestamp as read
+        mark_all:
+          type: boolean
+          title: Mark All
+          description: Mark all unread notifications as read (can combine with workflow_id)
+          default: false
+        workflow_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workflow Id
+          description: Filter by workflow (only valid with 'before' or 'mark_all')
+      type: object
+      title: MarkReadRequest
+      description: 'Request to mark notifications as read.
+
+
+        Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
+
+        workflow_id is valid with ''before'' or ''mark_all''.'
     NotificationResponse:
       properties:
         id:
@@ -294,6 +357,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     NotificationListResponse:
       properties:
         events:
@@ -313,45 +385,6 @@ components:
       - events
       title: NotificationListResponse
       description: Paginated notification list response.
-    MarkReadRequest:
-      properties:
-        notification_ids:
-          anyOf:
-          - items:
-              type: string
-              format: uuid
-            type: array
-            maxItems: 100
-          - type: 'null'
-          title: Notification Ids
-          description: Specific notification IDs to mark as read (max 100)
-        before:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Before
-          description: Mark all notifications created before this ISO 8601 timestamp as read
-        mark_all:
-          type: boolean
-          title: Mark All
-          description: Mark all unread notifications as read (can combine with workflow_id)
-          default: false
-        workflow_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Workflow Id
-          description: Filter by workflow (only valid with 'before' or 'mark_all')
-      type: object
-      title: MarkReadRequest
-      description: 'Request to mark notifications as read.
-
-
-        Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
-
-        workflow_id is valid with ''before'' or ''mark_all''.'
     UnreadCountResponse:
       properties:
         unread_count:

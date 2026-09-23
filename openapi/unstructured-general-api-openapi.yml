@@ -13,12 +13,12 @@ security:
 - ApiKeyAuth: []
 - {}
 tags:
-- name: general
+- name: General
 paths:
   /general/v0/general:
     post:
       tags:
-      - general
+      - General
       summary: Summary
       description: Description
       operationId: partition
@@ -79,53 +79,6 @@ components:
           type: string
       example:
         detail: An error occurred
-    HTTPValidationError:
-      type: object
-      properties:
-        detail:
-          oneOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ValidationError'
-          - type: string
-      example:
-        detail:
-        - type: int_parsing
-          loc:
-          - body
-          - combine_under_n_chars
-          msg: Input should be a valid integer, unable to parse string as an integer
-          input: forty
-    CSV-Element:
-      title: CSV-Element
-      type: string
-      example: "type,element_id,text,languages,page_number,filename,filetype,parent_id,links\n    Title,b7f58c2fd9c15949a55a62eb84e39575,LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis,['eng'],1,layout-parser-paper.pdf,application/pdf,,"
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     partition_parameters:
       properties:
         files:
@@ -413,6 +366,53 @@ components:
           page_number: 1
           filename: layout-parser-paper.pdf
           filetype: application/pdf
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ValidationError'
+          - type: string
+      example:
+        detail:
+        - type: int_parsing
+          loc:
+          - body
+          - combine_under_n_chars
+          msg: Input should be a valid integer, unable to parse string as an integer
+          input: forty
+    CSV-Element:
+      title: CSV-Element
+      type: string
+      example: "type,element_id,text,languages,page_number,filename,filetype,parent_id,links\n    Title,b7f58c2fd9c15949a55a62eb84e39575,LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis,['eng'],1,layout-parser-paper.pdf,application/pdf,,"
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -29,7 +29,8 @@
     "unstructured-platform-api-openapi.yml: declared missing tag: sources",
     "unstructured-platform-api-openapi.yml: declared missing tag: templates",
     "unstructured-platform-api-openapi.yml: declared missing tag: workflow-channels",
-    "unstructured-platform-api-openapi.yml: declared missing tag: workflows"
+    "unstructured-platform-api-openapi.yml: declared missing tag: workflows",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "unstructured-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",

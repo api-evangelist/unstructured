@@ -7,12 +7,12 @@ servers:
   description: Unstructured Platform API
   x-speakeasy-server-id: platform-api
 tags:
-- name: templates
+- name: Templates
 paths:
   /api/v1/templates/:
     get:
       tags:
-      - templates
+      - Templates
       summary: List Templates
       description: Retrieve a list of available templates with their metadata.
       operationId: list_templates
@@ -44,7 +44,7 @@ paths:
   /api/v1/templates/{template_id}:
     get:
       tags:
-      - templates
+      - Templates
       summary: Get Template
       description: Retrieve detailed information and DAG for a specific template.
       operationId: get_template
@@ -78,15 +78,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     TemplateDetail:
       properties:
         id:
@@ -145,32 +136,6 @@ components:
       - description
       title: TemplateListItem
       description: Template metadata for list responses.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     TemplateNode:
       properties:
         id:
@@ -199,3 +164,38 @@ components:
       - subtype
       title: TemplateNode
       description: A node in a template DAG.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

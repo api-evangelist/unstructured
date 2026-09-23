@@ -7,12 +7,12 @@ servers:
   description: Unstructured Platform API
   x-speakeasy-server-id: platform-api
 tags:
-- name: jobs
+- name: Jobs
 paths:
   /api/v1/jobs/:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: List Jobs
       description: Retrieve a list of jobs with optional filtering by workflow ID or job status.
       operationId: list_jobs
@@ -60,7 +60,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - jobs
+      - Jobs
       summary: Create Job
       description: Create a new on-demand job using either a template (with persistent job optimization) or custom DAG.
       operationId: create_job
@@ -95,7 +95,7 @@ paths:
   /api/v1/jobs/{job_id}:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Get Job
       description: Retrieve detailed information for a specific job by its ID.
       operationId: get_job
@@ -131,7 +131,7 @@ paths:
   /api/v1/jobs/{job_id}/cancel:
     post:
       tags:
-      - jobs
+      - Jobs
       summary: Cancel Job
       description: Cancel the specified job.
       operationId: cancel_job
@@ -166,7 +166,7 @@ paths:
   /api/v1/jobs/{job_id}/download:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Download Job output
       description: Download the output of a job from a workflow where the input file was provided at runtime.
       operationId: download_job_output
@@ -220,7 +220,7 @@ paths:
   /api/v1/jobs/{job_id}/details:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Get Job processing details
       description: Retrieve processing details for a specific job by its ID.
       operationId: get_job_details
@@ -256,7 +256,7 @@ paths:
   /api/v1/jobs/{job_id}/failed-files:
     get:
       tags:
-      - jobs
+      - Jobs
       summary: Get Job Failed Files
       description: Retrieve failed files for a specific job by its ID.
       operationId: get_job_failed_files
@@ -291,41 +291,53 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    JobAggregations:
+    FailedFile:
       properties:
-        total_docs:
-          type: integer
-          title: Total Docs
-          default: 0
-        total_docs_succeeded:
-          type: integer
-          title: Total Docs Succeeded
-          default: 0
-        total_docs_failed:
-          type: integer
-          title: Total Docs Failed
-          default: 0
+        document:
+          type: string
+          title: Document
+        error:
+          type: string
+          title: Error
       type: object
-      title: JobAggregations
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    JobProcessingStatus:
+      required:
+      - document
+      - error
+      title: FailedFile
+    JobStatus:
       type: string
       enum:
       - SCHEDULED
       - IN_PROGRESS
-      - SUCCESS
-      - COMPLETED_WITH_ERRORS
+      - COMPLETED
       - STOPPED
       - FAILED
-      title: JobProcessingStatus
+      title: JobStatus
+    WorkflowJobType:
+      type: string
+      enum:
+      - ephemeral
+      - persistent
+      - scheduled
+      - template
+      title: WorkflowJobType
+    Body_create_job:
+      properties:
+        input_files:
+          anyOf:
+          - items:
+              type: string
+              contentMediaType: application/octet-stream
+            type: array
+          - type: 'null'
+          title: Input Files
+        request_data:
+          type: string
+          title: Request Data
+      type: object
+      required:
+      - request_data
+      title: Body_create_job
     JobFailedFiles:
       properties:
         failed_files:
@@ -337,6 +349,28 @@ components:
       required:
       - failed_files
       title: JobFailedFiles
+    NodeFileMetadata:
+      properties:
+        node_id:
+          type: string
+          format: uuid
+          title: Node Id
+        file_id:
+          type: string
+          title: File Id
+        node_type:
+          type: string
+          title: Node Type
+        node_subtype:
+          type: string
+          title: Node Subtype
+      type: object
+      required:
+      - node_id
+      - file_id
+      - node_type
+      - node_subtype
+      title: NodeFileMetadata
     JobInformation:
       properties:
         id:
@@ -387,88 +421,6 @@ components:
       - status
       - created_at
       title: JobInformation
-    Body_create_job:
-      properties:
-        input_files:
-          anyOf:
-          - items:
-              type: string
-              contentMediaType: application/octet-stream
-            type: array
-          - type: 'null'
-          title: Input Files
-        request_data:
-          type: string
-          title: Request Data
-      type: object
-      required:
-      - request_data
-      title: Body_create_job
-    JobStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - COMPLETED
-      - STOPPED
-      - FAILED
-      title: JobStatus
-    NodeFileMetadata:
-      properties:
-        node_id:
-          type: string
-          format: uuid
-          title: Node Id
-        file_id:
-          type: string
-          title: File Id
-        node_type:
-          type: string
-          title: Node Type
-        node_subtype:
-          type: string
-          title: Node Subtype
-      type: object
-      required:
-      - node_id
-      - file_id
-      - node_type
-      - node_subtype
-      title: NodeFileMetadata
-    WorkflowJobType:
-      type: string
-      enum:
-      - ephemeral
-      - persistent
-      - scheduled
-      - template
-      title: WorkflowJobType
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     JobNodeDetails:
       properties:
         node_name:
@@ -505,19 +457,67 @@ components:
       - success
       - failure
       title: JobNodeDetails
-    FailedFile:
+    ValidationError:
       properties:
-        document:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Document
-        error:
+          title: Message
+        type:
           type: string
-          title: Error
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - document
-      - error
-      title: FailedFile
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    JobAggregations:
+      properties:
+        total_docs:
+          type: integer
+          title: Total Docs
+          default: 0
+        total_docs_succeeded:
+          type: integer
+          title: Total Docs Succeeded
+          default: 0
+        total_docs_failed:
+          type: integer
+          title: Total Docs Failed
+          default: 0
+      type: object
+      title: JobAggregations
+    JobProcessingStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - SUCCESS
+      - COMPLETED_WITH_ERRORS
+      - STOPPED
+      - FAILED
+      title: JobProcessingStatus
     JobDetails:
       properties:
         id:
