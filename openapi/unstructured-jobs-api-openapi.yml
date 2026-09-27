@@ -291,36 +291,95 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    FailedFile:
+    JobDetails:
       properties:
-        document:
+        id:
           type: string
-          title: Document
-        error:
-          type: string
-          title: Error
+          format: uuid
+          title: Id
+        processing_status:
+          $ref: '#/components/schemas/JobProcessingStatus'
+        node_stats:
+          items:
+            $ref: '#/components/schemas/JobNodeDetails'
+          type: array
+          title: Node Stats
+        summary:
+          anyOf:
+          - $ref: '#/components/schemas/JobAggregations'
+          - type: 'null'
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
       type: object
       required:
-      - document
-      - error
-      title: FailedFile
-    JobStatus:
+      - id
+      - processing_status
+      - node_stats
+      title: JobDetails
+    JobProcessingStatus:
       type: string
       enum:
       - SCHEDULED
       - IN_PROGRESS
-      - COMPLETED
+      - SUCCESS
+      - COMPLETED_WITH_ERRORS
       - STOPPED
       - FAILED
-      title: JobStatus
-    WorkflowJobType:
-      type: string
-      enum:
-      - ephemeral
-      - persistent
-      - scheduled
-      - template
-      title: WorkflowJobType
+      title: JobProcessingStatus
+    JobAggregations:
+      properties:
+        total_docs:
+          type: integer
+          title: Total Docs
+          default: 0
+        total_docs_succeeded:
+          type: integer
+          title: Total Docs Succeeded
+          default: 0
+        total_docs_failed:
+          type: integer
+          title: Total Docs Failed
+          default: 0
+      type: object
+      title: JobAggregations
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Body_create_job:
       properties:
         input_files:
@@ -338,6 +397,59 @@ components:
       required:
       - request_data
       title: Body_create_job
+    JobStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+      - STOPPED
+      - FAILED
+      title: JobStatus
+    JobNodeDetails:
+      properties:
+        node_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Name
+        node_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Type
+        node_subtype:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Subtype
+        ready:
+          type: integer
+          title: Ready
+        in_progress:
+          type: integer
+          title: In Progress
+        success:
+          type: integer
+          title: Success
+        failure:
+          type: integer
+          title: Failure
+      type: object
+      required:
+      - ready
+      - in_progress
+      - success
+      - failure
+      title: JobNodeDetails
+    WorkflowJobType:
+      type: string
+      enum:
+      - ephemeral
+      - persistent
+      - scheduled
+      - template
+      title: WorkflowJobType
     JobFailedFiles:
       properties:
         failed_files:
@@ -349,28 +461,19 @@ components:
       required:
       - failed_files
       title: JobFailedFiles
-    NodeFileMetadata:
+    FailedFile:
       properties:
-        node_id:
+        document:
           type: string
-          format: uuid
-          title: Node Id
-        file_id:
+          title: Document
+        error:
           type: string
-          title: File Id
-        node_type:
-          type: string
-          title: Node Type
-        node_subtype:
-          type: string
-          title: Node Subtype
+          title: Error
       type: object
       required:
-      - node_id
-      - file_id
-      - node_type
-      - node_subtype
-      title: NodeFileMetadata
+      - document
+      - error
+      title: FailedFile
     JobInformation:
       properties:
         id:
@@ -421,128 +524,25 @@ components:
       - status
       - created_at
       title: JobInformation
-    JobNodeDetails:
+    NodeFileMetadata:
       properties:
-        node_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Name
-        node_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Type
-        node_subtype:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Subtype
-        ready:
-          type: integer
-          title: Ready
-        in_progress:
-          type: integer
-          title: In Progress
-        success:
-          type: integer
-          title: Success
-        failure:
-          type: integer
-          title: Failure
-      type: object
-      required:
-      - ready
-      - in_progress
-      - success
-      - failure
-      title: JobNodeDetails
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    JobAggregations:
-      properties:
-        total_docs:
-          type: integer
-          title: Total Docs
-          default: 0
-        total_docs_succeeded:
-          type: integer
-          title: Total Docs Succeeded
-          default: 0
-        total_docs_failed:
-          type: integer
-          title: Total Docs Failed
-          default: 0
-      type: object
-      title: JobAggregations
-    JobProcessingStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - SUCCESS
-      - COMPLETED_WITH_ERRORS
-      - STOPPED
-      - FAILED
-      title: JobProcessingStatus
-    JobDetails:
-      properties:
-        id:
+        node_id:
           type: string
           format: uuid
-          title: Id
-        processing_status:
-          $ref: '#/components/schemas/JobProcessingStatus'
-        node_stats:
-          items:
-            $ref: '#/components/schemas/JobNodeDetails'
-          type: array
-          title: Node Stats
-        summary:
-          anyOf:
-          - $ref: '#/components/schemas/JobAggregations'
-          - type: 'null'
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
+          title: Node Id
+        file_id:
+          type: string
+          title: File Id
+        node_type:
+          type: string
+          title: Node Type
+        node_subtype:
+          type: string
+          title: Node Subtype
       type: object
       required:
-      - id
-      - processing_status
-      - node_stats
-      title: JobDetails
+      - node_id
+      - file_id
+      - node_type
+      - node_subtype
+      title: NodeFileMetadata

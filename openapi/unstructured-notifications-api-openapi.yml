@@ -240,17 +240,36 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MarkReadResponse:
+    UnreadCountResponse:
       properties:
-        marked_count:
+        unread_count:
           type: integer
-          title: Marked Count
-          description: Number of events newly marked as read
+          title: Unread Count
+          description: Number of unread events
       type: object
       required:
-      - marked_count
-      title: MarkReadResponse
-      description: Response for mark-as-read operation.
+      - unread_count
+      title: UnreadCountResponse
+      description: Response for unread count query.
+    NotificationListResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/NotificationResponse'
+          type: array
+          title: Events
+          description: List of notification events
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: Cursor for next page (null if no more)
+      type: object
+      required:
+      - events
+      title: NotificationListResponse
+      description: Paginated notification list response.
     MarkReadRequest:
       properties:
         notification_ids:
@@ -290,6 +309,41 @@ components:
         Provide ONE of: notification_ids, before, or mark_all (mutually exclusive).
 
         workflow_id is valid with ''before'' or ''mark_all''.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     NotificationResponse:
       properties:
         id:
@@ -331,68 +385,14 @@ components:
       - created_at
       title: NotificationResponse
       description: Single notification event.
-    ValidationError:
+    MarkReadResponse:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    NotificationListResponse:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/NotificationResponse'
-          type: array
-          title: Events
-          description: List of notification events
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-          description: Cursor for next page (null if no more)
-      type: object
-      required:
-      - events
-      title: NotificationListResponse
-      description: Paginated notification list response.
-    UnreadCountResponse:
-      properties:
-        unread_count:
+        marked_count:
           type: integer
-          title: Unread Count
-          description: Number of unread events
+          title: Marked Count
+          description: Number of events newly marked as read
       type: object
       required:
-      - unread_count
-      title: UnreadCountResponse
-      description: Response for unread count query.
+      - marked_count
+      title: MarkReadResponse
+      description: Response for mark-as-read operation.

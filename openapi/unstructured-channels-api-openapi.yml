@@ -279,24 +279,13 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    NotificationEventType:
-      type: string
-      enum:
-      - job.scheduled
-      - job.in_progress
-      - job.progress
-      - job.completed
-      - job.stopped
-      - job.failed
-      title: NotificationEventType
-      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
-    CreateWebhookChannelRequest:
+    CreateEmailChannelRequest:
       properties:
         channel_type:
           type: string
-          const: webhook
+          const: email
           title: Channel Type
-          default: webhook
+          default: email
         description:
           anyOf:
           - type: string
@@ -316,22 +305,50 @@ components:
           title: Enabled
           description: Enable/disable channel
           default: true
-        url:
-          type: string
-          title: Url
-          description: Webhook endpoint URL (HTTPS required)
-        secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Secret
-          description: Consumer-supplied signing secret (24-75 bytes)
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfig'
+          description: Email channel configuration
       type: object
       required:
       - event_types
-      - url
-      title: CreateWebhookChannelRequest
-      description: Request to create a webhook notification channel.
+      - email_config
+      title: CreateEmailChannelRequest
+      description: Request to create an email notification channel.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     EmailChannelConfigResponse:
       properties:
         cc:
@@ -365,6 +382,20 @@ components:
       - provider
       title: EmailChannelConfigResponse
       description: Email config in response (no sensitive data).
+    VerifyChannelRequest:
+      properties:
+        code:
+          type: string
+          maxLength: 6
+          minLength: 6
+          pattern: ^\d{6}$
+          title: Code
+          description: 6-digit verification code sent to the channel's email address
+      type: object
+      required:
+      - code
+      title: VerifyChannelRequest
+      description: Request to verify an email channel with a verification code.
     ChannelListResponse:
       properties:
         items:
@@ -435,97 +466,6 @@ components:
       - email_config
       title: EmailChannelResponse
       description: Response for email notification channel.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ChannelType:
-      type: string
-      enum:
-      - webhook
-      - email
-      title: ChannelType
-      description: Notification delivery channel types.
-    VerifyChannelRequest:
-      properties:
-        code:
-          type: string
-          maxLength: 6
-          minLength: 6
-          pattern: ^\d{6}$
-          title: Code
-          description: 6-digit verification code sent to the channel's email address
-      type: object
-      required:
-      - code
-      title: VerifyChannelRequest
-      description: Request to verify an email channel with a verification code.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateEmailChannelRequest:
-      properties:
-        channel_type:
-          type: string
-          const: email
-          title: Channel Type
-          default: email
-        description:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Description
-          description: Channel description
-        event_types:
-          items:
-            $ref: '#/components/schemas/NotificationEventType'
-          type: array
-          minItems: 1
-          title: Event Types
-          description: Event types to subscribe to
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Enable/disable channel
-          default: true
-        email_config:
-          $ref: '#/components/schemas/EmailChannelConfig'
-          description: Email channel configuration
-      type: object
-      required:
-      - event_types
-      - email_config
-      title: CreateEmailChannelRequest
-      description: Request to create an email notification channel.
     UpdateChannelRequest:
       properties:
         channel_type:
@@ -575,6 +515,115 @@ components:
       type: object
       title: UpdateChannelRequest
       description: Common fields for all channel update requests.
+    EmailChannelConfig:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      required:
+      - recipient_email
+      title: EmailChannelConfig
+      description: User-configurable email settings.
+    EmailChannelConfigUpdate:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Recipient Email
+          description: Primary recipient email address
+      type: object
+      title: EmailChannelConfigUpdate
+      description: User-configurable email settings.
+    CreateWebhookChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes)
+      type: object
+      required:
+      - event_types
+      - url
+      title: CreateWebhookChannelRequest
+      description: Request to create a webhook notification channel.
+    NotificationEventType:
+      type: string
+      enum:
+      - job.scheduled
+      - job.in_progress
+      - job.progress
+      - job.completed
+      - job.stopped
+      - job.failed
+      title: NotificationEventType
+      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
     WebhookChannelResponse:
       properties:
         channel_type:
@@ -626,59 +675,10 @@ components:
       - url
       title: WebhookChannelResponse
       description: Response for webhook notification channel.
-    EmailChannelConfigUpdate:
-      properties:
-        cc:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Cc
-          description: CC email addresses (if provider supports)
-        reply_to:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Reply To
-          description: Reply-to email address
-        recipient_email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Recipient Email
-          description: Primary recipient email address
-      type: object
-      title: EmailChannelConfigUpdate
-      description: User-configurable email settings.
-    EmailChannelConfig:
-      properties:
-        cc:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Cc
-          description: CC email addresses (if provider supports)
-        reply_to:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Reply To
-          description: Reply-to email address
-        recipient_email:
-          type: string
-          format: email
-          title: Recipient Email
-          description: Primary recipient email address
-      type: object
-      required:
-      - recipient_email
-      title: EmailChannelConfig
-      description: User-configurable email settings.
+    ChannelType:
+      type: string
+      enum:
+      - webhook
+      - email
+      title: ChannelType
+      description: Notification delivery channel types.

@@ -67,7 +67,7 @@ modified: '2026-06-12'
 specificationVersion: '0.23'
 apis:
 - aid: unstructured:unstructured-channels-api
-  name: Unstructured channels API
+  name: Unstructured Channels API
   description: The channels API from Unstructured — 3 operation(s) for channels.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -87,7 +87,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-destinations-api
-  name: Unstructured destinations API
+  name: Unstructured Destinations API
   description: The destinations API from Unstructured — 3 operation(s) for destinations.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -107,7 +107,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-general-api
-  name: Unstructured general API
+  name: Unstructured General API
   description: The general API from Unstructured — 1 operation(s) for general.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -126,7 +126,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-jobs-api
-  name: Unstructured jobs API
+  name: Unstructured Jobs API
   description: The jobs API from Unstructured — 6 operation(s) for jobs.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -146,7 +146,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-notifications-api
-  name: Unstructured notifications API
+  name: Unstructured Notifications API
   description: The notifications API from Unstructured — 4 operation(s) for notifications.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -166,7 +166,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-sources-api
-  name: Unstructured sources API
+  name: Unstructured Sources API
   description: The sources API from Unstructured — 3 operation(s) for sources.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -186,7 +186,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-templates-api
-  name: Unstructured templates API
+  name: Unstructured Templates API
   description: The templates API from Unstructured — 2 operation(s) for templates.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -206,7 +206,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-workflow-channels-api
-  name: Unstructured workflow-channels API
+  name: Unstructured Workflow Channels API
   description: The workflow-channels API from Unstructured — 3 operation(s) for workflow-channels.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1
@@ -224,7 +224,7 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 - aid: unstructured:unstructured-workflows-api
-  name: Unstructured workflows API
+  name: Unstructured Workflows API
   description: The workflows API from Unstructured — 6 operation(s) for workflows.
   humanURL: https://docs.unstructured.io/api-reference/overview
   baseURL: https://platform.unstructuredapp.io/api/v1

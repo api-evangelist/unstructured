@@ -110,60 +110,6 @@ components:
       - nodes
       title: TemplateDetail
       description: Full template details including nodes.
-    TemplateListItem:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        version:
-          type: string
-          title: Version
-        last_updated:
-          type: string
-          title: Last Updated
-        description:
-          type: string
-          title: Description
-      type: object
-      required:
-      - id
-      - name
-      - version
-      - last_updated
-      - description
-      title: TemplateListItem
-      description: Template metadata for list responses.
-    TemplateNode:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          title: Type
-        subtype:
-          type: string
-          title: Subtype
-        settings:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Settings
-      type: object
-      required:
-      - id
-      - name
-      - type
-      - subtype
-      title: TemplateNode
-      description: A node in a template DAG.
     ValidationError:
       properties:
         loc:
@@ -199,3 +145,57 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    TemplateNode:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+        subtype:
+          type: string
+          title: Subtype
+        settings:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Settings
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - subtype
+      title: TemplateNode
+      description: A node in a template DAG.
+    TemplateListItem:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+        last_updated:
+          type: string
+          title: Last Updated
+        description:
+          type: string
+          title: Description
+      type: object
+      required:
+      - id
+      - name
+      - version
+      - last_updated
+      - description
+      title: TemplateListItem
+      description: Template metadata for list responses.
