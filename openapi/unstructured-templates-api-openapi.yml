@@ -78,6 +78,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     TemplateDetail:
       properties:
         id:
@@ -110,41 +136,32 @@ components:
       - nodes
       title: TemplateDetail
       description: Full template details including nodes.
-    ValidationError:
+    TemplateListItem:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        id:
           type: string
-          title: Message
-        type:
+          title: Id
+        name:
           type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Name
+        version:
+          type: string
+          title: Version
+        last_updated:
+          type: string
+          title: Last Updated
+        description:
+          type: string
+          title: Description
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - id
+      - name
+      - version
+      - last_updated
+      - description
+      title: TemplateListItem
+      description: Template metadata for list responses.
     TemplateNode:
       properties:
         id:
@@ -173,29 +190,12 @@ components:
       - subtype
       title: TemplateNode
       description: A node in a template DAG.
-    TemplateListItem:
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        version:
-          type: string
-          title: Version
-        last_updated:
-          type: string
-          title: Last Updated
-        description:
-          type: string
-          title: Description
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - name
-      - version
-      - last_updated
-      - description
-      title: TemplateListItem
-      description: Template metadata for list responses.
+      title: HTTPValidationError

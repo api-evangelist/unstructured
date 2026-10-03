@@ -279,80 +279,54 @@ paths:
       x-speakeasy-name-override: get_connection_check_destinations
 components:
   schemas:
-    CreateDestinationConnector:
+    WeaviateDestinationConnectorConfigInput:
       properties:
-        name:
+        cluster_url:
           type: string
-          title: Name
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/DestinationConnectorType'
-          - type: string
-          title: Type
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/AstraDBConnectorConfigInput'
-          - $ref: '#/components/schemas/CouchbaseDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVDTDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/DeltaTableConnectorConfigInput'
-          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
-          - $ref: '#/components/schemas/GCSDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/KafkaCloudDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/MilvusDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
-          - $ref: '#/components/schemas/Neo4jDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/OneDriveDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/PineconeDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/PostgresDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/RedisDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/QdrantCloudDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/SnowflakeDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/TeradataDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/WeaviateDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/IBMWatsonxS3DestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/S3DestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/AzureDestinationConnectorConfigInput'
-          - additionalProperties: true
-            type: object
-          title: Config
-        key:
+          title: Cluster Url
+        api_key:
+          type: string
+          title: Api Key
+        collection:
           anyOf:
           - type: string
-            maxLength: 63
-            minLength: 1
-            pattern: ^[a-z0-9](-?[a-z0-9])*$
           - type: 'null'
-          title: Key
-          description: Stable identifier for the destination connector, used for cross-environment export. If omitted, derived from `name` with a 6-hex-digit suffix. Immutable once set. 1-63 characters, lowercase alphanumeric and hyphens, no consecutive/leading/trailing hyphens.
-          examples:
-          - s3-output-destination
+          title: Collection
+      additionalProperties: true
       type: object
       required:
-      - name
-      - type
-      - config
-      title: CreateDestinationConnector
-    PostgresDestinationConnectorConfigInput:
+      - cluster_url
+      - api_key
+      title: WeaviateDestinationConnectorConfigInput
+    RedisDestinationConnectorConfig:
       properties:
         host:
           type: string
           title: Host
-        database:
-          type: string
-          title: Database
         port:
           type: integer
           title: Port
         username:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Username
         password:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Password
-        table_name:
-          type: string
-          title: Table Name
+        uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Uri
+        database:
+          type: integer
+          title: Database
+        ssl:
+          type: boolean
+          title: Ssl
         batch_size:
           type: integer
           title: Batch Size
@@ -360,48 +334,12 @@ components:
       type: object
       required:
       - host
-      - database
       - port
-      - username
-      - password
-      - table_name
+      - database
+      - ssl
       - batch_size
-      title: PostgresDestinationConnectorConfigInput
-    DatabricksVolumesConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        catalog:
-          type: string
-          title: Catalog
-        schema:
-          type: string
-          title: Schema
-          default: default
-        volume:
-          type: string
-          title: Volume
-        volume_path:
-          type: string
-          title: Volume Path
-        client_secret:
-          type: string
-          title: Client Secret
-        client_id:
-          type: string
-          title: Client Id
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - catalog
-      - volume
-      - volume_path
-      - client_secret
-      - client_id
-      title: DatabricksVolumesConnectorConfigInput
-    DatabricksVDTDestinationConnectorConfigInput:
+      title: RedisDestinationConnectorConfig
+    DatabricksVDTDestinationConnectorConfig:
       properties:
         server_hostname:
           type: string
@@ -455,7 +393,161 @@ components:
       - http_path
       - catalog
       - volume
-      title: DatabricksVDTDestinationConnectorConfigInput
+      title: DatabricksVDTDestinationConnectorConfig
+    DatabricksVolumesConnectorConfig:
+      properties:
+        host:
+          type: string
+          title: Host
+        catalog:
+          type: string
+          title: Catalog
+        schema:
+          type: string
+          title: Schema
+          default: default
+        volume:
+          type: string
+          title: Volume
+        volume_path:
+          type: string
+          title: Volume Path
+        client_secret:
+          type: string
+          title: Client Secret
+        client_id:
+          type: string
+          title: Client Id
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - catalog
+      - volume
+      - volume_path
+      - client_secret
+      - client_id
+      title: DatabricksVolumesConnectorConfig
+    Neo4jDestinationConnectorConfigInput:
+      properties:
+        uri:
+          type: string
+          title: Uri
+        database:
+          type: string
+          title: Database
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+      additionalProperties: true
+      type: object
+      required:
+      - uri
+      - database
+      - username
+      - password
+      title: Neo4jDestinationConnectorConfigInput
+    AzureDestinationConnectorConfig:
+      properties:
+        remote_url:
+          type: string
+          title: Remote Url
+        account_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Name
+        account_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Key
+        connection_string:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Connection String
+        sas_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sas Token
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      title: AzureDestinationConnectorConfig
+    GCSDestinationConnectorConfigInput:
+      properties:
+        remote_url:
+          type: string
+          pattern: ^(gs|gcs):\/\/
+          title: Remote Url
+        service_account_key:
+          type: string
+          title: Service Account Key
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      - service_account_key
+      title: GCSDestinationConnectorConfigInput
+    GCSDestinationConnectorConfig:
+      properties:
+        remote_url:
+          type: string
+          title: Remote Url
+        service_account_key:
+          type: string
+          title: Service Account Key
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      - service_account_key
+      title: GCSDestinationConnectorConfig
+    PostgresDestinationConnectorConfigInput:
+      properties:
+        host:
+          type: string
+          title: Host
+        database:
+          type: string
+          title: Database
+        port:
+          type: integer
+          title: Port
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          title: Batch Size
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - database
+      - port
+      - username
+      - password
+      - table_name
+      - batch_size
+      title: PostgresDestinationConnectorConfigInput
     KafkaCloudDestinationConnectorConfigInput:
       properties:
         bootstrap_servers:
@@ -493,101 +585,6 @@ components:
       - kafka_api_key
       - secret
       title: KafkaCloudDestinationConnectorConfigInput
-    ConnectionCheckStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - SUCCESS
-      - FAILURE
-      title: ConnectionCheckStatus
-    MongoDBConnectorConfigInput:
-      properties:
-        database:
-          type: string
-          title: Database
-        collection:
-          type: string
-          title: Collection
-        uri:
-          type: string
-          pattern: ^mongodb(?:\+srv)?:\/\/(?:([^:@/\s]+)(?::([^@/\s]*))?@)?([^/\s:,]+)(?::(\d+))?(?:,([^/\s:,]+)(?::(\d+))?)*(?:\/([^/\s?]*))?(?:\?([^/\s]*))?$
-          title: Uri
-      additionalProperties: true
-      type: object
-      required:
-      - database
-      - collection
-      - uri
-      title: MongoDBConnectorConfigInput
-    OneDriveDestinationConnectorConfig:
-      properties:
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        user_pname:
-          type: string
-          title: User Pname
-        tenant:
-          type: string
-          title: Tenant
-        authority_url:
-          type: string
-          title: Authority Url
-          default: https://login.microsoftonline.com
-        client_cred:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Cred
-        oauth_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Token
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-        remote_url:
-          type: string
-          title: Remote Url
-      additionalProperties: true
-      type: object
-      required:
-      - user_pname
-      - tenant
-      - remote_url
-      title: OneDriveDestinationConnectorConfig
-    Neo4jDestinationConnectorConfigInput:
-      properties:
-        uri:
-          type: string
-          title: Uri
-        database:
-          type: string
-          title: Database
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-      additionalProperties: true
-      type: object
-      required:
-      - uri
-      - database
-      - username
-      - password
-      title: Neo4jDestinationConnectorConfigInput
     PineconeDestinationConnectorConfig:
       properties:
         index_name:
@@ -610,181 +607,6 @@ components:
       - namespace
       - batch_size
       title: PineconeDestinationConnectorConfig
-    UpdateDestinationConnector:
-      properties:
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/AstraDBConnectorConfigInput'
-          - $ref: '#/components/schemas/CouchbaseDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
-          - $ref: '#/components/schemas/DatabricksVDTDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/DeltaTableConnectorConfigInput'
-          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
-          - $ref: '#/components/schemas/GCSDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/KafkaCloudDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/MilvusDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
-          - $ref: '#/components/schemas/Neo4jDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/OneDriveDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/PineconeDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/PostgresDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/RedisDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/QdrantCloudDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/SnowflakeDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/TeradataDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/WeaviateDestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/IBMWatsonxS3DestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/S3DestinationConnectorConfigInput'
-          - $ref: '#/components/schemas/AzureDestinationConnectorConfigInput'
-          - additionalProperties: true
-            type: object
-          title: Config
-      type: object
-      required:
-      - config
-      title: UpdateDestinationConnector
-    RedisDestinationConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 6379
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        uri:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Uri
-        database:
-          type: integer
-          minimum: 0.0
-          title: Database
-          default: 0
-        ssl:
-          type: boolean
-          title: Ssl
-          default: true
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 100
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      title: RedisDestinationConnectorConfigInput
-    AstraDBConnectorConfigInput:
-      properties:
-        collection_name:
-          type: string
-          pattern: ^\w+$
-          title: Collection Name
-        keyspace:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Keyspace
-          default: default_keyspace
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 20
-        binary_encode_vectors:
-          type: boolean
-          title: Binary Encode Vectors
-          default: true
-        api_endpoint:
-          type: string
-          title: Api Endpoint
-        token:
-          type: string
-          title: Token
-        flatten_metadata:
-          type: boolean
-          title: Flatten Metadata
-          default: false
-      additionalProperties: true
-      type: object
-      required:
-      - collection_name
-      - api_endpoint
-      - token
-      title: AstraDBConnectorConfigInput
-    PostgresDestinationConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        database:
-          type: string
-          title: Database
-        port:
-          type: integer
-          title: Port
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        table_name:
-          type: string
-          title: Table Name
-        batch_size:
-          type: integer
-          title: Batch Size
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - database
-      - port
-      - username
-      - password
-      - table_name
-      - batch_size
-      title: PostgresDestinationConnectorConfig
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     WeaviateDestinationConnectorConfig:
       properties:
         cluster_url:
@@ -853,7 +675,325 @@ components:
       required:
       - remote_url
       title: S3DestinationConnectorConfigInput
-    OneDriveDestinationConnectorConfigInput:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MilvusDestinationConnectorConfigInput:
+      properties:
+        uri:
+          type: string
+          pattern: ^https?:\/\/
+          title: Uri
+        user:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        db_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Db Name
+        collection_name:
+          type: string
+          title: Collection Name
+        record_id_key:
+          type: string
+          title: Record Id Key
+        flatten_metadata:
+          type: boolean
+          title: Flatten Metadata
+          default: true
+        fields_to_include:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Fields To Include
+      additionalProperties: true
+      type: object
+      required:
+      - uri
+      - collection_name
+      - record_id_key
+      title: MilvusDestinationConnectorConfigInput
+    DeltaTableConnectorConfigInput:
+      properties:
+        aws_access_key_id:
+          type: string
+          title: Aws Access Key Id
+        aws_secret_access_key:
+          type: string
+          title: Aws Secret Access Key
+        aws_region:
+          type: string
+          title: Aws Region
+        table_uri:
+          type: string
+          pattern: ^s3:\/\/
+          title: Table Uri
+      additionalProperties: true
+      type: object
+      required:
+      - aws_access_key_id
+      - aws_secret_access_key
+      - aws_region
+      - table_uri
+      title: DeltaTableConnectorConfigInput
+    QdrantCloudDestinationConnectorConfig:
+      properties:
+        url:
+          type: string
+          title: Url
+        api_key:
+          type: string
+          title: Api Key
+        collection_name:
+          type: string
+          title: Collection Name
+        batch_size:
+          type: integer
+          title: Batch Size
+      additionalProperties: true
+      type: object
+      required:
+      - url
+      - api_key
+      - collection_name
+      - batch_size
+      title: QdrantCloudDestinationConnectorConfig
+    SnowflakeDestinationConnectorConfig:
+      properties:
+        account:
+          type: string
+          title: Account
+        role:
+          type: string
+          title: Role
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 443
+        database:
+          type: string
+          title: Database
+        schema:
+          type: string
+          title: Schema
+        table_name:
+          type: string
+          title: Table Name
+          default: elements
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 50
+        record_id_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Record Id Key
+          default: record_id
+      additionalProperties: true
+      type: object
+      required:
+      - account
+      - role
+      - user
+      - password
+      - host
+      - database
+      - schema
+      title: SnowflakeDestinationConnectorConfig
+    SnowflakeDestinationConnectorConfigInput:
+      properties:
+        account:
+          type: string
+          title: Account
+        role:
+          type: string
+          title: Role
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 443
+        database:
+          type: string
+          title: Database
+        schema:
+          type: string
+          title: Schema
+        table_name:
+          type: string
+          title: Table Name
+          default: elements
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 50
+        record_id_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Record Id Key
+          default: record_id
+      additionalProperties: true
+      type: object
+      required:
+      - account
+      - role
+      - user
+      - password
+      - host
+      - database
+      - schema
+      title: SnowflakeDestinationConnectorConfigInput
+    MongoDBConnectorConfigInput:
+      properties:
+        database:
+          type: string
+          title: Database
+        collection:
+          type: string
+          title: Collection
+        uri:
+          type: string
+          pattern: ^mongodb(?:\+srv)?:\/\/(?:([^:@/\s]+)(?::([^@/\s]*))?@)?([^/\s:,]+)(?::(\d+))?(?:,([^/\s:,]+)(?::(\d+))?)*(?:\/([^/\s?]*))?(?:\?([^/\s]*))?$
+          title: Uri
+      additionalProperties: true
+      type: object
+      required:
+      - database
+      - collection
+      - uri
+      title: MongoDBConnectorConfigInput
+    DatabricksVolumesConnectorConfigInput:
+      properties:
+        host:
+          type: string
+          title: Host
+        catalog:
+          type: string
+          title: Catalog
+        schema:
+          type: string
+          title: Schema
+          default: default
+        volume:
+          type: string
+          title: Volume
+        volume_path:
+          type: string
+          title: Volume Path
+        client_secret:
+          type: string
+          title: Client Secret
+        client_id:
+          type: string
+          title: Client Id
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      - catalog
+      - volume
+      - volume_path
+      - client_secret
+      - client_id
+      title: DatabricksVolumesConnectorConfigInput
+    CouchbaseDestinationConnectorConfigInput:
+      properties:
+        bucket:
+          type: string
+          title: Bucket
+        connection_string:
+          type: string
+          title: Connection String
+        scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scope
+        collection:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Collection
+        batch_size:
+          type: integer
+          title: Batch Size
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+      additionalProperties: true
+      type: object
+      required:
+      - bucket
+      - connection_string
+      - batch_size
+      - username
+      - password
+      title: CouchbaseDestinationConnectorConfigInput
+    OneDriveDestinationConnectorConfig:
       properties:
         client_id:
           anyOf:
@@ -887,7 +1027,6 @@ components:
           title: Refresh Token
         remote_url:
           type: string
-          pattern: ^onedrive:\/\/
           title: Remote Url
       additionalProperties: true
       type: object
@@ -895,182 +1034,229 @@ components:
       - user_pname
       - tenant
       - remote_url
-      title: OneDriveDestinationConnectorConfigInput
-    MongoDBConnectorConfig:
+      title: OneDriveDestinationConnectorConfig
+    TeradataDestinationConnectorConfig:
       properties:
+        host:
+          type: string
+          title: Host
+        user:
+          type: string
+          title: User
+        password:
+          type: string
+          title: Password
         database:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Database
-        collection:
+        dbs_port:
+          type: integer
+          minimum: 1.0
+          title: Dbs Port
+          default: 1025
+        table_name:
           type: string
-          title: Collection
-        uri:
-          type: string
-          title: Uri
-      additionalProperties: true
-      type: object
-      required:
-      - database
-      - collection
-      - uri
-      title: MongoDBConnectorConfig
-    S3DestinationConnectorConfig:
-      properties:
-        remote_url:
-          type: string
-          title: Remote Url
-        anonymous:
-          type: boolean
-          title: Anonymous
-        ambient_credentials:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Ambient Credentials
-        key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Key
-        secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Secret
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
-        endpoint_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Endpoint Url
-        role_arn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Role Arn
-        external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Id
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      - anonymous
-      title: S3DestinationConnectorConfig
-    PineconeDestinationConnectorConfigInput:
-      properties:
-        index_name:
-          type: string
-          title: Index Name
-        api_key:
-          type: string
-          title: Api Key
-        namespace:
-          type: string
-          title: Namespace
+          title: Table Name
+          default: elements
         batch_size:
           type: integer
           minimum: 1.0
           title: Batch Size
           default: 50
+        record_id_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Record Id Key
+          default: record_id
       additionalProperties: true
       type: object
       required:
-      - index_name
-      - api_key
-      - namespace
-      title: PineconeDestinationConnectorConfigInput
-    WeaviateDestinationConnectorConfigInput:
+      - host
+      - user
+      - password
+      title: TeradataDestinationConnectorConfig
+    UpdateDestinationConnector:
       properties:
-        cluster_url:
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/AstraDBConnectorConfigInput'
+          - $ref: '#/components/schemas/CouchbaseDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVDTDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/DeltaTableConnectorConfigInput'
+          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
+          - $ref: '#/components/schemas/GCSDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/KafkaCloudDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/MilvusDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
+          - $ref: '#/components/schemas/Neo4jDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/OneDriveDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/PineconeDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/PostgresDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/RedisDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/QdrantCloudDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/SnowflakeDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/TeradataDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/WeaviateDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/IBMWatsonxS3DestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/S3DestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/AzureDestinationConnectorConfigInput'
+          - additionalProperties: true
+            type: object
+          title: Config
+      type: object
+      required:
+      - config
+      title: UpdateDestinationConnector
+    MilvusDestinationConnectorConfig:
+      properties:
+        uri:
           type: string
-          title: Cluster Url
-        api_key:
+          title: Uri
+        user:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        db_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Db Name
+        collection_name:
           type: string
-          title: Api Key
+          title: Collection Name
+        record_id_key:
+          type: string
+          title: Record Id Key
+      additionalProperties: true
+      type: object
+      required:
+      - uri
+      - collection_name
+      - record_id_key
+      title: MilvusDestinationConnectorConfig
+    AstraDBConnectorConfigInput:
+      properties:
+        collection_name:
+          type: string
+          pattern: ^\w+$
+          title: Collection Name
+        keyspace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Keyspace
+          default: default_keyspace
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 20
+        binary_encode_vectors:
+          type: boolean
+          title: Binary Encode Vectors
+          default: true
+        api_endpoint:
+          type: string
+          title: Api Endpoint
+        token:
+          type: string
+          title: Token
+        flatten_metadata:
+          type: boolean
+          title: Flatten Metadata
+          default: false
+      additionalProperties: true
+      type: object
+      required:
+      - collection_name
+      - api_endpoint
+      - token
+      title: AstraDBConnectorConfigInput
+    CouchbaseDestinationConnectorConfig:
+      properties:
+        bucket:
+          type: string
+          title: Bucket
+        connection_string:
+          type: string
+          title: Connection String
+        scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scope
         collection:
           anyOf:
           - type: string
           - type: 'null'
           title: Collection
+        batch_size:
+          type: integer
+          title: Batch Size
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
       additionalProperties: true
       type: object
       required:
-      - cluster_url
-      - api_key
-      title: WeaviateDestinationConnectorConfigInput
-    AzureDestinationConnectorConfigInput:
+      - bucket
+      - connection_string
+      - batch_size
+      - username
+      - password
+      title: CouchbaseDestinationConnectorConfig
+    PostgresDestinationConnectorConfig:
       properties:
-        remote_url:
+        host:
           type: string
-          pattern: ^(az:\/\/|abfs:\/\/)
-          title: Remote Url
-        account_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Name
-        account_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Key
-        connection_string:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Connection String
-        sas_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sas Token
+          title: Host
+        database:
+          type: string
+          title: Database
+        port:
+          type: integer
+          title: Port
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        table_name:
+          type: string
+          title: Table Name
+        batch_size:
+          type: integer
+          title: Batch Size
       additionalProperties: true
       type: object
       required:
-      - remote_url
-      title: AzureDestinationConnectorConfigInput
-    GCSDestinationConnectorConfigInput:
-      properties:
-        remote_url:
-          type: string
-          pattern: ^(gs|gcs):\/\/
-          title: Remote Url
-        service_account_key:
-          type: string
-          title: Service Account Key
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      - service_account_key
-      title: GCSDestinationConnectorConfigInput
-    ElasticsearchConnectorConfigInput:
-      properties:
-        hosts:
-          items:
-            type: string
-          type: array
-          title: Hosts
-        index_name:
-          type: string
-          title: Index Name
-        es_api_key:
-          type: string
-          title: Es Api Key
-      additionalProperties: true
-      type: object
-      required:
-      - hosts
-      - index_name
-      - es_api_key
-      title: ElasticsearchConnectorConfigInput
+      - host
+      - database
+      - port
+      - username
+      - password
+      - table_name
+      - batch_size
+      title: PostgresDestinationConnectorConfig
     QdrantCloudDestinationConnectorConfigInput:
       properties:
         url:
@@ -1094,69 +1280,6 @@ components:
       - api_key
       - collection_name
       title: QdrantCloudDestinationConnectorConfigInput
-    DeltaTableConnectorConfig:
-      properties:
-        aws_access_key_id:
-          type: string
-          title: Aws Access Key Id
-        aws_secret_access_key:
-          type: string
-          title: Aws Secret Access Key
-        aws_region:
-          type: string
-          title: Aws Region
-        table_uri:
-          type: string
-          title: Table Uri
-      additionalProperties: true
-      type: object
-      required:
-      - aws_access_key_id
-      - aws_secret_access_key
-      - aws_region
-      - table_uri
-      title: DeltaTableConnectorConfig
-    RedisDestinationConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          title: Port
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        uri:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Uri
-        database:
-          type: integer
-          title: Database
-        ssl:
-          type: boolean
-          title: Ssl
-        batch_size:
-          type: integer
-          title: Batch Size
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - port
-      - database
-      - ssl
-      - batch_size
-      title: RedisDestinationConnectorConfig
     IBMWatsonxS3DestinationConnectorConfig:
       properties:
         iam_api_key:
@@ -1211,7 +1334,267 @@ components:
       - max_retries
       - record_id_key
       title: IBMWatsonxS3DestinationConnectorConfig
-    DatabricksVDTDestinationConnectorConfig:
+    IBMWatsonxS3DestinationConnectorConfigInput:
+      properties:
+        iam_api_key:
+          type: string
+          title: Iam Api Key
+        access_key_id:
+          type: string
+          title: Access Key Id
+        secret_access_key:
+          type: string
+          title: Secret Access Key
+        iceberg_endpoint:
+          type: string
+          title: Iceberg Endpoint
+        object_storage_endpoint:
+          type: string
+          title: Object Storage Endpoint
+        object_storage_region:
+          type: string
+          title: Object Storage Region
+        catalog:
+          type: string
+          title: Catalog
+        max_retries_connection:
+          type: integer
+          maximum: 100.0
+          minimum: 2.0
+          title: Max Retries Connection
+          description: Maximum number of retries in case of a connection error
+          default: 10
+        namespace:
+          type: string
+          title: Namespace
+        table:
+          type: string
+          title: Table
+        max_retries:
+          type: integer
+          maximum: 500.0
+          minimum: 2.0
+          title: Max Retries
+          description: Maximum number of retries to upload data
+          default: 50
+        record_id_key:
+          type: string
+          title: Record Id Key
+          description: Searchable key to find entries for the same record on previous runs
+          default: record_id
+      additionalProperties: true
+      type: object
+      required:
+      - iam_api_key
+      - access_key_id
+      - secret_access_key
+      - iceberg_endpoint
+      - object_storage_endpoint
+      - object_storage_region
+      - catalog
+      - namespace
+      - table
+      title: IBMWatsonxS3DestinationConnectorConfigInput
+    PineconeDestinationConnectorConfigInput:
+      properties:
+        index_name:
+          type: string
+          title: Index Name
+        api_key:
+          type: string
+          title: Api Key
+        namespace:
+          type: string
+          title: Namespace
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 50
+      additionalProperties: true
+      type: object
+      required:
+      - index_name
+      - api_key
+      - namespace
+      title: PineconeDestinationConnectorConfigInput
+    AstraDBConnectorConfig:
+      properties:
+        collection_name:
+          type: string
+          title: Collection Name
+        keyspace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Keyspace
+        batch_size:
+          type: integer
+          title: Batch Size
+        binary_encode_vectors:
+          type: boolean
+          title: Binary Encode Vectors
+          default: true
+        api_endpoint:
+          type: string
+          title: Api Endpoint
+        token:
+          type: string
+          title: Token
+      additionalProperties: true
+      type: object
+      required:
+      - collection_name
+      - batch_size
+      - api_endpoint
+      - token
+      title: AstraDBConnectorConfig
+    DeltaTableConnectorConfig:
+      properties:
+        aws_access_key_id:
+          type: string
+          title: Aws Access Key Id
+        aws_secret_access_key:
+          type: string
+          title: Aws Secret Access Key
+        aws_region:
+          type: string
+          title: Aws Region
+        table_uri:
+          type: string
+          title: Table Uri
+      additionalProperties: true
+      type: object
+      required:
+      - aws_access_key_id
+      - aws_secret_access_key
+      - aws_region
+      - table_uri
+      title: DeltaTableConnectorConfig
+    ElasticsearchConnectorConfig:
+      properties:
+        hosts:
+          items:
+            type: string
+          type: array
+          title: Hosts
+        index_name:
+          type: string
+          title: Index Name
+        es_api_key:
+          type: string
+          title: Es Api Key
+      additionalProperties: true
+      type: object
+      required:
+      - hosts
+      - index_name
+      - es_api_key
+      title: ElasticsearchConnectorConfig
+    CreateDestinationConnector:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/DestinationConnectorType'
+          - type: string
+          title: Type
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/AstraDBConnectorConfigInput'
+          - $ref: '#/components/schemas/CouchbaseDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVolumesConnectorConfigInput'
+          - $ref: '#/components/schemas/DatabricksVDTDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/DeltaTableConnectorConfigInput'
+          - $ref: '#/components/schemas/ElasticsearchConnectorConfigInput'
+          - $ref: '#/components/schemas/GCSDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/KafkaCloudDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/MilvusDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/MongoDBConnectorConfigInput'
+          - $ref: '#/components/schemas/Neo4jDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/OneDriveDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/PineconeDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/PostgresDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/RedisDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/QdrantCloudDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/SnowflakeDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/TeradataDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/WeaviateDestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/IBMWatsonxS3DestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/S3DestinationConnectorConfigInput'
+          - $ref: '#/components/schemas/AzureDestinationConnectorConfigInput'
+          - additionalProperties: true
+            type: object
+          title: Config
+        key:
+          anyOf:
+          - type: string
+            maxLength: 63
+            minLength: 1
+            pattern: ^[a-z0-9](-?[a-z0-9])*$
+          - type: 'null'
+          title: Key
+          description: Stable identifier for the destination connector, used for cross-environment export. If omitted, derived from `name` with a 6-hex-digit suffix. Immutable once set. 1-63 characters, lowercase alphanumeric and hyphens, no consecutive/leading/trailing hyphens.
+          examples:
+          - s3-output-destination
+      type: object
+      required:
+      - name
+      - type
+      - config
+      title: CreateDestinationConnector
+    S3DestinationConnectorConfig:
+      properties:
+        remote_url:
+          type: string
+          title: Remote Url
+        anonymous:
+          type: boolean
+          title: Anonymous
+        ambient_credentials:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ambient Credentials
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+        token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+        endpoint_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Endpoint Url
+        role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role Arn
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+      additionalProperties: true
+      type: object
+      required:
+      - remote_url
+      - anonymous
+      title: S3DestinationConnectorConfig
+    DatabricksVDTDestinationConnectorConfigInput:
       properties:
         server_hostname:
           type: string
@@ -1265,145 +1648,116 @@ components:
       - http_path
       - catalog
       - volume
-      title: DatabricksVDTDestinationConnectorConfig
-    MilvusDestinationConnectorConfig:
+      title: DatabricksVDTDestinationConnectorConfigInput
+    AzureDestinationConnectorConfigInput:
       properties:
-        uri:
+        remote_url:
           type: string
-          title: Uri
-        user:
+          pattern: ^(az:\/\/|abfs:\/\/)
+          title: Remote Url
+        account_name:
           anyOf:
           - type: string
           - type: 'null'
-          title: User
-        token:
+          title: Account Name
+        account_key:
           anyOf:
           - type: string
           - type: 'null'
-          title: Token
-        password:
+          title: Account Key
+        connection_string:
           anyOf:
           - type: string
           - type: 'null'
-          title: Password
-        db_name:
+          title: Connection String
+        sas_token:
           anyOf:
           - type: string
           - type: 'null'
-          title: Db Name
-        collection_name:
-          type: string
-          title: Collection Name
-        record_id_key:
-          type: string
-          title: Record Id Key
+          title: Sas Token
       additionalProperties: true
       type: object
       required:
-      - uri
-      - collection_name
-      - record_id_key
-      title: MilvusDestinationConnectorConfig
-    Neo4jDestinationConnectorConfig:
+      - remote_url
+      title: AzureDestinationConnectorConfigInput
+    OneDriveDestinationConnectorConfigInput:
       properties:
-        uri:
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        user_pname:
           type: string
-          title: Uri
-        database:
+          title: User Pname
+        tenant:
           type: string
-          title: Database
-        username:
+          title: Tenant
+        authority_url:
           type: string
-          title: Username
-        password:
+          title: Authority Url
+          default: https://login.microsoftonline.com
+        client_cred:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Cred
+        oauth_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        remote_url:
           type: string
-          title: Password
+          pattern: ^onedrive:\/\/
+          title: Remote Url
+      additionalProperties: true
+      type: object
+      required:
+      - user_pname
+      - tenant
+      - remote_url
+      title: OneDriveDestinationConnectorConfigInput
+    KafkaCloudDestinationConnectorConfig:
+      properties:
+        bootstrap_servers:
+          type: string
+          title: Bootstrap Servers
+        port:
+          type: integer
+          title: Port
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        topic:
+          type: string
+          title: Topic
+        kafka_api_key:
+          type: string
+          title: Kafka Api Key
+        secret:
+          type: string
+          title: Secret
         batch_size:
           type: integer
           title: Batch Size
       additionalProperties: true
       type: object
       required:
-      - uri
-      - database
-      - username
-      - password
+      - bootstrap_servers
+      - port
+      - topic
+      - kafka_api_key
+      - secret
       - batch_size
-      title: Neo4jDestinationConnectorConfig
-    TeradataDestinationConnectorConfigInput:
-      properties:
-        host:
-          type: string
-          title: Host
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        database:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Database
-        dbs_port:
-          type: integer
-          minimum: 1.0
-          title: Dbs Port
-          default: 1025
-        table_name:
-          type: string
-          title: Table Name
-          default: elements
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 50
-        record_id_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Record Id Key
-          default: record_id
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - user
-      - password
-      title: TeradataDestinationConnectorConfigInput
-    AstraDBConnectorConfig:
-      properties:
-        collection_name:
-          type: string
-          title: Collection Name
-        keyspace:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Keyspace
-        batch_size:
-          type: integer
-          title: Batch Size
-        binary_encode_vectors:
-          type: boolean
-          title: Binary Encode Vectors
-          default: true
-        api_endpoint:
-          type: string
-          title: Api Endpoint
-        token:
-          type: string
-          title: Token
-      additionalProperties: true
-      type: object
-      required:
-      - collection_name
-      - batch_size
-      - api_endpoint
-      - token
-      title: AstraDBConnectorConfig
+      title: KafkaCloudDestinationConnectorConfig
     DestinationConnectorInformation:
       properties:
         id:
@@ -1468,16 +1822,45 @@ components:
       - config
       - created_at
       title: DestinationConnectorInformation
-    HTTPValidationError:
+    ElasticsearchConnectorConfigInput:
       properties:
-        detail:
+        hosts:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
-          title: Detail
+          title: Hosts
+        index_name:
+          type: string
+          title: Index Name
+        es_api_key:
+          type: string
+          title: Es Api Key
+      additionalProperties: true
       type: object
-      title: HTTPValidationError
-    TeradataDestinationConnectorConfig:
+      required:
+      - hosts
+      - index_name
+      - es_api_key
+      title: ElasticsearchConnectorConfigInput
+    MongoDBConnectorConfig:
+      properties:
+        database:
+          type: string
+          title: Database
+        collection:
+          type: string
+          title: Collection
+        uri:
+          type: string
+          title: Uri
+      additionalProperties: true
+      type: object
+      required:
+      - database
+      - collection
+      - uri
+      title: MongoDBConnectorConfig
+    TeradataDestinationConnectorConfigInput:
       properties:
         host:
           type: string
@@ -1519,348 +1902,14 @@ components:
       - host
       - user
       - password
-      title: TeradataDestinationConnectorConfig
-    DestinationConnectorType:
+      title: TeradataDestinationConnectorConfigInput
+    ConnectionCheckStatus:
       type: string
       enum:
-      - astradb
-      - couchbase
-      - databricks_volumes
-      - databricks_volume_delta_tables
-      - delta_table
-      - elasticsearch
-      - gcs
-      - kafka-cloud
-      - milvus
-      - mongodb
-      - motherduck
-      - neo4j
-      - onedrive
-      - pinecone
-      - postgres
-      - redis
-      - qdrant-cloud
-      - snowflake
-      - teradata
-      - weaviate-cloud
-      - ibm_watsonx_s3
-      - s3
-      - azure
-      title: DestinationConnectorType
-    KafkaCloudDestinationConnectorConfig:
-      properties:
-        bootstrap_servers:
-          type: string
-          title: Bootstrap Servers
-        port:
-          type: integer
-          title: Port
-        group_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Id
-        topic:
-          type: string
-          title: Topic
-        kafka_api_key:
-          type: string
-          title: Kafka Api Key
-        secret:
-          type: string
-          title: Secret
-        batch_size:
-          type: integer
-          title: Batch Size
-      additionalProperties: true
-      type: object
-      required:
-      - bootstrap_servers
-      - port
-      - topic
-      - kafka_api_key
-      - secret
-      - batch_size
-      title: KafkaCloudDestinationConnectorConfig
-    CouchbaseDestinationConnectorConfigInput:
-      properties:
-        bucket:
-          type: string
-          title: Bucket
-        connection_string:
-          type: string
-          title: Connection String
-        scope:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Scope
-        collection:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Collection
-        batch_size:
-          type: integer
-          title: Batch Size
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-      additionalProperties: true
-      type: object
-      required:
-      - bucket
-      - connection_string
-      - batch_size
-      - username
-      - password
-      title: CouchbaseDestinationConnectorConfigInput
-    CouchbaseDestinationConnectorConfig:
-      properties:
-        bucket:
-          type: string
-          title: Bucket
-        connection_string:
-          type: string
-          title: Connection String
-        scope:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Scope
-        collection:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Collection
-        batch_size:
-          type: integer
-          title: Batch Size
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-      additionalProperties: true
-      type: object
-      required:
-      - bucket
-      - connection_string
-      - batch_size
-      - username
-      - password
-      title: CouchbaseDestinationConnectorConfig
-    ElasticsearchConnectorConfig:
-      properties:
-        hosts:
-          items:
-            type: string
-          type: array
-          title: Hosts
-        index_name:
-          type: string
-          title: Index Name
-        es_api_key:
-          type: string
-          title: Es Api Key
-      additionalProperties: true
-      type: object
-      required:
-      - hosts
-      - index_name
-      - es_api_key
-      title: ElasticsearchConnectorConfig
-    DatabricksVolumesConnectorConfig:
-      properties:
-        host:
-          type: string
-          title: Host
-        catalog:
-          type: string
-          title: Catalog
-        schema:
-          type: string
-          title: Schema
-          default: default
-        volume:
-          type: string
-          title: Volume
-        volume_path:
-          type: string
-          title: Volume Path
-        client_secret:
-          type: string
-          title: Client Secret
-        client_id:
-          type: string
-          title: Client Id
-      additionalProperties: true
-      type: object
-      required:
-      - host
-      - catalog
-      - volume
-      - volume_path
-      - client_secret
-      - client_id
-      title: DatabricksVolumesConnectorConfig
-    QdrantCloudDestinationConnectorConfig:
-      properties:
-        url:
-          type: string
-          title: Url
-        api_key:
-          type: string
-          title: Api Key
-        collection_name:
-          type: string
-          title: Collection Name
-        batch_size:
-          type: integer
-          title: Batch Size
-      additionalProperties: true
-      type: object
-      required:
-      - url
-      - api_key
-      - collection_name
-      - batch_size
-      title: QdrantCloudDestinationConnectorConfig
-    DeltaTableConnectorConfigInput:
-      properties:
-        aws_access_key_id:
-          type: string
-          title: Aws Access Key Id
-        aws_secret_access_key:
-          type: string
-          title: Aws Secret Access Key
-        aws_region:
-          type: string
-          title: Aws Region
-        table_uri:
-          type: string
-          pattern: ^s3:\/\/
-          title: Table Uri
-      additionalProperties: true
-      type: object
-      required:
-      - aws_access_key_id
-      - aws_secret_access_key
-      - aws_region
-      - table_uri
-      title: DeltaTableConnectorConfigInput
-    SnowflakeDestinationConnectorConfigInput:
-      properties:
-        account:
-          type: string
-          title: Account
-        role:
-          type: string
-          title: Role
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 443
-        database:
-          type: string
-          title: Database
-        schema:
-          type: string
-          title: Schema
-        table_name:
-          type: string
-          title: Table Name
-          default: elements
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 50
-        record_id_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Record Id Key
-          default: record_id
-      additionalProperties: true
-      type: object
-      required:
-      - account
-      - role
-      - user
-      - password
-      - host
-      - database
-      - schema
-      title: SnowflakeDestinationConnectorConfigInput
-    SnowflakeDestinationConnectorConfig:
-      properties:
-        account:
-          type: string
-          title: Account
-        role:
-          type: string
-          title: Role
-        user:
-          type: string
-          title: User
-        password:
-          type: string
-          title: Password
-        host:
-          type: string
-          title: Host
-        port:
-          type: integer
-          minimum: 1.0
-          title: Port
-          default: 443
-        database:
-          type: string
-          title: Database
-        schema:
-          type: string
-          title: Schema
-        table_name:
-          type: string
-          title: Table Name
-          default: elements
-        batch_size:
-          type: integer
-          minimum: 1.0
-          title: Batch Size
-          default: 50
-        record_id_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Record Id Key
-          default: record_id
-      additionalProperties: true
-      type: object
-      required:
-      - account
-      - role
-      - user
-      - password
-      - host
-      - database
-      - schema
-      title: SnowflakeDestinationConnectorConfig
+      - SCHEDULED
+      - SUCCESS
+      - FAILURE
+      title: ConnectionCheckStatus
     DagNodeConnectionCheck:
       properties:
         id:
@@ -1890,158 +1939,109 @@ components:
       - status
       - created_at
       title: DagNodeConnectionCheck
-    GCSDestinationConnectorConfig:
+    DestinationConnectorType:
+      type: string
+      enum:
+      - astradb
+      - couchbase
+      - databricks_volumes
+      - databricks_volume_delta_tables
+      - delta_table
+      - elasticsearch
+      - gcs
+      - kafka-cloud
+      - milvus
+      - mongodb
+      - motherduck
+      - neo4j
+      - onedrive
+      - pinecone
+      - postgres
+      - redis
+      - qdrant-cloud
+      - snowflake
+      - teradata
+      - weaviate-cloud
+      - ibm_watsonx_s3
+      - s3
+      - azure
+      title: DestinationConnectorType
+    HTTPValidationError:
       properties:
-        remote_url:
-          type: string
-          title: Remote Url
-        service_account_key:
-          type: string
-          title: Service Account Key
-      additionalProperties: true
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - remote_url
-      - service_account_key
-      title: GCSDestinationConnectorConfig
-    AzureDestinationConnectorConfig:
+      title: HTTPValidationError
+    RedisDestinationConnectorConfigInput:
       properties:
-        remote_url:
+        host:
           type: string
-          title: Remote Url
-        account_name:
+          title: Host
+        port:
+          type: integer
+          minimum: 1.0
+          title: Port
+          default: 6379
+        username:
           anyOf:
           - type: string
           - type: 'null'
-          title: Account Name
-        account_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Key
-        connection_string:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Connection String
-        sas_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sas Token
-      additionalProperties: true
-      type: object
-      required:
-      - remote_url
-      title: AzureDestinationConnectorConfig
-    MilvusDestinationConnectorConfigInput:
-      properties:
-        uri:
-          type: string
-          pattern: ^https?:\/\/
-          title: Uri
-        user:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User
-        token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token
+          title: Username
         password:
           anyOf:
           - type: string
           - type: 'null'
           title: Password
-        db_name:
+        uri:
           anyOf:
           - type: string
           - type: 'null'
-          title: Db Name
-        collection_name:
-          type: string
-          title: Collection Name
-        record_id_key:
-          type: string
-          title: Record Id Key
-        flatten_metadata:
+          title: Uri
+        database:
+          type: integer
+          minimum: 0.0
+          title: Database
+          default: 0
+        ssl:
           type: boolean
-          title: Flatten Metadata
+          title: Ssl
           default: true
-        fields_to_include:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Fields To Include
+        batch_size:
+          type: integer
+          minimum: 1.0
+          title: Batch Size
+          default: 100
+      additionalProperties: true
+      type: object
+      required:
+      - host
+      title: RedisDestinationConnectorConfigInput
+    Neo4jDestinationConnectorConfig:
+      properties:
+        uri:
+          type: string
+          title: Uri
+        database:
+          type: string
+          title: Database
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        batch_size:
+          type: integer
+          title: Batch Size
       additionalProperties: true
       type: object
       required:
       - uri
-      - collection_name
-      - record_id_key
-      title: MilvusDestinationConnectorConfigInput
-    IBMWatsonxS3DestinationConnectorConfigInput:
-      properties:
-        iam_api_key:
-          type: string
-          title: Iam Api Key
-        access_key_id:
-          type: string
-          title: Access Key Id
-        secret_access_key:
-          type: string
-          title: Secret Access Key
-        iceberg_endpoint:
-          type: string
-          title: Iceberg Endpoint
-        object_storage_endpoint:
-          type: string
-          title: Object Storage Endpoint
-        object_storage_region:
-          type: string
-          title: Object Storage Region
-        catalog:
-          type: string
-          title: Catalog
-        max_retries_connection:
-          type: integer
-          maximum: 100.0
-          minimum: 2.0
-          title: Max Retries Connection
-          description: Maximum number of retries in case of a connection error
-          default: 10
-        namespace:
-          type: string
-          title: Namespace
-        table:
-          type: string
-          title: Table
-        max_retries:
-          type: integer
-          maximum: 500.0
-          minimum: 2.0
-          title: Max Retries
-          description: Maximum number of retries to upload data
-          default: 50
-        record_id_key:
-          type: string
-          title: Record Id Key
-          description: Searchable key to find entries for the same record on previous runs
-          default: record_id
-      additionalProperties: true
-      type: object
-      required:
-      - iam_api_key
-      - access_key_id
-      - secret_access_key
-      - iceberg_endpoint
-      - object_storage_endpoint
-      - object_storage_region
-      - catalog
-      - namespace
-      - table
-      title: IBMWatsonxS3DestinationConnectorConfigInput
+      - database
+      - username
+      - password
+      - batch_size
+      title: Neo4jDestinationConnectorConfig

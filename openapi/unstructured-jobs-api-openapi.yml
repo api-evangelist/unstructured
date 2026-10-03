@@ -291,189 +291,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    JobDetails:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        processing_status:
-          $ref: '#/components/schemas/JobProcessingStatus'
-        node_stats:
-          items:
-            $ref: '#/components/schemas/JobNodeDetails'
-          type: array
-          title: Node Stats
-        summary:
-          anyOf:
-          - $ref: '#/components/schemas/JobAggregations'
-          - type: 'null'
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - id
-      - processing_status
-      - node_stats
-      title: JobDetails
-    JobProcessingStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - SUCCESS
-      - COMPLETED_WITH_ERRORS
-      - STOPPED
-      - FAILED
-      title: JobProcessingStatus
-    JobAggregations:
-      properties:
-        total_docs:
-          type: integer
-          title: Total Docs
-          default: 0
-        total_docs_succeeded:
-          type: integer
-          title: Total Docs Succeeded
-          default: 0
-        total_docs_failed:
-          type: integer
-          title: Total Docs Failed
-          default: 0
-      type: object
-      title: JobAggregations
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_create_job:
-      properties:
-        input_files:
-          anyOf:
-          - items:
-              type: string
-              contentMediaType: application/octet-stream
-            type: array
-          - type: 'null'
-          title: Input Files
-        request_data:
-          type: string
-          title: Request Data
-      type: object
-      required:
-      - request_data
-      title: Body_create_job
-    JobStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - COMPLETED
-      - STOPPED
-      - FAILED
-      title: JobStatus
-    JobNodeDetails:
-      properties:
-        node_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Name
-        node_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Type
-        node_subtype:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Node Subtype
-        ready:
-          type: integer
-          title: Ready
-        in_progress:
-          type: integer
-          title: In Progress
-        success:
-          type: integer
-          title: Success
-        failure:
-          type: integer
-          title: Failure
-      type: object
-      required:
-      - ready
-      - in_progress
-      - success
-      - failure
-      title: JobNodeDetails
-    WorkflowJobType:
-      type: string
-      enum:
-      - ephemeral
-      - persistent
-      - scheduled
-      - template
-      title: WorkflowJobType
-    JobFailedFiles:
-      properties:
-        failed_files:
-          items:
-            $ref: '#/components/schemas/FailedFile'
-          type: array
-          title: Failed Files
-      type: object
-      required:
-      - failed_files
-      title: JobFailedFiles
-    FailedFile:
-      properties:
-        document:
-          type: string
-          title: Document
-        error:
-          type: string
-          title: Error
-      type: object
-      required:
-      - document
-      - error
-      title: FailedFile
     JobInformation:
       properties:
         id:
@@ -524,6 +341,121 @@ components:
       - status
       - created_at
       title: JobInformation
+    Body_create_job:
+      properties:
+        input_files:
+          anyOf:
+          - items:
+              type: string
+              contentMediaType: application/octet-stream
+            type: array
+          - type: 'null'
+          title: Input Files
+        request_data:
+          type: string
+          title: Request Data
+      type: object
+      required:
+      - request_data
+      title: Body_create_job
+    JobDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        processing_status:
+          $ref: '#/components/schemas/JobProcessingStatus'
+        node_stats:
+          items:
+            $ref: '#/components/schemas/JobNodeDetails'
+          type: array
+          title: Node Stats
+        summary:
+          anyOf:
+          - $ref: '#/components/schemas/JobAggregations'
+          - type: 'null'
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - id
+      - processing_status
+      - node_stats
+      title: JobDetails
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    JobStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+      - STOPPED
+      - FAILED
+      title: JobStatus
+    WorkflowJobType:
+      type: string
+      enum:
+      - ephemeral
+      - persistent
+      - scheduled
+      - template
+      title: WorkflowJobType
+    JobAggregations:
+      properties:
+        total_docs:
+          type: integer
+          title: Total Docs
+          default: 0
+        total_docs_succeeded:
+          type: integer
+          title: Total Docs Succeeded
+          default: 0
+        total_docs_failed:
+          type: integer
+          title: Total Docs Failed
+          default: 0
+      type: object
+      title: JobAggregations
+    JobFailedFiles:
+      properties:
+        failed_files:
+          items:
+            $ref: '#/components/schemas/FailedFile'
+          type: array
+          title: Failed Files
+      type: object
+      required:
+      - failed_files
+      title: JobFailedFiles
     NodeFileMetadata:
       properties:
         node_id:
@@ -546,3 +478,71 @@ components:
       - node_type
       - node_subtype
       title: NodeFileMetadata
+    JobNodeDetails:
+      properties:
+        node_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Name
+        node_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Type
+        node_subtype:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Node Subtype
+        ready:
+          type: integer
+          title: Ready
+        in_progress:
+          type: integer
+          title: In Progress
+        success:
+          type: integer
+          title: Success
+        failure:
+          type: integer
+          title: Failure
+      type: object
+      required:
+      - ready
+      - in_progress
+      - success
+      - failure
+      title: JobNodeDetails
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FailedFile:
+      properties:
+        document:
+          type: string
+          title: Document
+        error:
+          type: string
+          title: Error
+      type: object
+      required:
+      - document
+      - error
+      title: FailedFile
+    JobProcessingStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - SUCCESS
+      - COMPLETED_WITH_ERRORS
+      - STOPPED
+      - FAILED
+      title: JobProcessingStatus

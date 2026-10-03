@@ -251,25 +251,32 @@ components:
       - unread_count
       title: UnreadCountResponse
       description: Response for unread count query.
-    NotificationListResponse:
+    ValidationError:
       properties:
-        events:
+        loc:
           items:
-            $ref: '#/components/schemas/NotificationResponse'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Events
-          description: List of notification events
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-          description: Cursor for next page (null if no more)
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - events
-      title: NotificationListResponse
-      description: Paginated notification list response.
+      - loc
+      - msg
+      - type
+      title: ValidationError
     MarkReadRequest:
       properties:
         notification_ids:
@@ -318,32 +325,25 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
+    NotificationListResponse:
       properties:
-        loc:
+        events:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/NotificationResponse'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Events
+          description: List of notification events
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: Cursor for next page (null if no more)
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - events
+      title: NotificationListResponse
+      description: Paginated notification list response.
     NotificationResponse:
       properties:
         id:

@@ -72,24 +72,6 @@ paths:
       x-speakeasy-name-override: partition
 components:
   schemas:
-    CSV-Element:
-      title: CSV-Element
-      type: string
-      example: "type,element_id,text,languages,page_number,filename,filetype,parent_id,links\n    Title,b7f58c2fd9c15949a55a62eb84e39575,LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis,['eng'],1,layout-parser-paper.pdf,application/pdf,,"
-    Element:
-      title: Element
-      type: object
-      additionalProperties: true
-      example:
-        type: Title
-        element_id: 6aa0ff22f91bbe7e26e8e25ca8052acd
-        text: 'LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis'
-        metadata:
-          languages:
-          - eng
-          page_number: 1
-          filename: layout-parser-paper.pdf
-          filetype: application/pdf
     ValidationError:
       properties:
         loc:
@@ -116,30 +98,20 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    Element:
+      title: Element
       type: object
-      properties:
-        detail:
-          oneOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ValidationError'
-          - type: string
+      additionalProperties: true
       example:
-        detail:
-        - type: int_parsing
-          loc:
-          - body
-          - combine_under_n_chars
-          msg: Input should be a valid integer, unable to parse string as an integer
-          input: forty
-    ServerError:
-      type: object
-      properties:
-        detail:
-          type: string
-      example:
-        detail: An error occurred
+        type: Title
+        element_id: 6aa0ff22f91bbe7e26e8e25ca8052acd
+        text: 'LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis'
+        metadata:
+          languages:
+          - eng
+          page_number: 1
+          filename: layout-parser-paper.pdf
+          filetype: application/pdf
     partition_parameters:
       properties:
         files:
@@ -413,6 +385,34 @@ components:
       required:
       - files
       title: Partition Parameters
+    CSV-Element:
+      title: CSV-Element
+      type: string
+      example: "type,element_id,text,languages,page_number,filename,filetype,parent_id,links\n    Title,b7f58c2fd9c15949a55a62eb84e39575,LayoutParser: A Unified Toolkit for Deep Learning Based Document Image Analysis,['eng'],1,layout-parser-paper.pdf,application/pdf,,"
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ValidationError'
+          - type: string
+      example:
+        detail:
+        - type: int_parsing
+          loc:
+          - body
+          - combine_under_n_chars
+          msg: Input should be a valid integer, unable to parse string as an integer
+          input: forty
+    ServerError:
+      type: object
+      properties:
+        detail:
+          type: string
+      example:
+        detail: An error occurred
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
