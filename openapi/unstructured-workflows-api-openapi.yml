@@ -661,6 +661,171 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    VerifyChannelRequest:
+      properties:
+        code:
+          type: string
+          maxLength: 6
+          minLength: 6
+          pattern: ^\d{6}$
+          title: Code
+          description: 6-digit verification code sent to the channel's email address
+      type: object
+      required:
+      - code
+      title: VerifyChannelRequest
+      description: Request to verify an email channel with a verification code.
+    CreateEmailChannelRequest:
+      properties:
+        channel_type:
+          type: string
+          const: email
+          title: Channel Type
+          default: email
+        description:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          type: array
+          minItems: 1
+          title: Event Types
+          description: Event types to subscribe to
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Enable/disable channel
+          default: true
+        email_config:
+          $ref: '#/components/schemas/EmailChannelConfig'
+          description: Email channel configuration
+      type: object
+      required:
+      - event_types
+      - email_config
+      title: CreateEmailChannelRequest
+      description: Request to create an email notification channel.
+    WebhookChannelResponse:
+      properties:
+        channel_type:
+          type: string
+          const: webhook
+          title: Channel Type
+          default: webhook
+        id:
+          type: string
+          title: Id
+          description: Channel ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Channel description
+        event_types:
+          items:
+            type: string
+          type: array
+          title: Event Types
+          description: Subscribed event types
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Channel enabled status
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: Last update timestamp
+        url:
+          type: string
+          title: Url
+          description: Webhook endpoint URL
+      type: object
+      required:
+      - id
+      - event_types
+      - enabled
+      - created_at
+      - updated_at
+      - url
+      title: WebhookChannelResponse
+      description: Response for webhook notification channel.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WorkflowState:
+      type: string
+      enum:
+      - active
+      - inactive
+      title: WorkflowState
+    JobInformation:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        workflow_id:
+          type: string
+          format: uuid
+          title: Workflow Id
+        workflow_name:
+          type: string
+          title: Workflow Name
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        runtime:
+          anyOf:
+          - type: string
+            format: duration
+          - type: 'null'
+          title: Runtime
+        input_file_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Input File Ids
+        output_node_files:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/NodeFileMetadata'
+            type: array
+          - type: 'null'
+          title: Output Node Files
+        job_type:
+          $ref: '#/components/schemas/WorkflowJobType'
+          default: ephemeral
+      type: object
+      required:
+      - id
+      - workflow_id
+      - workflow_name
+      - status
+      - created_at
+      title: JobInformation
     EmailChannelResponse:
       properties:
         channel_type:
@@ -711,6 +876,45 @@ components:
       - email_config
       title: EmailChannelResponse
       description: Response for email notification channel.
+    WorkflowJobType:
+      type: string
+      enum:
+      - ephemeral
+      - persistent
+      - scheduled
+      - template
+      title: WorkflowJobType
+    ChannelListResponse:
+      properties:
+        items:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/WebhookChannelResponse'
+            - $ref: '#/components/schemas/EmailChannelResponse'
+            discriminator:
+              propertyName: channel_type
+              mapping:
+                email: '#/components/schemas/EmailChannelResponse'
+                webhook: '#/components/schemas/WebhookChannelResponse'
+          type: array
+          title: Items
+          description: List of channels
+      type: object
+      required:
+      - items
+      title: ChannelListResponse
+      description: List response for notification channels (no pagination, max 50 per scope).
+    NotificationEventType:
+      type: string
+      enum:
+      - job.scheduled
+      - job.in_progress
+      - job.progress
+      - job.completed
+      - job.stopped
+      - job.failed
+      title: NotificationEventType
+      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
     UpdateChannelRequest:
       properties:
         channel_type:
@@ -760,40 +964,305 @@ components:
       type: object
       title: UpdateChannelRequest
       description: Common fields for all channel update requests.
-    NodeFileMetadata:
+    SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: SortDirection
+    ChannelType:
+      type: string
+      enum:
+      - webhook
+      - email
+      title: ChannelType
+      description: Notification delivery channel types.
+    UpdateWorkflow:
       properties:
-        node_id:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        source_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Source Id
+        destination_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          - type: 'null'
+          title: Destination Id
+        workflow_type:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowType'
+          - type: 'null'
+        workflow_nodes:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/WorkflowNode'
+            type: array
+          - type: 'null'
+          title: Workflow Nodes
+        template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template Id
+        schedule:
+          anyOf:
+          - type: string
+            enum:
+            - every 15 minutes
+            - every hour
+            - every 2 hours
+            - every 4 hours
+            - every 6 hours
+            - every 8 hours
+            - every 10 hours
+            - every 12 hours
+            - daily
+            - weekly
+            - monthly
+          - type: 'null'
+          title: Schedule
+        reprocess_all:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Reprocess All
+        state:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowState'
+          - type: 'null'
+      type: object
+      title: UpdateWorkflow
+    JobStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+      - STOPPED
+      - FAILED
+      title: JobStatus
+    WorkflowNode:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        name:
           type: string
-          format: uuid
-          title: Node Id
-        file_id:
+          title: Name
+        type:
           type: string
-          title: File Id
-        node_type:
+          title: Type
+        subtype:
           type: string
-          title: Node Type
-        node_subtype:
-          type: string
-          title: Node Subtype
+          title: Subtype
+        settings:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Settings
       type: object
       required:
-      - node_id
-      - file_id
-      - node_type
-      - node_subtype
-      title: NodeFileMetadata
-    Body_run_workflow:
+      - name
+      - type
+      - subtype
+      title: WorkflowNode
+    ValidationError:
       properties:
-        input_files:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CronTabEntry:
+      properties:
+        cron_expression:
+          type: string
+          title: Cron Expression
+      type: object
+      required:
+      - cron_expression
+      title: CronTabEntry
+    WorkflowType:
+      type: string
+      enum:
+      - basic
+      - advanced
+      - platinum
+      - custom
+      title: WorkflowType
+    WorkflowSchedule:
+      properties:
+        crontab_entries:
+          items:
+            $ref: '#/components/schemas/CronTabEntry'
+          type: array
+          title: Crontab Entries
+      type: object
+      required:
+      - crontab_entries
+      title: WorkflowSchedule
+      examples:
+      - crontab_entries:
+        - cron_expression: 0 0 * * *
+    WorkflowInformation:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        sources:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Sources
+        destinations:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Destinations
+        workflow_type:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowType'
+          - type: 'null'
+        workflow_nodes:
+          items:
+            $ref: '#/components/schemas/WorkflowNode'
+          type: array
+          title: Workflow Nodes
+        schedule:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowSchedule'
+          - type: 'null'
+        status:
+          $ref: '#/components/schemas/WorkflowState'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        reprocess_all:
+          type: boolean
+          title: Reprocess All
+          default: false
+      type: object
+      required:
+      - id
+      - name
+      - sources
+      - destinations
+      - workflow_nodes
+      - status
+      - created_at
+      title: WorkflowInformation
+    EmailChannelConfig:
+      properties:
+        cc:
           anyOf:
           - items:
               type: string
-              contentMediaType: application/octet-stream
+              format: email
             type: array
           - type: 'null'
-          title: Input Files
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
       type: object
-      title: Body_run_workflow
+      required:
+      - recipient_email
+      title: EmailChannelConfig
+      description: User-configurable email settings.
+    EmailChannelConfigResponse:
+      properties:
+        cc:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Cc
+          description: CC email addresses (if provider supports)
+        reply_to:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Reply To
+          description: Reply-to email address
+        recipient_email:
+          type: string
+          format: email
+          title: Recipient Email
+          description: Primary recipient email address
+        provider:
+          type: string
+          title: Provider
+          description: Email provider (read-only, from platform config)
+      type: object
+      required:
+      - recipient_email
+      - provider
+      title: EmailChannelConfigResponse
+      description: Email config in response (no sensitive data).
     EmailChannelConfigUpdate:
       properties:
         cc:
@@ -822,136 +1291,6 @@ components:
       type: object
       title: EmailChannelConfigUpdate
       description: User-configurable email settings.
-    JobStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - COMPLETED
-      - STOPPED
-      - FAILED
-      title: JobStatus
-    WorkflowType:
-      type: string
-      enum:
-      - basic
-      - advanced
-      - platinum
-      - custom
-      title: WorkflowType
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CreateWebhookChannelRequest:
-      properties:
-        channel_type:
-          type: string
-          const: webhook
-          title: Channel Type
-          default: webhook
-        description:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Description
-          description: Channel description
-        event_types:
-          items:
-            $ref: '#/components/schemas/NotificationEventType'
-          type: array
-          minItems: 1
-          title: Event Types
-          description: Event types to subscribe to
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Enable/disable channel
-          default: true
-        url:
-          type: string
-          title: Url
-          description: Webhook endpoint URL (HTTPS required)
-        secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Secret
-          description: Consumer-supplied signing secret (24-75 bytes)
-      type: object
-      required:
-      - event_types
-      - url
-      title: CreateWebhookChannelRequest
-      description: Request to create a webhook notification channel.
-    NotificationEventType:
-      type: string
-      enum:
-      - job.scheduled
-      - job.in_progress
-      - job.progress
-      - job.completed
-      - job.stopped
-      - job.failed
-      title: NotificationEventType
-      description: Webhook event types derived from internal JOB_STATUSCHANGED_V1 statuses.
-    WorkflowSchedule:
-      properties:
-        crontab_entries:
-          items:
-            $ref: '#/components/schemas/CronTabEntry'
-          type: array
-          title: Crontab Entries
-      type: object
-      required:
-      - crontab_entries
-      title: WorkflowSchedule
-      examples:
-      - crontab_entries:
-        - cron_expression: 0 0 * * *
-    ChannelListResponse:
-      properties:
-        items:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/WebhookChannelResponse'
-            - $ref: '#/components/schemas/EmailChannelResponse'
-            discriminator:
-              propertyName: channel_type
-              mapping:
-                email: '#/components/schemas/EmailChannelResponse'
-                webhook: '#/components/schemas/WebhookChannelResponse'
-          type: array
-          title: Items
-          description: List of channels
-      type: object
-      required:
-      - items
-      title: ChannelListResponse
-      description: List response for notification channels (no pagination, max 50 per scope).
     CreateWorkflow:
       properties:
         name:
@@ -1024,300 +1363,25 @@ components:
       - name
       - workflow_type
       title: CreateWorkflow
-    SortDirection:
-      type: string
-      enum:
-      - asc
-      - desc
-      title: SortDirection
-    EmailChannelConfigResponse:
+    Body_run_workflow:
       properties:
-        cc:
+        input_files:
           anyOf:
           - items:
               type: string
-              format: email
+              contentMediaType: application/octet-stream
             type: array
           - type: 'null'
-          title: Cc
-          description: CC email addresses (if provider supports)
-        reply_to:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Reply To
-          description: Reply-to email address
-        recipient_email:
-          type: string
-          format: email
-          title: Recipient Email
-          description: Primary recipient email address
-        provider:
-          type: string
-          title: Provider
-          description: Email provider (read-only, from platform config)
+          title: Input Files
       type: object
-      required:
-      - recipient_email
-      - provider
-      title: EmailChannelConfigResponse
-      description: Email config in response (no sensitive data).
-    JobInformation:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        workflow_id:
-          type: string
-          format: uuid
-          title: Workflow Id
-        workflow_name:
-          type: string
-          title: Workflow Name
-        status:
-          $ref: '#/components/schemas/JobStatus'
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        runtime:
-          anyOf:
-          - type: string
-            format: duration
-          - type: 'null'
-          title: Runtime
-        input_file_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Input File Ids
-        output_node_files:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/NodeFileMetadata'
-            type: array
-          - type: 'null'
-          title: Output Node Files
-        job_type:
-          $ref: '#/components/schemas/WorkflowJobType'
-          default: ephemeral
-      type: object
-      required:
-      - id
-      - workflow_id
-      - workflow_name
-      - status
-      - created_at
-      title: JobInformation
-    WorkflowInformation:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        name:
-          type: string
-          title: Name
-        key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Key
-        sources:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Sources
-        destinations:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Destinations
-        workflow_type:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowType'
-          - type: 'null'
-        workflow_nodes:
-          items:
-            $ref: '#/components/schemas/WorkflowNode'
-          type: array
-          title: Workflow Nodes
-        schedule:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowSchedule'
-          - type: 'null'
-        status:
-          $ref: '#/components/schemas/WorkflowState'
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        reprocess_all:
-          type: boolean
-          title: Reprocess All
-          default: false
-      type: object
-      required:
-      - id
-      - name
-      - sources
-      - destinations
-      - workflow_nodes
-      - status
-      - created_at
-      title: WorkflowInformation
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    WorkflowNode:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        name:
-          type: string
-          title: Name
-        type:
-          type: string
-          title: Type
-        subtype:
-          type: string
-          title: Subtype
-        settings:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Settings
-      type: object
-      required:
-      - name
-      - type
-      - subtype
-      title: WorkflowNode
-    WorkflowState:
-      type: string
-      enum:
-      - active
-      - inactive
-      title: WorkflowState
-    CronTabEntry:
-      properties:
-        cron_expression:
-          type: string
-          title: Cron Expression
-      type: object
-      required:
-      - cron_expression
-      title: CronTabEntry
-    UpdateWorkflow:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        source_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: string
-          - type: 'null'
-          title: Source Id
-        destination_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: string
-          - type: 'null'
-          title: Destination Id
-        workflow_type:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowType'
-          - type: 'null'
-        workflow_nodes:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/WorkflowNode'
-            type: array
-          - type: 'null'
-          title: Workflow Nodes
-        template_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Template Id
-        schedule:
-          anyOf:
-          - type: string
-            enum:
-            - every 15 minutes
-            - every hour
-            - every 2 hours
-            - every 4 hours
-            - every 6 hours
-            - every 8 hours
-            - every 10 hours
-            - every 12 hours
-            - daily
-            - weekly
-            - monthly
-          - type: 'null'
-          title: Schedule
-        reprocess_all:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Reprocess All
-        state:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowState'
-          - type: 'null'
-      type: object
-      title: UpdateWorkflow
-    ChannelType:
-      type: string
-      enum:
-      - webhook
-      - email
-      title: ChannelType
-      description: Notification delivery channel types.
-    WorkflowJobType:
-      type: string
-      enum:
-      - ephemeral
-      - persistent
-      - scheduled
-      - template
-      title: WorkflowJobType
-    CreateEmailChannelRequest:
+      title: Body_run_workflow
+    CreateWebhookChannelRequest:
       properties:
         channel_type:
           type: string
-          const: email
+          const: webhook
           title: Channel Type
-          default: email
+          default: webhook
         description:
           anyOf:
           - type: string
@@ -1337,105 +1401,41 @@ components:
           title: Enabled
           description: Enable/disable channel
           default: true
-        email_config:
-          $ref: '#/components/schemas/EmailChannelConfig'
-          description: Email channel configuration
-      type: object
-      required:
-      - event_types
-      - email_config
-      title: CreateEmailChannelRequest
-      description: Request to create an email notification channel.
-    EmailChannelConfig:
-      properties:
-        cc:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Cc
-          description: CC email addresses (if provider supports)
-        reply_to:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Reply To
-          description: Reply-to email address
-        recipient_email:
-          type: string
-          format: email
-          title: Recipient Email
-          description: Primary recipient email address
-      type: object
-      required:
-      - recipient_email
-      title: EmailChannelConfig
-      description: User-configurable email settings.
-    WebhookChannelResponse:
-      properties:
-        channel_type:
-          type: string
-          const: webhook
-          title: Channel Type
-          default: webhook
-        id:
-          type: string
-          title: Id
-          description: Channel ID
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Channel description
-        event_types:
-          items:
-            type: string
-          type: array
-          title: Event Types
-          description: Subscribed event types
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Channel enabled status
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: Creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-          description: Last update timestamp
         url:
           type: string
           title: Url
-          description: Webhook endpoint URL
+          description: Webhook endpoint URL (HTTPS required)
+        secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secret
+          description: Consumer-supplied signing secret (24-75 bytes)
       type: object
       required:
-      - id
       - event_types
-      - enabled
-      - created_at
-      - updated_at
       - url
-      title: WebhookChannelResponse
-      description: Response for webhook notification channel.
-    VerifyChannelRequest:
+      title: CreateWebhookChannelRequest
+      description: Request to create a webhook notification channel.
+    NodeFileMetadata:
       properties:
-        code:
+        node_id:
           type: string
-          maxLength: 6
-          minLength: 6
-          pattern: ^\d{6}$
-          title: Code
-          description: 6-digit verification code sent to the channel's email address
+          format: uuid
+          title: Node Id
+        file_id:
+          type: string
+          title: File Id
+        node_type:
+          type: string
+          title: Node Type
+        node_subtype:
+          type: string
+          title: Node Subtype
       type: object
       required:
-      - code
-      title: VerifyChannelRequest
-      description: Request to verify an email channel with a verification code.
+      - node_id
+      - file_id
+      - node_type
+      - node_subtype
+      title: NodeFileMetadata
