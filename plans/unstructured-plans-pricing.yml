@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-06-12 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-06-12'
 specification: API Commons Plans
 specificationVersion: '0.1'
 provider: Unstructured
@@ -89,3 +94,29 @@ plans:
       - ISO 27001 compliance
       - FedRAMP compliance
       - CMMC 2.0 Level 2 compliance
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  units: []
+  plans:
+  - name: Let's Go
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pay-As-You-Go
+    access: paid
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Business
+    access: enterprise
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
