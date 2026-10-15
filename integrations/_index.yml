@@ -34,3 +34,14 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: unstructured-langchain
+  label: LangChain
+  partner: langchain
+  partner_name: LangChain
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/langchain-ai/langchain-unstructured
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
