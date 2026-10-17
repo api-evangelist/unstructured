@@ -291,41 +291,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+    JobProcessingStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - SUCCESS
+      - COMPLETED_WITH_ERRORS
+      - STOPPED
+      - FAILED
+      title: JobProcessingStatus
     JobInformation:
       properties:
         id:
@@ -376,33 +351,23 @@ components:
       - status
       - created_at
       title: JobInformation
-    JobFailedFiles:
+    Body_create_job:
       properties:
-        failed_files:
-          items:
-            $ref: '#/components/schemas/FailedFile'
-          type: array
-          title: Failed Files
+        input_files:
+          anyOf:
+          - items:
+              type: string
+              contentMediaType: application/octet-stream
+            type: array
+          - type: 'null'
+          title: Input Files
+        request_data:
+          type: string
+          title: Request Data
       type: object
       required:
-      - failed_files
-      title: JobFailedFiles
-    JobAggregations:
-      properties:
-        total_docs:
-          type: integer
-          title: Total Docs
-          default: 0
-        total_docs_succeeded:
-          type: integer
-          title: Total Docs Succeeded
-          default: 0
-        total_docs_failed:
-          type: integer
-          title: Total Docs Failed
-          default: 0
-      type: object
-      title: JobAggregations
+      - request_data
+      title: Body_create_job
     JobNodeDetails:
       properties:
         node_name:
@@ -439,6 +404,32 @@ components:
       - success
       - failure
       title: JobNodeDetails
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     WorkflowJobType:
       type: string
       enum:
@@ -447,16 +438,28 @@ components:
       - scheduled
       - template
       title: WorkflowJobType
-    JobProcessingStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - SUCCESS
-      - COMPLETED_WITH_ERRORS
-      - STOPPED
-      - FAILED
-      title: JobProcessingStatus
+    NodeFileMetadata:
+      properties:
+        node_id:
+          type: string
+          format: uuid
+          title: Node Id
+        file_id:
+          type: string
+          title: File Id
+        node_type:
+          type: string
+          title: Node Type
+        node_subtype:
+          type: string
+          title: Node Subtype
+      type: object
+      required:
+      - node_id
+      - file_id
+      - node_type
+      - node_subtype
+      title: NodeFileMetadata
     FailedFile:
       properties:
         document:
@@ -470,32 +473,6 @@ components:
       - document
       - error
       title: FailedFile
-    JobStatus:
-      type: string
-      enum:
-      - SCHEDULED
-      - IN_PROGRESS
-      - COMPLETED
-      - STOPPED
-      - FAILED
-      title: JobStatus
-    Body_create_job:
-      properties:
-        input_files:
-          anyOf:
-          - items:
-              type: string
-              contentMediaType: application/octet-stream
-            type: array
-          - type: 'null'
-          title: Input Files
-        request_data:
-          type: string
-          title: Request Data
-      type: object
-      required:
-      - request_data
-      title: Body_create_job
     JobDetails:
       properties:
         id:
@@ -524,25 +501,48 @@ components:
       - processing_status
       - node_stats
       title: JobDetails
-    NodeFileMetadata:
+    HTTPValidationError:
       properties:
-        node_id:
-          type: string
-          format: uuid
-          title: Node Id
-        file_id:
-          type: string
-          title: File Id
-        node_type:
-          type: string
-          title: Node Type
-        node_subtype:
-          type: string
-          title: Node Subtype
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    JobStatus:
+      type: string
+      enum:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+      - STOPPED
+      - FAILED
+      title: JobStatus
+    JobFailedFiles:
+      properties:
+        failed_files:
+          items:
+            $ref: '#/components/schemas/FailedFile'
+          type: array
+          title: Failed Files
       type: object
       required:
-      - node_id
-      - file_id
-      - node_type
-      - node_subtype
-      title: NodeFileMetadata
+      - failed_files
+      title: JobFailedFiles
+    JobAggregations:
+      properties:
+        total_docs:
+          type: integer
+          title: Total Docs
+          default: 0
+        total_docs_succeeded:
+          type: integer
+          title: Total Docs Succeeded
+          default: 0
+        total_docs_failed:
+          type: integer
+          title: Total Docs Failed
+          default: 0
+      type: object
+      title: JobAggregations
