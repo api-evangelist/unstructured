@@ -244,6 +244,8 @@ apis:
   - type: JavaScriptSDK
     url: https://github.com/Unstructured-IO/unstructured-js-client
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/unstructured/overview
   - type: AgenticAccess
     url: agentic-access/unstructured-agentic-access.yml
   - type: TrustCenter
