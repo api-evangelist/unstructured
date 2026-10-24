@@ -1,1342 +1,1201 @@
 {
+  "info": {
+    "_postman_id": "7abc3c43-2e16-47f2-ab6b-c34ce096151b",
+    "name": "Platform Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:24:14.000Z",
+    "updatedAt": "2026-10-21T20:24:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7abc3c43-2e16-47f2-ab6b-c34ce096151b"
+  },
   "item": [
     {
-      "id": "0a4fc87f-cbaa-442c-951b-aa97a09425ea",
-      "name": "jobs",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "176c295d-9ae8-4a4d-bdc3-5a10d343f229",
-          "name": "List Jobs",
-          "request": {
-            "name": "List Jobs",
-            "description": {
-              "content": "Retrieve a list of jobs with optional filtering by workflow ID or job status.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workflow_id",
-                  "value": "<uuid>"
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "dde9659f-21aa-4e5e-89a6-7cadd73f35d0",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workflow_id",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "jobs",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"38e61668-908d-c63d-c864-94d2ddf17803\",\n    \"workflow_id\": \"b318f170-26a1-60d8-1981-066f6d2379f6\",\n    \"workflow_name\": \"string\",\n    \"status\": \"FAILED\",\n    \"created_at\": \"1950-07-20T01:47:28.565Z\",\n    \"runtime\": \"string\",\n    \"input_file_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"output_node_files\": [\n      {\n        \"node_id\": \"441bd3d8-46a9-35d7-8018-ee211430bce7\",\n        \"file_id\": \"string\",\n        \"node_type\": \"string\",\n        \"node_subtype\": \"string\"\n      },\n      {\n        \"node_id\": \"c7b41555-a483-b61c-2f39-3e5770c66a17\",\n        \"file_id\": \"string\",\n        \"node_type\": \"string\",\n        \"node_subtype\": \"string\"\n      }\n    ],\n    \"job_type\": \"ephemeral\"\n  },\n  {\n    \"id\": \"a35b64e5-71ce-abb1-262c-e19f7e6acf96\",\n    \"workflow_id\": \"da477571-c052-1458-8bee-f2e877b33d55\",\n    \"workflow_name\": \"string\",\n    \"status\": \"FAILED\",\n    \"created_at\": \"1991-11-02T06:34:34.686Z\",\n    \"runtime\": \"string\",\n    \"input_file_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"output_node_files\": [\n      {\n        \"node_id\": \"6d111cb0-7351-5df2-7939-c01a4aae44b0\",\n        \"file_id\": \"string\",\n        \"node_type\": \"string\",\n        \"node_subtype\": \"string\"\n      },\n      {\n        \"node_id\": \"7332e8e8-30ad-3d0d-df16-ee4112ecd703\",\n        \"file_id\": \"string\",\n        \"node_type\": \"string\",\n        \"node_subtype\": \"string\"\n      }\n    ],\n    \"job_type\": \"ephemeral\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d663b95e-c668-4267-934e-5f1e72e13bb0",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "{job_id}",
+                  "item": [
                     {
-                      "key": "workflow_id",
-                      "value": "<uuid>"
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Cancel Job",
+                          "id": "7c9e7ed0-961e-4c28-864a-fc0ea9f50636",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ffc5b286-2d98-4d41-9f54-996081bc6592",
+                                  "key": "job_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Cancel the specified job."
+                          },
+                          "response": [
+                            {
+                              "id": "a13404e5-c3d6-4b44-9897-f23449724203",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-a13404e5-c3d6-4b44-9897-f23449724203"
+                            },
+                            {
+                              "id": "d52d90eb-d0fc-457b-9889-45822b91f689",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-d52d90eb-d0fc-457b-9889-45822b91f689"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-7c9e7ed0-961e-4c28-864a-fc0ea9f50636"
+                        }
+                      ],
+                      "id": "69cdee7a-e981-472c-996f-cbe9bd52cf54",
+                      "createdAt": "2026-10-21T20:24:14.000Z",
+                      "updatedAt": "2026-10-21T20:24:14.000Z",
+                      "uid": "35240-69cdee7a-e981-472c-996f-cbe9bd52cf54"
                     },
                     {
-                      "key": "status",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                      "name": "download",
+                      "item": [
+                        {
+                          "name": "Download Job output",
+                          "id": "de944a8a-5cce-4573-aeec-b5d86ee8e84b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id/download?file_id=<string>&node_id=<uuid>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id",
+                                "download"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to download",
+                                  "key": "file_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Node ID to retrieve the corresponding output file.If not provided, uses the terminal processing node in the workflow.",
+                                  "key": "node_id",
+                                  "value": "<uuid>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "54508e2d-3671-49b4-9048-b68469a3f3d7",
+                                  "key": "job_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Download the output of a job from a workflow where the input file was provided at runtime."
+                          },
+                          "response": [
+                            {
+                              "id": "8de83f28-cbb7-44c9-b328-d977ed0f249c",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/download?file_id=<string>&node_id=<uuid>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "download"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ID of the file to download",
+                                      "key": "file_id",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Node ID to retrieve the corresponding output file.If not provided, uses the terminal processing node in the workflow.",
+                                      "key": "node_id",
+                                      "value": "<uuid>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-8de83f28-cbb7-44c9-b328-d977ed0f249c"
+                            },
+                            {
+                              "id": "9c5863a9-5315-41cf-bf4e-a4e23d0cde5a",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/download?file_id=<string>&node_id=<uuid>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "download"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ID of the file to download",
+                                      "key": "file_id",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Node ID to retrieve the corresponding output file.If not provided, uses the terminal processing node in the workflow.",
+                                      "key": "node_id",
+                                      "value": "<uuid>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-9c5863a9-5315-41cf-bf4e-a4e23d0cde5a"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-de944a8a-5cce-4573-aeec-b5d86ee8e84b"
+                        }
+                      ],
+                      "id": "7b2b7d72-8f93-4b31-8699-431ee14b6f93",
+                      "createdAt": "2026-10-21T20:24:14.000Z",
+                      "updatedAt": "2026-10-21T20:24:14.000Z",
+                      "uid": "35240-7b2b7d72-8f93-4b31-8699-431ee14b6f93"
                     },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "109b47fc-6310-4cc4-b738-c6a99c45b414",
-          "name": "Create Job",
-          "request": {
-            "name": "Create Job",
-            "description": {
-              "content": "Create a new on-demand job using either a template (with persistent job optimization) or custom DAG.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "multipart/form-data"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "request_data",
-                  "value": "<string>",
-                  "type": "text",
-                  "description": "(Required) "
-                },
-                {
-                  "key": "input_files",
-                  "value": "[\"<string>\",\"<string>\"]",
-                  "type": "text",
-                  "description": ""
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "3cb14b42-8bba-4998-8fbc-53f321b238f6",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
                     {
-                      "description": {
-                        "content": "(Required) ",
-                        "type": "text/plain"
+                      "name": "details",
+                      "item": [
+                        {
+                          "name": "Get Job processing details",
+                          "id": "56d49f05-b20c-457d-8b4b-1a855b06c0f3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id/details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id",
+                                "details"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "24aec20c-a1f7-486c-9830-3076bf8e68f1",
+                                  "key": "job_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve processing details for a specific job by its ID."
+                          },
+                          "response": [
+                            {
+                              "id": "01b15fe2-bb88-4687-b47a-5c9b1e7af68e",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/details",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "details"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"processing_status\": \"SCHEDULED\",\n  \"node_stats\": [\n    {\n      \"ready\": \"<integer>\",\n      \"in_progress\": \"<integer>\",\n      \"success\": \"<integer>\",\n      \"failure\": \"<integer>\",\n      \"node_name\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    },\n    {\n      \"ready\": \"<integer>\",\n      \"in_progress\": \"<integer>\",\n      \"success\": \"<integer>\",\n      \"failure\": \"<integer>\",\n      \"node_name\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    }\n  ],\n  \"summary\": {\n    \"total_docs\": 0,\n    \"total_docs_succeeded\": 0,\n    \"total_docs_failed\": 0\n  },\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-01b15fe2-bb88-4687-b47a-5c9b1e7af68e"
+                            },
+                            {
+                              "id": "39b7e9a0-f385-42a6-be77-61cf4cf4e0aa",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/details",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "details"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-39b7e9a0-f385-42a6-be77-61cf4cf4e0aa"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-56d49f05-b20c-457d-8b4b-1a855b06c0f3"
+                        }
+                      ],
+                      "id": "ce0dccea-955e-4a31-84a2-bd2fa4addcf4",
+                      "createdAt": "2026-10-21T20:24:14.000Z",
+                      "updatedAt": "2026-10-21T20:24:14.000Z",
+                      "uid": "35240-ce0dccea-955e-4a31-84a2-bd2fa4addcf4"
+                    },
+                    {
+                      "name": "failed-files",
+                      "item": [
+                        {
+                          "name": "Get Job Failed Files",
+                          "id": "81a9ac42-2593-4ffd-a8c0-c4077501c59a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id/failed-files",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id",
+                                "failed-files"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "76b04121-d405-446f-ac1c-eb0660801e82",
+                                  "key": "job_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve failed files for a specific job by its ID."
+                          },
+                          "response": [
+                            {
+                              "id": "dbd84086-b309-4f5e-9cfe-fa74b23ace35",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/failed-files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "failed-files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"failed_files\": [\n    {\n      \"document\": \"<string>\",\n      \"error\": \"<string>\"\n    },\n    {\n      \"document\": \"<string>\",\n      \"error\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-dbd84086-b309-4f5e-9cfe-fa74b23ace35"
+                            },
+                            {
+                              "id": "8e64a187-c59b-42bb-87f8-dd852382937a",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/jobs/:job_id/failed-files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "jobs",
+                                    ":job_id",
+                                    "failed-files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:24:15.000Z",
+                              "updatedAt": "2026-10-21T20:24:15.000Z",
+                              "uid": "35240-8e64a187-c59b-42bb-87f8-dd852382937a"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-81a9ac42-2593-4ffd-a8c0-c4077501c59a"
+                        }
+                      ],
+                      "id": "0868bfd4-7185-4c6c-89f3-56e105a16181",
+                      "createdAt": "2026-10-21T20:24:14.000Z",
+                      "updatedAt": "2026-10-21T20:24:14.000Z",
+                      "uid": "35240-0868bfd4-7185-4c6c-89f3-56e105a16181"
+                    },
+                    {
+                      "name": "Get Job",
+                      "id": "ad8d38c4-48a0-404f-8426-50bf815562c5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
                       },
-                      "key": "request_data",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/jobs/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "jobs",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2257afba-d953-48e0-affe-e4dc56d6478d",
+                              "key": "job_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve detailed information for a specific job by its ID."
                       },
-                      "key": "input_files",
-                      "value": "[\"<string>\",\"<string>\"]",
-                      "type": "text"
+                      "response": [
+                        {
+                          "id": "579b7a8f-ff8d-4b0c-9ff8-441a4fd62630",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"workflow_id\": \"<uuid>\",\n  \"workflow_name\": \"<string>\",\n  \"status\": \"STOPPED\",\n  \"created_at\": \"<dateTime>\",\n  \"runtime\": \"<string>\",\n  \"input_file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"output_node_files\": [\n    {\n      \"node_id\": \"<uuid>\",\n      \"file_id\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    },\n    {\n      \"node_id\": \"<uuid>\",\n      \"file_id\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    }\n  ],\n  \"job_type\": \"template\"\n}",
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-579b7a8f-ff8d-4b0c-9ff8-441a4fd62630"
+                        },
+                        {
+                          "id": "3fdf8013-8dab-4784-89b7-b762d654595a",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/jobs/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "jobs",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:24:15.000Z",
+                          "updatedAt": "2026-10-21T20:24:15.000Z",
+                          "uid": "35240-3fdf8013-8dab-4784-89b7-b762d654595a"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:24:15.000Z",
+                      "updatedAt": "2026-10-21T20:24:15.000Z",
+                      "uid": "35240-ad8d38c4-48a0-404f-8426-50bf815562c5"
                     }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"a9e4810a-92c8-5d38-ba63-287e7f5a9cbe\",\n  \"workflow_id\": \"18dfe565-cfeb-7c07-53e1-1dd0a269e1b1\",\n  \"workflow_name\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"created_at\": \"2012-05-24T00:33:14.435Z\",\n  \"runtime\": \"string\",\n  \"input_file_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"output_node_files\": [\n    {\n      \"node_id\": \"90eb0039-cad3-2375-b466-8fbe76e9f987\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    },\n    {\n      \"node_id\": \"c10c2f7f-768b-5b76-ffb9-34a0cefb005a\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    }\n  ],\n  \"job_type\": \"ephemeral\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6740dbbb-a3ef-4f8f-bc6a-991a54f67107",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ""
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "id": "be2f536d-7fe5-4a5d-81e4-796cd2813abe",
+                  "createdAt": "2026-10-21T20:24:14.000Z",
+                  "updatedAt": "2026-10-21T20:24:14.000Z",
+                  "uid": "35240-be2f536d-7fe5-4a5d-81e4-796cd2813abe"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
+                {
+                  "name": "List Jobs",
+                  "id": "254cbfb7-ee95-4abd-b672-9901b42cbb5d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) ",
-                        "type": "text/plain"
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "unstructured-api-key",
+                        "value": "<string>"
                       },
-                      "key": "request_data",
-                      "value": "<string>",
-                      "type": "text"
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/jobs/?workflow_id=<uuid>&status=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "jobs",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "workflow_id",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "key": "status",
+                          "value": "<string>"
+                        }
+                      ]
                     },
+                    "description": "Retrieve a list of jobs with optional filtering by workflow ID or job status."
+                  },
+                  "response": [
                     {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
+                      "id": "26c2671b-3728-465e-a473-e83d53598a98",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/jobs/?workflow_id=<uuid>&status=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "jobs",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "workflow_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
                       },
-                      "key": "input_files",
-                      "value": "[\"<string>\",\"<string>\"]",
-                      "type": "text"
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"workflow_id\": \"<uuid>\",\n    \"workflow_name\": \"<string>\",\n    \"status\": \"COMPLETED\",\n    \"created_at\": \"<dateTime>\",\n    \"runtime\": \"<string>\",\n    \"input_file_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"output_node_files\": [\n      {\n        \"node_id\": \"<uuid>\",\n        \"file_id\": \"<string>\",\n        \"node_type\": \"<string>\",\n        \"node_subtype\": \"<string>\"\n      },\n      {\n        \"node_id\": \"<uuid>\",\n        \"file_id\": \"<string>\",\n        \"node_type\": \"<string>\",\n        \"node_subtype\": \"<string>\"\n      }\n    ],\n    \"job_type\": \"scheduled\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"workflow_id\": \"<uuid>\",\n    \"workflow_name\": \"<string>\",\n    \"status\": \"IN_PROGRESS\",\n    \"created_at\": \"<dateTime>\",\n    \"runtime\": \"<string>\",\n    \"input_file_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"output_node_files\": [\n      {\n        \"node_id\": \"<uuid>\",\n        \"file_id\": \"<string>\",\n        \"node_type\": \"<string>\",\n        \"node_subtype\": \"<string>\"\n      },\n      {\n        \"node_id\": \"<uuid>\",\n        \"file_id\": \"<string>\",\n        \"node_type\": \"<string>\",\n        \"node_subtype\": \"<string>\"\n      }\n    ],\n    \"job_type\": \"template\"\n  }\n]",
+                      "createdAt": "2026-10-21T20:24:15.000Z",
+                      "updatedAt": "2026-10-21T20:24:15.000Z",
+                      "uid": "35240-26c2671b-3728-465e-a473-e83d53598a98"
+                    },
+                    {
+                      "id": "2b3d427a-fcc3-4d0a-bd18-4b6d2e4ebddb",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/jobs/?workflow_id=<uuid>&status=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "jobs",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "workflow_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:24:15.000Z",
+                      "updatedAt": "2026-10-21T20:24:15.000Z",
+                      "uid": "35240-2b3d427a-fcc3-4d0a-bd18-4b6d2e4ebddb"
                     }
-                  ]
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
+                  ],
+                  "createdAt": "2026-10-21T20:24:15.000Z",
+                  "updatedAt": "2026-10-21T20:24:15.000Z",
+                  "uid": "35240-254cbfb7-ee95-4abd-b672-9901b42cbb5d"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Create Job",
+                  "id": "dcd7f871-3fa0-422e-907d-cdb2d492bb8f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "unstructured-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "request_data",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "input_files",
+                          "value": "<string>,<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/jobs/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "jobs",
+                        ""
+                      ]
+                    },
+                    "description": "Create a new on-demand job using either a template (with persistent job optimization) or custom DAG."
+                  },
+                  "response": [
+                    {
+                      "id": "918d4047-53bd-4e27-a18a-c8dd3f6cb8f8",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "request_data",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "key": "input_files",
+                              "value": "<string>,<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/jobs/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "jobs",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"workflow_id\": \"<uuid>\",\n  \"workflow_name\": \"<string>\",\n  \"status\": \"STOPPED\",\n  \"created_at\": \"<dateTime>\",\n  \"runtime\": \"<string>\",\n  \"input_file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"output_node_files\": [\n    {\n      \"node_id\": \"<uuid>\",\n      \"file_id\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    },\n    {\n      \"node_id\": \"<uuid>\",\n      \"file_id\": \"<string>\",\n      \"node_type\": \"<string>\",\n      \"node_subtype\": \"<string>\"\n    }\n  ],\n  \"job_type\": \"template\"\n}",
+                      "createdAt": "2026-10-21T20:24:15.000Z",
+                      "updatedAt": "2026-10-21T20:24:15.000Z",
+                      "uid": "35240-918d4047-53bd-4e27-a18a-c8dd3f6cb8f8"
+                    },
+                    {
+                      "id": "fc926bef-4006-42ac-818c-b84d54abbe6d",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "request_data",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "key": "input_files",
+                              "value": "<string>,<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/jobs/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "jobs",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:24:15.000Z",
+                      "updatedAt": "2026-10-21T20:24:15.000Z",
+                      "uid": "35240-fc926bef-4006-42ac-818c-b84d54abbe6d"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:24:15.000Z",
+                  "updatedAt": "2026-10-21T20:24:15.000Z",
+                  "uid": "35240-dcd7f871-3fa0-422e-907d-cdb2d492bb8f"
                 }
               ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "d5faa986-aadc-44c3-9ff6-5f9d03900bba",
+              "createdAt": "2026-10-21T20:24:14.000Z",
+              "updatedAt": "2026-10-21T20:24:14.000Z",
+              "uid": "35240-d5faa986-aadc-44c3-9ff6-5f9d03900bba"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f9a958f9-40f7-4fa0-9f1a-6dba15665d3a",
-          "name": "Get Job",
-          "request": {
-            "name": "Get Job",
-            "description": {
-              "content": "Retrieve detailed information for a specific job by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ":job_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "job_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "7ad06078-60a9-4b49-b7be-88428636a2b9",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"a9e4810a-92c8-5d38-ba63-287e7f5a9cbe\",\n  \"workflow_id\": \"18dfe565-cfeb-7c07-53e1-1dd0a269e1b1\",\n  \"workflow_name\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"created_at\": \"2012-05-24T00:33:14.435Z\",\n  \"runtime\": \"string\",\n  \"input_file_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"output_node_files\": [\n    {\n      \"node_id\": \"90eb0039-cad3-2375-b466-8fbe76e9f987\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    },\n    {\n      \"node_id\": \"c10c2f7f-768b-5b76-ffb9-34a0cefb005a\",\n      \"file_id\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    }\n  ],\n  \"job_type\": \"ephemeral\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ce95d299-513f-4be3-a08d-bb940af1ed1f",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "806cc843-1be4-4791-b87b-4a5fb2cb417a",
-          "name": "Cancel Job",
-          "request": {
-            "name": "Cancel Job",
-            "description": {
-              "content": "Cancel the specified job.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ":job_id",
-                "cancel"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "job_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3481bb3b-3e1f-4a5d-aa4f-9bd21f4f1337",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2b83a206-bcfd-49d0-8e33-3c1e7e04211a",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4fb27527-b020-4805-a809-f1d3713e507c",
-          "name": "Download Job output",
-          "request": {
-            "name": "Download Job output",
-            "description": {
-              "content": "Download the output of a job from a workflow where the input file was provided at runtime.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ":job_id",
-                "download"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "file_id",
-                  "value": "<string>",
-                  "description": "(Required) ID of the file to download"
-                },
-                {
-                  "disabled": false,
-                  "key": "node_id",
-                  "value": "<uuid>",
-                  "description": "Node ID to retrieve the corresponding output file.If not provided, uses the terminal processing node in the workflow."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "job_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4ea0deb3-a796-4ef4-8fea-92d814d2f434",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "file_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "node_id",
-                      "value": "<uuid>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ff9ae7b4-d458-4938-aff7-0498f42da214",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "file_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "node_id",
-                      "value": "<uuid>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7b64c222-52f0-467e-88b7-49d2c544b461",
-          "name": "Get Job processing details",
-          "request": {
-            "name": "Get Job processing details",
-            "description": {
-              "content": "Retrieve processing details for a specific job by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ":job_id",
-                "details"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "job_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1e444595-8372-4d80-9dde-e1f2e1767b6e",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "details"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"50f88834-facf-a3b5-5656-39af3ee1af43\",\n  \"processing_status\": \"COMPLETED_WITH_ERRORS\",\n  \"node_stats\": [\n    {\n      \"ready\": 6865,\n      \"in_progress\": 884,\n      \"success\": 6005,\n      \"failure\": 5469,\n      \"node_name\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    },\n    {\n      \"ready\": 273,\n      \"in_progress\": 5196,\n      \"success\": 1927,\n      \"failure\": 8218,\n      \"node_name\": \"string\",\n      \"node_type\": \"string\",\n      \"node_subtype\": \"string\"\n    }\n  ],\n  \"summary\": {\n    \"total_docs\": 0,\n    \"total_docs_succeeded\": 0,\n    \"total_docs_failed\": 0\n  },\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "20e3017b-a922-4032-b006-b8934e1f4c31",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "details"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e8f24a69-d298-44f8-a12c-938e11136dfb",
-          "name": "Get Job Failed Files",
-          "request": {
-            "name": "Get Job Failed Files",
-            "description": {
-              "content": "Retrieve failed files for a specific job by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "jobs",
-                ":job_id",
-                "failed-files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "job_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "265f7518-d8ad-4067-a43f-2570ffd83b68",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "failed-files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"failed_files\": [\n    {\n      \"document\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"document\": \"string\",\n      \"error\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "88f966b6-8f3d-433c-a29d-6b2258fdb10e",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "jobs",
-                    ":job_id",
-                    "failed-files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "job_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "cd370dbb-6acb-4fc1-a6cd-f8895bedcb27",
+          "createdAt": "2026-10-21T20:24:14.000Z",
+          "updatedAt": "2026-10-21T20:24:14.000Z",
+          "uid": "35240-cd370dbb-6acb-4fc1-a6cd-f8895bedcb27"
         }
       ],
-      "event": []
+      "id": "e28022ef-31d6-4c27-859a-ef876a343c91",
+      "createdAt": "2026-10-21T20:24:14.000Z",
+      "updatedAt": "2026-10-21T20:24:14.000Z",
+      "uid": "35240-e28022ef-31d6-4c27-859a-ef876a343c91"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.unstructuredapp.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://platform.unstructuredapp.io/"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "unstructured-api-key"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "e8cd4dea-2cad-4192-b925-fbc578c0f9ba",
-    "name": "Unstructured Partition channels jobs API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

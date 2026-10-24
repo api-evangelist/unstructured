@@ -1,1157 +1,1057 @@
 {
+  "info": {
+    "_postman_id": "9567cbb1-26b1-4781-b605-02610def16a1",
+    "name": "Platform Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:23:50.000Z",
+    "updatedAt": "2026-10-21T20:23:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9567cbb1-26b1-4781-b605-02610def16a1"
+  },
   "item": [
     {
-      "id": "992bf2f9-ca75-4f3a-98ff-cdc97bd17a34",
-      "name": "channels",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "07634b0a-9a55-46f7-a70d-81a61a27f612",
-          "name": "Create Channel",
-          "request": {
-            "name": "Create Channel",
-            "description": {
-              "content": "Create notification channel.\n\nCreates a new delivery channel for receiving platform event notifications.\nURL must use HTTPS for webhook type. At least one event type must be specified.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"event_types\": [\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"secret\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "e0fefc3d-6c96-4c49-86da-a6dd89b9810f",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"secret\": \"string\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "notifications",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": true,\n  \"created_at\": \"2008-08-15T05:50:04.819Z\",\n  \"updated_at\": \"2010-05-31T00:38:44.511Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "89ba8c8f-feac-4261-8235-6e8640b7ef49",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event_types\": [\n    \"job.completed\"\n  ],\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"secret\": \"string\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "377aabf0-0678-4e26-8bcb-42fe20926857",
-          "name": "List Channels",
-          "request": {
-            "name": "List Channels",
-            "description": {
-              "content": "List account-level notification channels.\n\nReturns all channel configurations for the account (workflow_id=None scope).\nchannel_type is required - no cross-type aggregation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "channel_type",
-                  "value": "<string>",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "key": "enabled",
-                  "value": "<boolean>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a2c733f0-bca5-49e2-8cff-b4099d8915de",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "channels",
+                  "item": [
                     {
-                      "key": "channel_type",
-                      "value": "email"
+                      "name": "{channel_id}",
+                      "item": [
+                        {
+                          "name": "verify",
+                          "item": [
+                            {
+                              "name": "Verify Channel",
+                              "id": "fb6130e7-ba33-459a-828f-82013fa0b31c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"code\": \"215790\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id/verify",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id",
+                                    "verify"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "43412b36-808b-43a1-89d6-7bfbd3d5074e",
+                                      "key": "channel_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Verify a notification channel using a verification code.\n\nEmail channels require verification by providing the 6-digit code\nsent to the recipient email address during channel creation."
+                              },
+                              "response": [
+                                {
+                                  "id": "7f1272eb-9c4a-49f2-90ef-30d5517b55ca",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "unstructured-api-key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"code\": \"215790\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id/verify",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "notifications",
+                                        "channels",
+                                        ":channel_id",
+                                        "verify"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "channel_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-10-21T20:23:50.000Z",
+                                  "updatedAt": "2026-10-21T20:23:50.000Z",
+                                  "uid": "35240-7f1272eb-9c4a-49f2-90ef-30d5517b55ca"
+                                },
+                                {
+                                  "id": "c43ca936-9e8f-4fdf-b8fd-5bec39158440",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "unstructured-api-key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"code\": \"215790\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id/verify",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "notifications",
+                                        "channels",
+                                        ":channel_id",
+                                        "verify"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "channel_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                                  "createdAt": "2026-10-21T20:23:50.000Z",
+                                  "updatedAt": "2026-10-21T20:23:50.000Z",
+                                  "uid": "35240-c43ca936-9e8f-4fdf-b8fd-5bec39158440"
+                                }
+                              ],
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-fb6130e7-ba33-459a-828f-82013fa0b31c"
+                            }
+                          ],
+                          "id": "a79e1d62-a76d-437a-8a6e-9045669f1b4e",
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-a79e1d62-a76d-437a-8a6e-9045669f1b4e"
+                        },
+                        {
+                          "name": "Get Channel",
+                          "id": "7413351b-23a7-4f61-a3e2-600895725797",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels",
+                                ":channel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0d28fdad-a525-411a-9c1b-a25f0c684afd",
+                                  "key": "channel_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get account-level notification channel by ID."
+                          },
+                          "response": [
+                            {
+                              "id": "1001e110-0195-409d-967c-34a1401bfb1e",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"event_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-1001e110-0195-409d-967c-34a1401bfb1e"
+                            },
+                            {
+                              "id": "9aa6fcd8-cda5-4563-b2af-ce2f1dfba6ae",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-9aa6fcd8-cda5-4563-b2af-ce2f1dfba6ae"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-7413351b-23a7-4f61-a3e2-600895725797"
+                        },
+                        {
+                          "name": "Update Channel",
+                          "id": "46930318-68ab-4c32-b41d-f45e71113bd5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"channel_type\": \"email\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.in_progress\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"<email>\",\n      \"<email>\"\n    ],\n    \"reply_to\": \"<email>\",\n    \"recipient_email\": \"<email>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels",
+                                ":channel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "794af186-2897-4a69-adb9-591a430a757c",
+                                  "key": "channel_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Update account-level notification channel.\n\nUpdates an existing channel. Only provided fields are updated."
+                          },
+                          "response": [
+                            {
+                              "id": "0c880b24-ab72-4857-bdd7-b66183d2cc91",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"channel_type\": \"email\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.in_progress\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"<email>\",\n      \"<email>\"\n    ],\n    \"reply_to\": \"<email>\",\n    \"recipient_email\": \"<email>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"event_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-0c880b24-ab72-4857-bdd7-b66183d2cc91"
+                            },
+                            {
+                              "id": "78f88583-19ad-45fd-ac3a-64973b3eee34",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"channel_type\": \"email\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.in_progress\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"<email>\",\n      \"<email>\"\n    ],\n    \"reply_to\": \"<email>\",\n    \"recipient_email\": \"<email>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-78f88583-19ad-45fd-ac3a-64973b3eee34"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-46930318-68ab-4c32-b41d-f45e71113bd5"
+                        },
+                        {
+                          "name": "Delete Channel",
+                          "id": "cbee74fc-6f39-497e-9b53-8e0d59dd256d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels",
+                                ":channel_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b63cb7ad-6e56-43eb-b87d-034bdea59ef6",
+                                  "key": "channel_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Delete account-level notification channel."
+                          },
+                          "response": [
+                            {
+                              "id": "23ff004c-18ce-417a-a9fe-60ebbdaba074",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-23ff004c-18ce-417a-a9fe-60ebbdaba074"
+                            },
+                            {
+                              "id": "175b87a0-2a02-4076-bddb-843c7e6270af",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/notifications/channels/:channel_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "notifications",
+                                    "channels",
+                                    ":channel_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "channel_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:23:50.000Z",
+                              "updatedAt": "2026-10-21T20:23:50.000Z",
+                              "uid": "35240-175b87a0-2a02-4076-bddb-843c7e6270af"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-cbee74fc-6f39-497e-9b53-8e0d59dd256d"
+                        }
+                      ],
+                      "id": "37b53c73-57e9-48b4-b9c3-e73cb62ad505",
+                      "createdAt": "2026-10-21T20:23:50.000Z",
+                      "updatedAt": "2026-10-21T20:23:50.000Z",
+                      "uid": "35240-37b53c73-57e9-48b4-b9c3-e73cb62ad505"
                     },
                     {
-                      "key": "enabled",
-                      "value": "<boolean>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                      "name": "Create Channel",
+                      "id": "35d2eda0-0f8b-484f-b76e-f0e48916e132",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"event_types\": [\n    \"job.stopped\"\n  ],\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"secret\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/notifications/channels",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "notifications",
+                            "channels"
+                          ]
+                        },
+                        "description": "Create notification channel.\n\nCreates a new delivery channel for receiving platform event notifications.\nURL must use HTTPS for webhook type. At least one event type must be specified."
+                      },
+                      "response": [
+                        {
+                          "id": "f6c635c3-bb5d-47bc-9358-3a06496206a0",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"event_types\": [\n    \"job.stopped\"\n  ],\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"secret\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"event_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-f6c635c3-bb5d-47bc-9358-3a06496206a0"
+                        },
+                        {
+                          "id": "21386f87-66f9-470d-87b6-e6e2407c1997",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"event_types\": [\n    \"job.stopped\"\n  ],\n  \"url\": \"<string>\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"secret\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-21386f87-66f9-470d-87b6-e6e2407c1997"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:23:50.000Z",
+                      "updatedAt": "2026-10-21T20:23:50.000Z",
+                      "uid": "35240-35d2eda0-0f8b-484f-b76e-f0e48916e132"
                     },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"event_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"created_at\": \"2017-12-30T22:24:38.106Z\",\n      \"updated_at\": \"1947-01-25T05:14:50.581Z\",\n      \"url\": \"string\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"event_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"created_at\": \"2006-09-05T01:45:24.078Z\",\n      \"updated_at\": \"1983-12-06T14:20:21.688Z\",\n      \"url\": \"string\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bb9ea2e3-463f-48e5-b8bd-d40ce411d06a",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
                     {
-                      "key": "channel_type",
-                      "value": "email"
-                    },
-                    {
-                      "key": "enabled",
-                      "value": "<boolean>"
+                      "name": "List Channels",
+                      "id": "dde3526b-9358-453e-9671-3c043398bdd1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/notifications/channels?channel_type=email&enabled=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "notifications",
+                            "channels"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "channel_type",
+                              "value": "email"
+                            },
+                            {
+                              "key": "enabled",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "description": "List account-level notification channels.\n\nReturns all channel configurations for the account (workflow_id=None scope).\nchannel_type is required - no cross-type aggregation."
+                      },
+                      "response": [
+                        {
+                          "id": "8438bec4-4df5-4b68-8e00-b8d1d94bb1df",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels?channel_type=email&enabled=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "channel_type",
+                                  "value": "email"
+                                },
+                                {
+                                  "key": "enabled",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"event_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"url\": \"<string>\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"event_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"url\": \"<string>\",\n      \"channel_type\": \"webhook\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-8438bec4-4df5-4b68-8e00-b8d1d94bb1df"
+                        },
+                        {
+                          "id": "f2dd657f-ac5f-4693-a038-8043c67f434b",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/notifications/channels?channel_type=email&enabled=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "notifications",
+                                "channels"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "channel_type",
+                                  "value": "email"
+                                },
+                                {
+                                  "key": "enabled",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:50.000Z",
+                          "updatedAt": "2026-10-21T20:23:50.000Z",
+                          "uid": "35240-f2dd657f-ac5f-4693-a038-8043c67f434b"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:23:50.000Z",
+                      "updatedAt": "2026-10-21T20:23:50.000Z",
+                      "uid": "35240-dde3526b-9358-453e-9671-3c043398bdd1"
                     }
                   ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "2d2fdd54-e276-4526-bddd-20c979604b44",
+                  "createdAt": "2026-10-21T20:23:50.000Z",
+                  "updatedAt": "2026-10-21T20:23:50.000Z",
+                  "uid": "35240-2d2fdd54-e276-4526-bddd-20c979604b44"
                 }
               ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "71857d83-b178-4125-bf95-2d25734aab82",
-          "name": "Get Channel",
-          "request": {
-            "name": "Get Channel",
-            "description": {
-              "content": "Get account-level notification channel by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels",
-                ":channel_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "channel_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "63a6d0cb-cff5-433f-a9ef-9707bac9e05e",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": true,\n  \"created_at\": \"2008-08-15T05:50:04.819Z\",\n  \"updated_at\": \"2010-05-31T00:38:44.511Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "38143029-d726-49c9-b912-476aba1ee192",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5480505e-b974-41d0-b127-a6a080d63e3b",
-          "name": "Update Channel",
-          "request": {
-            "name": "Update Channel",
-            "description": {
-              "content": "Update account-level notification channel.\n\nUpdates an existing channel. Only provided fields are updated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels",
-                ":channel_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "channel_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"channel_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"<email>\",\n      \"<email>\"\n    ],\n    \"reply_to\": \"<email>\",\n    \"recipient_email\": \"<email>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "3aa93900-5e75-413b-ab2c-f6b254a33cfd",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.in_progress\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"3iM@BAsRdlBC.xp\",\n      \"Sm-X@MRdSYwSWsJYCArHbWFlG.dr\"\n    ],\n    \"reply_to\": \"7MaNbvt@UiFNVMHRzbLuwQgQYxf.mdq\",\n    \"recipient_email\": \"Rw9IE-g@XQrzrFVshKrfQcoPnHnLN.zyeh\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"event_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enabled\": true,\n  \"created_at\": \"2008-08-15T05:50:04.819Z\",\n  \"updated_at\": \"2010-05-31T00:38:44.511Z\",\n  \"url\": \"string\",\n  \"channel_type\": \"webhook\",\n  \"description\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fbb7822a-db1b-47d1-aa4b-bd81f19d399e",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"channel_type\": \"webhook\",\n  \"description\": \"<string>\",\n  \"event_types\": [\n    \"job.in_progress\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"secret\": \"<string>\",\n  \"email_config\": {\n    \"cc\": [\n      \"3iM@BAsRdlBC.xp\",\n      \"Sm-X@MRdSYwSWsJYCArHbWFlG.dr\"\n    ],\n    \"reply_to\": \"7MaNbvt@UiFNVMHRzbLuwQgQYxf.mdq\",\n    \"recipient_email\": \"Rw9IE-g@XQrzrFVshKrfQcoPnHnLN.zyeh\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5340c0bd-3573-4aae-bb92-79dd5c3e6da6",
-          "name": "Delete Channel",
-          "request": {
-            "name": "Delete Channel",
-            "description": {
-              "content": "Delete account-level notification channel.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels",
-                ":channel_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "channel_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "14088934-c0c5-47d8-9164-a95d2b5deed6",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "a23ad984-6082-4804-9954-b58ad9f1cb17",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7afbcb60-97e9-4a5e-9641-e9067de71284",
-          "name": "Verify Channel",
-          "request": {
-            "name": "Verify Channel",
-            "description": {
-              "content": "Verify a notification channel using a verification code.\n\nEmail channels require verification by providing the 6-digit code\nsent to the recipient email address during channel creation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "notifications",
-                "channels",
-                ":channel_id",
-                "verify"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "channel_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"code\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "598a76c7-fb7f-47c5-a4ed-e6ece4ee848f",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id",
-                    "verify"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "f9261382-150f-41f7-8d51-05ab34e6581b",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "notifications",
-                    "channels",
-                    ":channel_id",
-                    "verify"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "channel_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "24cf42fe-67b1-4386-b410-ae50141fbd79",
+              "createdAt": "2026-10-21T20:23:50.000Z",
+              "updatedAt": "2026-10-21T20:23:50.000Z",
+              "uid": "35240-24cf42fe-67b1-4386-b410-ae50141fbd79"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ea695a62-4003-435c-931e-0ef789a1b2d8",
+          "createdAt": "2026-10-21T20:23:50.000Z",
+          "updatedAt": "2026-10-21T20:23:50.000Z",
+          "uid": "35240-ea695a62-4003-435c-931e-0ef789a1b2d8"
         }
       ],
-      "event": []
+      "id": "02a19b78-71e4-43c2-8bff-ddf5057bb425",
+      "createdAt": "2026-10-21T20:23:50.000Z",
+      "updatedAt": "2026-10-21T20:23:50.000Z",
+      "uid": "35240-02a19b78-71e4-43c2-8bff-ddf5057bb425"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.unstructuredapp.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://platform.unstructuredapp.io/"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "unstructured-api-key"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "ebf47fd9-6f7d-45e1-9946-3bc0713cb9a6",
-    "name": "Unstructured Partition channels API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,1285 +1,1144 @@
 {
+  "info": {
+    "_postman_id": "a99df0cd-fe92-4c79-961d-31a8c5b30a58",
+    "name": "Platform Destinations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:23:56.000Z",
+    "updatedAt": "2026-10-21T20:23:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a99df0cd-fe92-4c79-961d-31a8c5b30a58"
+  },
   "item": [
     {
-      "id": "877d368a-e240-41fa-96e0-6124600d07b7",
-      "name": "destinations",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "d3cdc349-6d9b-494c-b9ea-4449e43dfaf1",
-          "name": "List destination connectors",
-          "request": {
-            "name": "List destination connectors",
-            "description": {
-              "content": "Retrieve a list of available destination connectors.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "destination_type",
-                  "value": "<string>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "882334ea-be77-432d-9760-abbbdcaea5d0",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "destinations",
+              "item": [
+                {
+                  "name": "{destination_id}",
+                  "item": [
                     {
-                      "key": "destination_type",
-                      "value": "snowflake"
+                      "name": "connection-check",
+                      "item": [
+                        {
+                          "name": "Create destination connection check",
+                          "id": "c1ef6ded-25f8-410b-9529-bf0ab856bf2f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id",
+                                "connection-check"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "57e58805-144c-41ea-bb8a-2b583bf05690",
+                                  "key": "destination_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Initiate a connection check for the destination connector"
+                          },
+                          "response": [
+                            {
+                              "id": "7a202ed0-d705-4786-9e84-ace3e0691853",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "destinations",
+                                    ":destination_id",
+                                    "connection-check"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "destination_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Accepted",
+                              "code": 202,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"status\": \"SUCCESS\",\n  \"created_at\": \"<dateTime>\",\n  \"reason\": \"<string>\",\n  \"reported_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-10-21T20:23:57.000Z",
+                              "updatedAt": "2026-10-21T20:23:57.000Z",
+                              "uid": "35240-7a202ed0-d705-4786-9e84-ace3e0691853"
+                            },
+                            {
+                              "id": "76162042-3922-4cb4-832b-c7a5ea74815a",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "destinations",
+                                    ":destination_id",
+                                    "connection-check"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "destination_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:23:57.000Z",
+                              "updatedAt": "2026-10-21T20:23:57.000Z",
+                              "uid": "35240-76162042-3922-4cb4-832b-c7a5ea74815a"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-c1ef6ded-25f8-410b-9529-bf0ab856bf2f"
+                        },
+                        {
+                          "name": "Get the latest destination connector connection check",
+                          "id": "3603158d-943c-4237-bb77-7a569b1e8a6f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id",
+                                "connection-check"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5ec67dca-ee14-40ee-a876-d8a7674739f0",
+                                  "key": "destination_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the most recent connection check for the specified destination connector."
+                          },
+                          "response": [
+                            {
+                              "id": "0a733d50-8b11-418f-b77a-62b80cdd6c63",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "destinations",
+                                    ":destination_id",
+                                    "connection-check"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "destination_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"status\": \"SUCCESS\",\n  \"created_at\": \"<dateTime>\",\n  \"reason\": \"<string>\",\n  \"reported_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-10-21T20:23:57.000Z",
+                              "updatedAt": "2026-10-21T20:23:57.000Z",
+                              "uid": "35240-0a733d50-8b11-418f-b77a-62b80cdd6c63"
+                            },
+                            {
+                              "id": "985f2078-3756-4329-aef3-5ec735f85849",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "unstructured-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/destinations/:destination_id/connection-check",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "destinations",
+                                    ":destination_id",
+                                    "connection-check"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "destination_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T20:23:57.000Z",
+                              "updatedAt": "2026-10-21T20:23:57.000Z",
+                              "uid": "35240-985f2078-3756-4329-aef3-5ec735f85849"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-3603158d-943c-4237-bb77-7a569b1e8a6f"
+                        }
+                      ],
+                      "id": "d4710c65-de21-461b-b9a7-ed4a5515419e",
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-d4710c65-de21-461b-b9a7-ed4a5515419e"
+                    },
+                    {
+                      "name": "Get destination connector",
+                      "id": "faf45b87-2745-482b-adac-bca28a98f3b2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ":destination_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b1dd0d47-2df7-444f-8d96-322537647c29",
+                              "key": "destination_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve detailed information for a specific destination connector by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "a45e9acf-7a16-41ae-aa4c-638595fced59",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type\": \"astradb\",\n  \"config\": {\n    \"collection_name\": \"<string>\",\n    \"batch_size\": \"<integer>\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"key\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-a45e9acf-7a16-41ae-aa4c-638595fced59"
+                        },
+                        {
+                          "id": "9cef08c8-8dd0-4c63-a895-f0f8d6b49685",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-9cef08c8-8dd0-4c63-a895-f0f8d6b49685"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-faf45b87-2745-482b-adac-bca28a98f3b2"
+                    },
+                    {
+                      "name": "Update destination connector",
+                      "id": "5e910f71-ab65-481f-b394-967919767624",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"config\": {\n    \"collection_name\": \"IBN\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ":destination_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6bd02498-a16d-4697-8a1b-e3bb1aad3ab2",
+                              "key": "destination_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Update the configuration of an existing destination connector."
+                      },
+                      "response": [
+                        {
+                          "id": "2f3a8465-f0bf-4dc8-b5a0-7ea6119704b1",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"collection_name\": \"IBN\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type\": \"astradb\",\n  \"config\": {\n    \"collection_name\": \"<string>\",\n    \"batch_size\": \"<integer>\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"key\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-2f3a8465-f0bf-4dc8-b5a0-7ea6119704b1"
+                        },
+                        {
+                          "id": "4b0f1fe0-bd76-4368-82f9-7a3ffd25897e",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"collection_name\": \"IBN\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-4b0f1fe0-bd76-4368-82f9-7a3ffd25897e"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-5e910f71-ab65-481f-b394-967919767624"
+                    },
+                    {
+                      "name": "Delete destination connector",
+                      "id": "3dfdb21a-675c-440c-b307-5f65de4356b1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ":destination_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "59e039f4-8a8d-4815-9ce3-57f8e27d1796",
+                              "key": "destination_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Delete a specific destination connector by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "b5a26264-76ea-4696-8208-817a1ecd372f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-b5a26264-76ea-4696-8208-817a1ecd372f"
+                        },
+                        {
+                          "id": "01f64d77-31ce-406b-9da7-c5cf76aad451",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/destinations/:destination_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "destinations",
+                                ":destination_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "destination_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:23:57.000Z",
+                          "updatedAt": "2026-10-21T20:23:57.000Z",
+                          "uid": "35240-01f64d77-31ce-406b-9da7-c5cf76aad451"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-3dfdb21a-675c-440c-b307-5f65de4356b1"
                     }
                   ],
-                  "variable": []
+                  "id": "0355296f-6006-4f50-8c3a-8dbdb23abecd",
+                  "createdAt": "2026-10-21T20:23:57.000Z",
+                  "updatedAt": "2026-10-21T20:23:57.000Z",
+                  "uid": "35240-0355296f-6006-4f50-8c3a-8dbdb23abecd"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"5ddc2ee9-24b9-c35c-a2c7-569e93d05e2f\",\n    \"name\": \"string\",\n    \"type\": \"delta_table\",\n    \"config\": {\n      \"collection_name\": \"string\",\n      \"batch_size\": 4563,\n      \"api_endpoint\": \"string\",\n      \"token\": \"string\",\n      \"keyspace\": \"string\",\n      \"binary_encode_vectors\": true\n    },\n    \"created_at\": \"1962-05-28T05:33:22.423Z\",\n    \"updated_at\": \"1950-10-17T12:36:21.098Z\",\n    \"key\": \"string\"\n  },\n  {\n    \"id\": \"52e40517-3fa4-748e-9ab6-0b1db3bbed1c\",\n    \"name\": \"string\",\n    \"type\": \"kafka-cloud\",\n    \"config\": {\n      \"collection_name\": \"string\",\n      \"batch_size\": 9789,\n      \"api_endpoint\": \"string\",\n      \"token\": \"string\",\n      \"keyspace\": \"string\",\n      \"binary_encode_vectors\": true\n    },\n    \"created_at\": \"1978-11-19T09:17:40.620Z\",\n    \"updated_at\": \"1981-09-27T01:57:34.842Z\",\n    \"key\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2f80b472-10f0-42e5-9e04-56f3e93acafd",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "List destination connectors",
+                  "id": "17917a4a-5f49-4228-b874-b53025b7d650",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "unstructured-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/destinations/?destination_type=databricks_volume_delta_tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "destinations",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "destination_type",
+                          "value": "databricks_volume_delta_tables"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of available destination connectors."
+                  },
+                  "response": [
                     {
-                      "key": "destination_type",
-                      "value": "snowflake"
+                      "id": "87d63db5-08fc-4c43-9c13-2ab5493ebaf4",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/?destination_type=databricks_volume_delta_tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "destination_type",
+                              "value": "databricks_volume_delta_tables"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"type\": \"onedrive\",\n    \"config\": {\n      \"collection_name\": \"<string>\",\n      \"batch_size\": \"<integer>\",\n      \"api_endpoint\": \"<string>\",\n      \"token\": \"<string>\",\n      \"keyspace\": \"<string>\",\n      \"binary_encode_vectors\": true\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"key\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"type\": \"ibm_watsonx_s3\",\n    \"config\": {\n      \"collection_name\": \"<string>\",\n      \"batch_size\": \"<integer>\",\n      \"api_endpoint\": \"<string>\",\n      \"token\": \"<string>\",\n      \"keyspace\": \"<string>\",\n      \"binary_encode_vectors\": true\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"key\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-87d63db5-08fc-4c43-9c13-2ab5493ebaf4"
+                    },
+                    {
+                      "id": "efb53a17-88df-401c-b8df-2a466f29aa65",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/?destination_type=databricks_volume_delta_tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "destination_type",
+                              "value": "databricks_volume_delta_tables"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-efb53a17-88df-401c-b8df-2a466f29aa65"
                     }
                   ],
-                  "variable": []
+                  "createdAt": "2026-10-21T20:23:57.000Z",
+                  "updatedAt": "2026-10-21T20:23:57.000Z",
+                  "uid": "35240-17917a4a-5f49-4228-b874-b53025b7d650"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Create destination connector",
+                  "id": "43e65f95-d021-4fc0-817e-b708647f46df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "unstructured-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"OUxbkYafBy\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"h-v-6v9-f\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/destinations/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "destinations",
+                        ""
+                      ]
+                    },
+                    "description": "Create a new destination connector using the provided configuration and name."
+                  },
+                  "response": [
+                    {
+                      "id": "b7ce52df-83b2-4a4a-aa6d-19af23fbffe9",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"OUxbkYafBy\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"h-v-6v9-f\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"type\": \"astradb\",\n  \"config\": {\n    \"collection_name\": \"<string>\",\n    \"batch_size\": \"<integer>\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"key\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-b7ce52df-83b2-4a4a-aa6d-19af23fbffe9"
+                    },
+                    {
+                      "id": "7a15522c-130f-4735-a508-7a980bec283b",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"OUxbkYafBy\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"h-v-6v9-f\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/destinations/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "destinations",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:23:57.000Z",
+                      "updatedAt": "2026-10-21T20:23:57.000Z",
+                      "uid": "35240-7a15522c-130f-4735-a508-7a980bec283b"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:23:57.000Z",
+                  "updatedAt": "2026-10-21T20:23:57.000Z",
+                  "uid": "35240-43e65f95-d021-4fc0-817e-b708647f46df"
                 }
               ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "b9f70517-4a19-412a-aa30-fb1cd4ae1719",
+              "createdAt": "2026-10-21T20:23:57.000Z",
+              "updatedAt": "2026-10-21T20:23:57.000Z",
+              "uid": "35240-b9f70517-4a19-412a-aa30-fb1cd4ae1719"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1cd4ce13-5031-4476-84da-aecb302bdb7b",
-          "name": "Create destination connector",
-          "request": {
-            "name": "Create destination connector",
-            "description": {
-              "content": "Create a new destination connector using the provided configuration and name.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"config\": {\n    \"collection_name\": \"<string>\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f6d16cf0-887a-44ce-ade1-de9025cfea49",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"weaviate-cloud\",\n  \"config\": {\n    \"collection_name\": \"h\",\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"0077506b-088d-393e-34bf-c698712ef6a0\",\n  \"name\": \"string\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"string\",\n    \"batch_size\": 1467,\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"1994-06-04T02:37:10.644Z\",\n  \"updated_at\": \"2007-01-29T12:14:44.985Z\",\n  \"key\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a4292136-11ec-4e5b-a089-844b3f03344f",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"weaviate-cloud\",\n  \"config\": {\n    \"collection_name\": \"h\",\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  },\n  \"key\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9a921abe-f1e4-43a7-8f44-0aefe1ba669d",
-          "name": "Get destination connector",
-          "request": {
-            "name": "Get destination connector",
-            "description": {
-              "content": "Retrieve detailed information for a specific destination connector by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ":destination_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "destination_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "03e7e8d8-90a0-45a5-a2e5-03cfd373acd7",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"0077506b-088d-393e-34bf-c698712ef6a0\",\n  \"name\": \"string\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"string\",\n    \"batch_size\": 1467,\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"1994-06-04T02:37:10.644Z\",\n  \"updated_at\": \"2007-01-29T12:14:44.985Z\",\n  \"key\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e1e421b9-753d-4c1c-8eeb-cb2a5e8e58a6",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "78a22dde-09c4-45d3-96f4-31424f3c5085",
-          "name": "Update destination connector",
-          "request": {
-            "name": "Update destination connector",
-            "description": {
-              "content": "Update the configuration of an existing destination connector.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ":destination_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "destination_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"config\": {\n    \"collection_name\": \"<string>\",\n    \"api_endpoint\": \"<string>\",\n    \"token\": \"<string>\",\n    \"keyspace\": \"<string>\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "be486e5b-d959-450f-8cea-7ff0fd6042c5",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"config\": {\n    \"collection_name\": \"ETwQfBKR95\",\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"0077506b-088d-393e-34bf-c698712ef6a0\",\n  \"name\": \"string\",\n  \"type\": \"databricks_volumes\",\n  \"config\": {\n    \"collection_name\": \"string\",\n    \"batch_size\": 1467,\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"binary_encode_vectors\": true\n  },\n  \"created_at\": \"1994-06-04T02:37:10.644Z\",\n  \"updated_at\": \"2007-01-29T12:14:44.985Z\",\n  \"key\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c00730bc-7771-4bdb-b109-322922e53863",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"config\": {\n    \"collection_name\": \"ETwQfBKR95\",\n    \"api_endpoint\": \"string\",\n    \"token\": \"string\",\n    \"keyspace\": \"string\",\n    \"batch_size\": 20,\n    \"binary_encode_vectors\": true,\n    \"flatten_metadata\": false\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "047c2158-b698-4e9b-90db-1c088e57e927",
-          "name": "Delete destination connector",
-          "request": {
-            "name": "Delete destination connector",
-            "description": {
-              "content": "Delete a specific destination connector by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ":destination_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "destination_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "7e3b212c-0441-427a-85bc-8777d701e575",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a8015ad1-b945-42a8-bbc1-c2b09eacaaeb",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9a88e4a6-5620-4f6f-92c2-459af06119f5",
-          "name": "Create destination connection check",
-          "request": {
-            "name": "Create destination connection check",
-            "description": {
-              "content": "Initiate a connection check for the destination connector",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ":destination_id",
-                "connection-check"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "destination_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5a27d695-1def-4e97-a34c-e6cc91095aa5",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id",
-                    "connection-check"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Accepted",
-              "code": 202,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"5d468999-54cb-9d77-71fb-a9838339339a\",\n  \"status\": \"FAILURE\",\n  \"created_at\": \"2011-09-29T13:06:18.048Z\",\n  \"reason\": \"string\",\n  \"reported_at\": \"2018-01-21T00:45:38.313Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "13aa88e6-f49a-4ea5-b882-af6dbcb619a1",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id",
-                    "connection-check"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b6f01c6b-cab6-419d-8617-9abf2ea05e4e",
-          "name": "Get the latest destination connector connection check",
-          "request": {
-            "name": "Get the latest destination connector connection check",
-            "description": {
-              "content": "Retrieves the most recent connection check for the specified destination connector.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "destinations",
-                ":destination_id",
-                "connection-check"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "destination_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4a56e5a2-ebc9-451d-a948-fd67c7da9a9f",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id",
-                    "connection-check"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"5d468999-54cb-9d77-71fb-a9838339339a\",\n  \"status\": \"FAILURE\",\n  \"created_at\": \"2011-09-29T13:06:18.048Z\",\n  \"reason\": \"string\",\n  \"reported_at\": \"2018-01-21T00:45:38.313Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "12211619-d453-4def-ad41-abee42f01928",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "destinations",
-                    ":destination_id",
-                    "connection-check"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "destination_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a2781155-ea3d-4367-9547-d1914720ea42",
+          "createdAt": "2026-10-21T20:23:57.000Z",
+          "updatedAt": "2026-10-21T20:23:57.000Z",
+          "uid": "35240-a2781155-ea3d-4367-9547-d1914720ea42"
         }
       ],
-      "event": []
+      "id": "a7e6ddd4-cc9a-4f7d-befe-1d89f3b0762a",
+      "createdAt": "2026-10-21T20:23:57.000Z",
+      "updatedAt": "2026-10-21T20:23:57.000Z",
+      "uid": "35240-a7e6ddd4-cc9a-4f7d-befe-1d89f3b0762a"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.unstructuredapp.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://platform.unstructuredapp.io/"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "unstructured-api-key"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "827903f7-f2d6-4054-8a37-71bfe5b6a31e",
-    "name": "Unstructured Partition channels destinations API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

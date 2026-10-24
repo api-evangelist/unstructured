@@ -1,369 +1,325 @@
 {
+  "info": {
+    "_postman_id": "831b167c-a677-4681-bd6c-7c0d66a2ad49",
+    "name": "Platform Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:24:31.000Z",
+    "updatedAt": "2026-10-21T20:24:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-831b167c-a677-4681-bd6c-7c0d66a2ad49"
+  },
   "item": [
     {
-      "id": "e0b1e5d5-2312-4078-b112-3e1f73ae5872",
-      "name": "templates",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "a46b8d1c-27fd-4077-a57b-6ea04fa56ccd",
-          "name": "List Templates",
-          "request": {
-            "name": "List Templates",
-            "description": {
-              "content": "Retrieve a list of available templates with their metadata.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "templates",
-                ""
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "6cd32936-d4ef-4851-9d19-09745ef8a357",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "templates",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "templates",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{template_id}",
+                  "item": [
+                    {
+                      "name": "Get Template",
+                      "id": "a7efdf60-9624-47fe-b76d-30bda5be5608",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/templates/:template_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "templates",
+                            ":template_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "196e4fcf-885c-484f-a514-c4057a9867de",
+                              "key": "template_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve detailed information and DAG for a specific template."
+                      },
+                      "response": [
+                        {
+                          "id": "30406cc4-9efd-4740-9c01-e2c4b9669f5d",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/templates/:template_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "templates",
+                                ":template_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "template_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"version\": \"<string>\",\n  \"last_updated\": \"<string>\",\n  \"description\": \"<string>\",\n  \"nodes\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"settings\": {\n        \"Lorem__30\": \"Duis incididunt cupidatat\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subtype\": \"<string>\",\n      \"settings\": {\n        \"quis8dd\": \"sit Ut\",\n        \"eu_cd\": -2563390\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:24:32.000Z",
+                          "updatedAt": "2026-10-21T20:24:32.000Z",
+                          "uid": "35240-30406cc4-9efd-4740-9c01-e2c4b9669f5d"
+                        },
+                        {
+                          "id": "4caa6962-83f6-4ad9-ac98-8083407c66ad",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "unstructured-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/templates/:template_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "templates",
+                                ":template_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "template_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:24:32.000Z",
+                          "updatedAt": "2026-10-21T20:24:32.000Z",
+                          "uid": "35240-4caa6962-83f6-4ad9-ac98-8083407c66ad"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:24:32.000Z",
+                      "updatedAt": "2026-10-21T20:24:32.000Z",
+                      "uid": "35240-a7efdf60-9624-47fe-b76d-30bda5be5608"
+                    }
+                  ],
+                  "id": "0fa7cead-db2a-402f-b3cd-4a35d24ea784",
+                  "createdAt": "2026-10-21T20:24:32.000Z",
+                  "updatedAt": "2026-10-21T20:24:32.000Z",
+                  "uid": "35240-0fa7cead-db2a-402f-b3cd-4a35d24ea784"
+                },
+                {
+                  "name": "List Templates",
+                  "id": "24267010-e5de-464b-af1c-6474104da92e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "unstructured-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/templates/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "templates",
+                        ""
+                      ]
+                    },
+                    "description": "Retrieve a list of available templates with their metadata."
+                  },
+                  "response": [
+                    {
+                      "id": "48631697-f7c9-4603-9839-434fefc70ca0",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/templates/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "templates",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"version\": \"<string>\",\n    \"last_updated\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"version\": \"<string>\",\n    \"last_updated\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-10-21T20:24:32.000Z",
+                      "updatedAt": "2026-10-21T20:24:32.000Z",
+                      "uid": "35240-48631697-f7c9-4603-9839-434fefc70ca0"
+                    },
+                    {
+                      "id": "5a3ddf83-af35-4196-accb-2617abb66c1c",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "unstructured-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/templates/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "templates",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\",\n      \"input\": {\n        \"title\": \"Input\"\n      },\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:24:32.000Z",
+                      "updatedAt": "2026-10-21T20:24:32.000Z",
+                      "uid": "35240-5a3ddf83-af35-4196-accb-2617abb66c1c"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:24:32.000Z",
+                  "updatedAt": "2026-10-21T20:24:32.000Z",
+                  "uid": "35240-24267010-e5de-464b-af1c-6474104da92e"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"last_updated\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"last_updated\": \"string\",\n    \"description\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bfc82caa-6fc3-430b-834f-3bce2d47f42d",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "templates",
-                    ""
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "2d72d2d1-6908-4173-a64b-add4baf2a31b",
+              "createdAt": "2026-10-21T20:24:32.000Z",
+              "updatedAt": "2026-10-21T20:24:32.000Z",
+              "uid": "35240-2d72d2d1-6908-4173-a64b-add4baf2a31b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e5e81b33-075e-4324-8ed9-ecc238d284f6",
-          "name": "Get Template",
-          "request": {
-            "name": "Get Template",
-            "description": {
-              "content": "Retrieve detailed information and DAG for a specific template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "templates",
-                ":template_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "template_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "key": "unstructured-api-key",
-                "value": "<string>",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2601030e-0dfd-43f8-8832-199f6c3d3b65",
-              "name": "Successful Response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "templates",
-                    ":template_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "template_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"version\": \"string\",\n  \"last_updated\": \"string\",\n  \"description\": \"string\",\n  \"nodes\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"settings\": {\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"subtype\": \"string\",\n      \"settings\": {\n        \"key_0\": false\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "50997234-92d0-4424-bc32-e8505660c14e",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "templates",
-                    ":template_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "template_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "unstructured-api-key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "key": "unstructured-api-key",
-                    "value": "<string>",
-                    "description": ""
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "596f7427-1f3f-4266-9a73-b9cb30b8e755",
+          "createdAt": "2026-10-21T20:24:32.000Z",
+          "updatedAt": "2026-10-21T20:24:32.000Z",
+          "uid": "35240-596f7427-1f3f-4266-9a73-b9cb30b8e755"
         }
       ],
-      "event": []
+      "id": "5589f45b-f1db-4296-b026-b62a1068f58a",
+      "createdAt": "2026-10-21T20:24:32.000Z",
+      "updatedAt": "2026-10-21T20:24:32.000Z",
+      "uid": "35240-5589f45b-f1db-4296-b026-b62a1068f58a"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.unstructuredapp.io",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://platform.unstructuredapp.io/"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "unstructured-api-key"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "48bdd4bf-59fd-48e5-9d82-8a9bdc6c8c4f",
-    "name": "Unstructured Partition channels templates API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
