@@ -1,4 +1,4 @@
-# Unstructured (unstructured)
+# Unstructured
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,80 +64,166 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Unstructured is a document parsing and pre-processing platform that provides a REST API for ingesting PDFs, HTML, DOCX, images, and more than 50 other file formats, transforming them into clean structured JSON chunks ready for RAG pipelines and LLM applications. The platform offers partitioning, enrichment, chunking, and embedding capabilities via a SaaS serverless API, dedicated instances, and in-VPC deployments. It ships Python and JavaScript SDKs, an MCP server for AI agent workflows, and 40+ connectors for source and destination data systems.
+Unstructured is a document parsing and pre-processing platform that provides a REST API for ingesting PDFs, HTML, DOCX, images, and more than 50 other file formats, transforming them into clean structured JSON chunks ready for RAG pipelines and LLM applications. The platform offers partitioning, enrichment, chunking, and embedding capabilities via both a SaaS serverless API and self-hosted deployments. Billing is calculated on a per-page basis, with a free tier of 15,000 pages, pay-as-you-go at $0.03 per page, and custom enterprise pricing. Unstructured also ships Python and JavaScript SDKs, an MCP server for AI agent workflows, and 40+ connectors for source and destination data systems including S3, Databricks, and vector databases.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/unstructured/refs/heads/main/apis.yml
+**Areas:** Document Processing · ETL · RAG · LLM · PDF · OCR · Data Ingestion · Chunking · Embeddings · Artificial Intelligence
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=unstructured-api-evangelist&utm_content=repo
+## Unstructured on APIs.io
 
-## Tags
+Everything profiled for Unstructured is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/unstructured/](https://apis.io/providers/unstructured/)** — or go straight to one of the APIs or properties below.
 
-- document-processing
-- ETL
-- RAG
-- LLM
-- PDF
-- OCR
-- data-ingestion
-- chunking
-- embeddings
-- AI
+### APIs (9)
 
-## APIs
+- [Unstructured Channels API](https://apis.io/apis/unstructured/unstructured-channels-api/) — The channels API from Unstructured — 3 operation(s) for channels.
+- [Unstructured Destinations API](https://apis.io/apis/unstructured/unstructured-destinations-api/) — The destinations API from Unstructured — 3 operation(s) for destinations.
+- [Unstructured General API](https://apis.io/apis/unstructured/unstructured-general-api/) — The general API from Unstructured — 1 operation(s) for general.
+- [Unstructured Jobs API](https://apis.io/apis/unstructured/unstructured-jobs-api/) — The jobs API from Unstructured — 6 operation(s) for jobs.
+- [Unstructured Notifications API](https://apis.io/apis/unstructured/unstructured-notifications-api/) — The notifications API from Unstructured — 4 operation(s) for notifications.
+- [Unstructured Sources API](https://apis.io/apis/unstructured/unstructured-sources-api/) — The sources API from Unstructured — 3 operation(s) for sources.
+- [Unstructured Templates API](https://apis.io/apis/unstructured/unstructured-templates-api/) — The templates API from Unstructured — 2 operation(s) for templates.
+- [Unstructured Workflow Channels API](https://apis.io/apis/unstructured/unstructured-workflow-channels-api/) — The workflow-channels API from Unstructured — 3 operation(s) for workflow-channels.
+- [Unstructured Workflows API](https://apis.io/apis/unstructured/unstructured-workflows-api/) — The workflows API from Unstructured — 6 operation(s) for workflows.
 
-### Unstructured Platform API
+### Published properties
 
-The Unstructured Platform API provides programmatic access to workflow operations including source connectors, destination connectors, workflows, and jobs. It enables headless, push-style data transformation pipelines that partition, enrich, chunk, and embed documents from 50+ file formats into AI-ready JSON.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Human URL: https://docs.unstructured.io/api-reference/overview
-- Base URL: https://platform.unstructuredapp.io/api/v1
+#### MCP servers (1)
 
-### Unstructured Partition Endpoint
+Model Context Protocol servers that expose the API to agents.
 
-The Unstructured Partition Endpoint is the legacy serverless API for processing individual files on demand. It supports PDFs, images, DOCX, HTML, and dozens of other formats, returning structured element JSON with configurable processing strategies (fast, hi_res, ocr_only, auto).
+- [UNS-MCP](https://apis.io/servers/unstructured/uns-mcp/)
 
-- Human URL: https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide
-- Base URL: https://api.unstructured.io/general/v0/general
+#### Agentic access (1)
 
-## Plans / Rate Limits / FinOps
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Plans: [plans/unstructured-plans-pricing.yml](plans/unstructured-plans-pricing.yml)
-- Rate Limits: [rate-limits/unstructured-rate-limits.yml](rate-limits/unstructured-rate-limits.yml)
-- FinOps: [finops/unstructured-finops.yml](finops/unstructured-finops.yml)
+- [Unstructured Agentic Access](https://apis.io/agentic-access/unstructured/unstructured-agentic-access/)
 
-### Pricing Summary
+#### JSON Schema (1)
 
-| Plan | Price | Pages |
-|------|-------|-------|
-| Let's Go (Free) | $0 | 15,000 lifetime |
-| Pay-As-You-Go | $0.03/page | Unlimited |
-| Business | Custom | Custom |
+The data models the API reads and writes.
 
-### Rate Limits
+- [Unstructured API Schemas](https://apis.io/schemas/unstructured/unstructured-schemas/)
 
-Unstructured does not publish explicit rate limit values in public documentation. The SDK uses exponential backoff retry logic (initial 500ms, max 1 minute, max 1 hour elapsed). The `split_pdf_concurrency_level` parameter is capped at 15 per request. Contact support@unstructured.io for plan-specific limits.
+#### JSON-LD (1)
 
-## Timestamps
+Linked-data contexts for the provider's vocabulary.
 
-- Created: 2026-06-12
-- Modified: 2026-06-12
+- [Unstructured Context](https://apis.io/jsonld/unstructured/unstructured-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-| Type | URL |
-|------|-----|
-| Website | https://unstructured.io |
-| Documentation | https://docs.unstructured.io |
-| GitHub Organization | https://github.com/Unstructured-IO |
-| LinkedIn | https://www.linkedin.com/company/unstructuredio/ |
-| X / Twitter | https://twitter.com/UnstructuredIO |
-| Blog | https://unstructured.io/blog |
-| Pricing | https://unstructured.io/pricing |
-| Status Page | https://unstructuredio.trust.pagerduty.com/posts/dashboard |
-| Python SDK | https://github.com/Unstructured-IO/unstructured-python-client |
-| JavaScript SDK | https://github.com/Unstructured-IO/unstructured-js-client |
-| MCP Server | https://github.com/Unstructured-IO/UNS-MCP |
+The provider's domain terms, defined.
 
-## Maintainers
+- [Unstructured API Vocabulary](https://apis.io/vocabularies/unstructured/unstructured-vocabulary/)
 
-- Kin Lane / kin@apievangelist.com
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Unstructured Partition channels API](https://apis.io/collections/unstructured/open-unstructured-channels-api/)
+- [Unstructured Partition channels destinations API](https://apis.io/collections/unstructured/open-unstructured-destinations-api/)
+- [Unstructured Partition channels general API](https://apis.io/collections/unstructured/open-unstructured-general-api/)
+- [Unstructured Partition channels jobs API](https://apis.io/collections/unstructured/open-unstructured-jobs-api/)
+- [Unstructured Partition channels notifications API](https://apis.io/collections/unstructured/open-unstructured-notifications-api/)
+- [Unstructured Partition channels sources API](https://apis.io/collections/unstructured/open-unstructured-sources-api/)
+- [Unstructured Partition channels templates API](https://apis.io/collections/unstructured/open-unstructured-templates-api/)
+- [Unstructured Partition channels workflow-channels API](https://apis.io/collections/unstructured/open-unstructured-workflow-channels-api/)
+- [Unstructured Partition channels workflows API](https://apis.io/collections/unstructured/open-unstructured-workflows-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Unstructured — jsonschema rules](https://apis.io/rules/unstructured/unstructured-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Unstructured Authentication](https://apis.io/security/unstructured/unstructured-authentication/)
+- [Unstructured Domain Security](https://apis.io/security/unstructured/unstructured-domain-security/)
+- [Unstructured Trust Center](https://apis.io/security/unstructured/unstructured-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Unstructured Plans Pricing](https://apis.io/plans/unstructured/unstructured-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Unstructured Rate Limits](https://apis.io/rate-limits/unstructured/unstructured-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Unstructured Finops](https://apis.io/finops/unstructured/unstructured-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://unstructured.io)
+- [Documentation](https://docs.unstructured.io)
+- [Pricing](https://unstructured.io/pricing)
+- [Blog](https://unstructured.io/blog)
+- [GitHub](https://github.com/Unstructured-IO)
+- [Status](https://unstructuredio.trust.pagerduty.com/posts/dashboard)
+
+## API Evangelist rating
+
+**Kin Score 34.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 70.0 |
+| Contract quality | 55.6 |
+| Contract governance | 23.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
+
+**Agent readiness 28.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.0** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/unstructured/](https://apis.io/providers/unstructured/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Unstructured: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/unstructured/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
